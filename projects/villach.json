@@ -70,7 +70,7 @@
         { "type": "match", "prompt": "Verbinde, was es hier gibt! 🔗",
           "pairs": [
             { "left": "⚰️", "right": "Zentral-Friedhof" },
-            { "left": "🛹", "right": "Skaterpark" },
+            { "left": "🛹", "right": "Skatepark" },
             { "left": "🚉", "right": "Hauptbahnhof" },
             { "left": "🪖", "right": "Rohrkaserne" }
           ] },
@@ -78,25 +78,27 @@
           "given": [
             { "symbol": "🚉", "name": "Hauptbahnhof" },
             { "symbol": "🪖", "name": "Rohrkaserne" },
-            { "symbol": "👮", "name": "Landespolizeidirektion" }
+            { "symbol": "👮", "name": "Landespolizeidirektion" },
+            { "symbol": "⚰️", "name": "Zentral-Friedhof" },
+            { "symbol": "🛹", "name": "Skatepark" }
           ],
           "blanks": [
-            { "symbol": "🧸", "name": "Kindergarten Tratten", "accept": ["kindergarten tratten", "kiga tratten", "tratten", "kindergarten"] },
-            { "symbol": "🏫", "name": "Volksschule", "accept": ["volksschule", "vs"] }
+            { "symbol": "🧸", "name": "Kindergarten Tratten", "accept": ["kindergarten tratten", "kiga tratten", "kindergarten-tratten"] },
+            { "symbol": "🎒", "name": "Volksschule", "accept": ["volksschule", "vs"] }
           ] },
-        { "type": "cloze", "prompt": "Ergänze den Satz über das Naherholungsgebiet! 📝",
+        { "type": "cloze", "prompt": "Ergänze die Lücken im Satz! 📝",
           "segments": [
             { "text": "In Seebach-Wasenboden gibt es ein großes " },
             { "blank": { "name": "Naherholungsgebiet", "accept": ["naherholungsgebiet", "naherholungs-gebiet"], "placeholder": "…" } },
             { "text": ". Dort liegt der " },
-            { "blank": { "name": "größten Spielplatz", "accept": ["größten spielplatz", "grössten spielplatz", "groessten spielplatz", "größter spielplatz", "grösster spielplatz", "spielplatz"], "placeholder": "…" } },
+            { "blank": { "name": "größte Spielplatz", "accept": ["größte spielplatz", "grösste spielplatz", "groesste spielplatz", "größten spielplatz", "größter spielplatz", "spielplatz"], "placeholder": "…" } },
             { "text": " Villachs und ein " },
             { "blank": { "name": "Skatepark", "accept": ["skatepark", "skaterpark"], "placeholder": "…" } },
             { "text": "." }
           ] },
         { "type": "choice", "prompt": "Wo liegt Seebach-Wasenboden? 🧭",
           "options": ["Nordöstlich der Innenstadt", "Im Süden am Berg", "Am Ossiacher See", "Westlich vom Warmbad"], "answer": 0 },
-        { "type": "type", "prompt": "Wie heißt der große Friedhof hier? ✍️",
+        { "type": "type", "prompt": "Wie heißt der große Ort in Seebach mit den vielen Gräbern? ⚰️",
           "accept": ["zentral-friedhof", "zentralfriedhof", "zentral friedhof"],
           "placeholder": "Antwort eintippen…", "hint": "„Zentral-…“ – wo Villach seine Verstorbenen bestattet." }
       ]
