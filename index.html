@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+<meta name="theme-color" content="#FFFDF6" />
+<title>Lernfuchs 🦊</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --indigo:#4B5694; --indigo-d:#3A4475;
+  --yellow:#FDEB9E; --yellow-d:#F6D661;
+  --teal:#24B1B1;  --teal-d:#1B8C8C;
+  --magenta:#C13383; --magenta-d:#9E2768;
+  --ink:#2C3052; --muted:#7B7F9E;
+  --screen-bg:#FFFDF6;
+  --indigo-soft:#E7EAF5; --teal-soft:#D9F1F1; --yellow-soft:#FFF6D6; --magenta-soft:#FBE2EF;
+  --card-bd:2px solid #ECEEF6; --card-sh:0 4px 0 #ECEEF6;
+  --green:#58a700; --green-d:#4a8c00; --green-soft:#e8f7d3;
+  --red:#e0436b; --red-soft:#fde4ec;
+  --font-head:"Fredoka", sans-serif;
+  --font-body:"Nunito", sans-serif;
+  --maxw:760px;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{margin:0;padding:0;height:100%;}
+body{
+  font-family:var(--font-body);
+  background:
+    radial-gradient(1100px 600px at 50% -10%, #eef2ff 0%, transparent 60%),
+    linear-gradient(180deg,#eceef6,#e6e8f2);
+  color:var(--ink);min-height:100%;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4{font-family:var(--font-head);margin:0;font-weight:600;}
+button{font-family:var(--font-body);cursor:pointer;}
+input,textarea{font-family:var(--font-body);}
+
+#stage{min-height:100dvh;display:flex;justify-content:center;}
+.screen{
+  width:100%;max-width:var(--maxw);min-height:100dvh;
+  background:var(--screen-bg);display:flex;flex-direction:column;position:relative;
+  box-shadow:0 0 60px -20px rgba(33,36,59,.25);
+}
+.body{flex:1;display:flex;flex-direction:column;min-height:0;}
+.pad-top{padding-top:max(10px, env(safe-area-inset-top));}
+
+.btn{font-family:var(--font-head);font-weight:600;border:none;font-size:21px;display:inline-flex;align-items:center;justify-content:center;gap:10px;border-radius:20px;padding:18px 26px;transition:transform .1s,box-shadow .1s,opacity .15s;}
+.btn-primary{background:var(--teal);color:#fff;box-shadow:0 6px 0 var(--teal-d);width:100%;}
+.btn-primary:active{transform:translateY(4px);box-shadow:0 2px 0 var(--teal-d);}
+.btn-primary:disabled{background:#dfe1ec;color:#a9adc4;box-shadow:0 6px 0 #cccfe0;cursor:default;}
+.btn-green{background:var(--green);color:#fff;box-shadow:0 6px 0 var(--green-d);width:100%;}
+.btn-green:active{transform:translateY(4px);box-shadow:0 2px 0 var(--green-d);}
+.btn-ghost{background:#fff;color:var(--muted);border:2px solid var(--indigo-soft);width:100%;box-shadow:0 4px 0 var(--indigo-soft);}
+
+.chips{display:flex;gap:10px;}
+.chip{display:inline-flex;align-items:center;gap:6px;font-weight:800;font-size:18px;padding:9px 15px;border-radius:24px;background:#fff;border:var(--card-bd);box-shadow:var(--card-sh);}
+.chip.flame{color:var(--magenta);} .chip.xp{color:#C99700;}
+
+.vili{display:flex;align-items:center;gap:14px;padding:4px 26px 16px;flex:none;}
+.vili .face{width:72px;height:72px;border-radius:50%;background:var(--teal-soft);display:grid;place-items:center;font-size:44px;flex:none;box-shadow:0 6px 0 rgba(36,177,177,.16);}
+.vili .bubble{background:#fff;border:var(--card-bd);border-radius:20px;border-bottom-left-radius:6px;padding:14px 18px;font-weight:700;font-size:19px;color:var(--ink);box-shadow:var(--card-sh);}
+.vili .bubble b{color:var(--magenta);}
+
+.back{width:50px;height:50px;border-radius:16px;background:#fff;border:var(--card-bd);display:grid;place-items:center;font-size:24px;color:var(--ink);flex:none;}
+.spacer{margin-left:auto;}
+
+/* HOME */
+.appbar{display:flex;align-items:flex-start;gap:14px;padding:14px 26px 8px;flex:none;}
+.appbar .greet b{font-family:var(--font-head);font-weight:600;font-size:27px;color:var(--indigo);display:block;line-height:1.1;}
+.appbar .greet span{font-size:16px;color:var(--muted);font-weight:700;}
+.appbar.titled{align-items:center;}
+.appbar .title{font-family:var(--font-head);font-weight:600;font-size:27px;color:var(--indigo);}
+.s-h{font-family:var(--font-head);font-weight:600;font-size:20px;color:var(--ink);margin:6px 26px 12px;display:flex;align-items:center;gap:8px;}
+.tiles{display:flex;flex-direction:column;gap:12px;padding:0 26px;}
+.tile{display:flex;align-items:center;gap:16px;background:#fff;border:var(--card-bd);box-shadow:var(--card-sh);border-radius:20px;padding:16px;transition:transform .12s;width:100%;text-align:left;}
+.tile:active{transform:translateY(2px);}
+.tile .ic{width:60px;height:60px;border-radius:16px;display:grid;place-items:center;font-size:32px;flex:none;}
+.tile .info{flex:1;min-width:0;}
+.tile .info b{font-family:var(--font-head);font-weight:600;font-size:20px;color:var(--ink);display:block;}
+.tile .info .pm{font-size:14px;color:var(--muted);font-weight:700;margin-top:2px;}
+.bar{height:9px;border-radius:6px;background:var(--indigo-soft);overflow:hidden;margin-top:9px;}
+.bar i{display:block;height:100%;border-radius:6px;background:var(--teal);transition:width .35s;}
+.tile .done{font-size:28px;color:var(--teal);flex:none;}
+.cta-wrap{padding:18px 26px max(18px, env(safe-area-inset-bottom));margin-top:auto;}
+.empty{padding:24px 26px;color:var(--muted);font-weight:700;text-align:center;}
+
+/* NEW PROJECT */
+.field{padding:0 26px;margin-bottom:18px;}
+.field label{font-family:var(--font-head);font-weight:500;font-size:16px;color:var(--ink);display:block;margin-bottom:8px;}
+.input{width:100%;background:#fff;border:2px solid var(--indigo-soft);border-radius:14px;padding:16px;font-size:18px;font-weight:700;color:var(--ink);outline:none;}
+.input:focus{border-color:var(--teal);}
+.emoji-pick{display:flex;gap:10px;flex-wrap:wrap;}
+.emoji-pick span{width:50px;height:50px;border-radius:14px;display:grid;place-items:center;font-size:26px;background:#fff;border:2px solid var(--indigo-soft);}
+.emoji-pick span.on{border-color:var(--teal);background:var(--teal-soft);}
+.dropzone{margin:0 26px;border:2.5px dashed #C9CCE0;border-radius:20px;background:#fff;padding:28px 16px;text-align:center;transition:.15s;}
+.dropzone.over{border-color:var(--teal);background:var(--teal-soft);}
+.dropzone .di{font-size:46px;}
+.dropzone b{font-family:var(--font-head);font-weight:600;display:block;margin-top:8px;color:var(--ink);font-size:17px;}
+.dropzone p{margin:4px 0 0;font-size:14px;color:var(--muted);}
+.dropzone .fname{margin-top:10px;font-weight:800;color:var(--green-d);font-size:15px;}
+.imp-btns{display:flex;gap:10px;padding:16px 26px 0;}
+.imp-btns button{flex:1;background:#fff;border:var(--card-bd);box-shadow:var(--card-sh);border-radius:14px;padding:14px 4px;font-family:var(--font-head);font-weight:600;font-size:14px;color:var(--ink);display:flex;flex-direction:column;align-items:center;gap:6px;transition:transform .1s;}
+.imp-btns button:active{transform:translateY(2px);}
+.imp-btns button .e{font-size:26px;}
+.imp-btns button.soon{opacity:.55;}
+.note{margin:14px 26px 0;padding:12px 14px;border-radius:14px;font-size:14.5px;font-weight:700;line-height:1.4;}
+.note.info{background:var(--yellow-soft);color:#7a5b00;border:1px solid var(--yellow-d);}
+.note.err{background:var(--red-soft);color:var(--red);border:1px solid #f6c0d2;}
+.paste-area{width:100%;min-height:160px;background:#fff;border:2px solid var(--indigo-soft);border-radius:14px;padding:14px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:14px;color:var(--ink);outline:none;resize:vertical;}
+.paste-area:focus{border-color:var(--teal);}
+
+/* PATH */
+.ph-top{display:flex;align-items:center;gap:14px;padding:8px 26px 14px;flex:none;}
+.ph-top .ttl b{font-family:var(--font-head);font-weight:600;font-size:27px;color:var(--indigo);display:block;line-height:1.1;}
+.ph-top .ttl span{font-size:16px;color:var(--muted);font-weight:700;}
+.path{flex:1;overflow-y:auto;padding:6px 0 max(28px, env(safe-area-inset-bottom));-webkit-overflow-scrolling:touch;}
+.lessons{display:flex;flex-direction:column;align-items:center;gap:6px;}
+.node-row{display:flex;align-items:center;gap:20px;width:min(430px,86vw);}
+.node-row.r{flex-direction:row-reverse;}
+.node{width:108px;height:108px;border-radius:50%;display:grid;place-items:center;font-size:48px;flex:none;position:relative;border:none;background:var(--teal);color:#fff;box-shadow:0 7px 0 var(--teal-d);transition:transform .1s,box-shadow .1s;}
+.node.play:active{transform:translateY(4px);box-shadow:0 3px 0 var(--teal-d);}
+.node.done{background:var(--teal);box-shadow:0 7px 0 var(--teal-d);}
+.node.ready{background:var(--yellow);color:#7a5b00;box-shadow:0 7px 0 var(--yellow-d);}
+.node.lock{background:#E7E7EF;color:#AEB0C4;box-shadow:0 6px 0 #D5D6E1;}
+.node.trophy{background:var(--magenta);box-shadow:0 7px 0 var(--magenta-d);width:118px;height:118px;}
+.node .ring{position:absolute;inset:-9px;border-radius:50%;border:4px solid var(--yellow);animation:pulse 1.6s ease-out infinite;}
+@keyframes pulse{0%{transform:scale(1);opacity:.9}100%{transform:scale(1.3);opacity:0}}
+.node .star{position:absolute;bottom:-6px;left:50%;transform:translateX(-50%);font-size:22px;}
+.lbl{font-family:var(--font-head);font-weight:600;font-size:21px;color:var(--ink);}
+.lbl small{display:block;font-family:var(--font-body);font-weight:800;font-size:14.5px;color:var(--muted);margin-top:2px;}
+.node-row.lockc .lbl{color:var(--muted);}
+.node-row.r .lbl{text-align:right;}
+
+/* EXERCISE */
+.ex-top{display:flex;align-items:center;gap:16px;padding:14px 26px 10px;flex:none;}
+.ex-top .x{font-size:30px;color:var(--muted);font-weight:800;flex:none;background:none;border:none;line-height:1;}
+.ex-bar{flex:1;height:20px;border-radius:12px;background:var(--indigo-soft);overflow:hidden;}
+.ex-bar i{display:block;height:100%;background:var(--teal);border-radius:12px;transition:width .35s;}
+.hearts{font-size:24px;flex:none;letter-spacing:2px;}
+.q-area{flex:1;display:flex;flex-direction:column;padding:10px 26px 0;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;}
+.q-prompt{font-family:var(--font-head);font-weight:600;font-size:28px;color:var(--ink);line-height:1.25;margin:6px 0 18px;}
+.q-prompt b{color:var(--magenta);}
+
+.choices{display:flex;flex-direction:column;gap:14px;}
+.choice{display:flex;align-items:center;gap:14px;background:#fff;border:2.5px solid var(--indigo-soft);border-radius:20px;padding:18px 20px;font-family:var(--font-head);font-weight:500;font-size:22px;color:var(--ink);box-shadow:0 4px 0 var(--indigo-soft);text-align:left;width:100%;transition:transform .08s;}
+.choice:active{transform:translateY(2px);}
+.choice .k{width:34px;height:34px;border-radius:10px;background:var(--indigo-soft);color:var(--indigo-d);font-size:16px;font-weight:700;display:grid;place-items:center;flex:none;}
+.choice.sel{border-color:var(--teal);background:var(--teal-soft);box-shadow:0 4px 0 #b8e6e6;}
+.choice.sel .k{background:var(--teal);color:#fff;}
+.choice.good{border-color:var(--green);background:var(--green-soft);box-shadow:0 4px 0 #c4e89a;}
+.choice.good .k{background:var(--green);color:#fff;}
+.choice.bad{border-color:var(--red);background:var(--red-soft);box-shadow:0 4px 0 #f6c0d2;}
+.choice.bad .k{background:var(--red);color:#fff;}
+.choice.dim{opacity:.5;}
+
+.mapbox{position:relative;border-radius:22px;overflow:hidden;border:var(--card-bd);box-shadow:var(--card-sh);background:#eef;}
+.mapbox img{display:block;width:100%;}
+.hot{position:absolute;width:96px;height:96px;transform:translate(-50%,-50%);border-radius:50%;border:3px dashed rgba(75,86,148,.45);background:rgba(255,255,255,.12);display:grid;place-items:center;transition:transform .12s;}
+.hot:active{transform:translate(-50%,-50%) scale(.94);}
+.hot .num{font-family:var(--font-head);font-weight:700;font-size:26px;color:#fff;width:46px;height:46px;border-radius:50%;background:rgba(33,36,59,.82);display:grid;place-items:center;box-shadow:0 2px 6px rgba(0,0,0,.3);}
+.hot.good{border:4px solid var(--green);background:rgba(88,167,0,.22);}
+.hot.good .num{background:var(--green);}
+.hot.bad{border:4px solid var(--red);background:rgba(224,67,107,.2);}
+.hot.bad .num{background:var(--red);animation:shake .4s;}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.map-cap{font-family:"Courier New",monospace;font-size:13px;color:var(--muted);text-align:center;margin:10px 0 0;}
+
+.type-in{width:100%;background:#fff;border:2.5px solid var(--indigo-soft);border-radius:18px;padding:20px;font-family:var(--font-head);font-weight:500;font-size:26px;color:var(--ink);box-shadow:0 4px 0 var(--indigo-soft);outline:none;}
+.type-in:focus{border-color:var(--teal);}
+.type-in.good{border-color:var(--green);background:var(--green-soft);}
+.type-in.bad{border-color:var(--red);background:var(--red-soft);}
+.hl-card{margin:0 0 18px;border-radius:18px;overflow:hidden;border:var(--card-bd);position:relative;}
+.hl-card img{display:block;width:100%;}
+
+.q-sub{font-family:var(--font-head);font-weight:500;font-size:18px;color:var(--muted);margin:-8px 0 18px;}
+.q-sub b{color:var(--ink);}
+.match{display:flex;gap:18px;align-items:stretch;}
+.match .col{flex:1;display:flex;flex-direction:column;gap:14px;}
+.mitem{position:relative;min-height:78px;background:#fff;border:2.5px solid var(--indigo-soft);border-radius:18px;padding:8px 14px;font-family:var(--font-head);font-weight:500;font-size:21px;color:var(--ink);box-shadow:0 4px 0 var(--indigo-soft);display:flex;align-items:center;justify-content:center;text-align:center;line-height:1.15;transition:transform .08s;}
+.mitem.emo{font-size:44px;}
+.mitem:active{transform:translateY(2px);}
+.mitem.sel{border-color:var(--teal);background:var(--teal-soft);box-shadow:0 4px 0 #b8e6e6;transform:translateY(-2px);}
+.mitem.done{border-color:var(--green);background:var(--green-soft);box-shadow:0 4px 0 #c4e89a;color:var(--green-d);}
+.mitem.miss{animation:shake .4s;border-color:var(--red);background:var(--red-soft);}
+.mitem .bdg{position:absolute;top:-10px;left:-10px;width:30px;height:30px;border-radius:50%;background:var(--green);color:#fff;font-family:var(--font-head);font-weight:700;font-size:16px;display:grid;place-items:center;box-shadow:0 2px 4px rgba(0,0,0,.2);}
+
+.foot{flex:none;padding:18px 26px max(24px, env(safe-area-inset-bottom));transition:background .2s;}
+.foot.good{background:var(--green-soft);}
+.foot.bad{background:var(--red-soft);}
+.fb{display:flex;align-items:center;gap:14px;margin-bottom:14px;}
+.fb .ic{font-size:40px;flex:none;}
+.fb .tx{display:flex;flex-direction:column;gap:3px;}
+.fb .tx b{font-family:var(--font-head);font-weight:700;font-size:23px;line-height:1.15;}
+.fb .tx span{font-size:16px;font-weight:700;color:var(--muted);}
+.foot.good .fb .tx b{color:var(--green-d);}
+.foot.bad .fb .tx b{color:var(--red);}
+
+/* REWARD */
+.reward{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 36px;position:relative;overflow:hidden;}
+.reward .vbig{font-size:150px;line-height:1;animation:cheer 1.3s ease-in-out infinite;filter:drop-shadow(0 14px 18px rgba(36,177,177,.25));}
+@keyframes cheer{0%,100%{transform:rotate(-6deg) translateY(0)}50%{transform:rotate(6deg) translateY(-12px)}}
+.reward h2{font-family:var(--font-head);font-weight:700;font-size:42px;color:var(--magenta);margin-top:18px;}
+.reward .sub{color:var(--muted);font-weight:800;font-size:20px;margin-top:6px;}
+.reward .xpbig{margin-top:24px;background:var(--yellow);color:#7a5b00;font-family:var(--font-head);font-weight:700;font-size:28px;padding:12px 32px;border-radius:40px;box-shadow:0 6px 0 var(--yellow-d);}
+.sticker{margin-top:22px;background:#fff;border:var(--card-bd);box-shadow:var(--card-sh);border-radius:22px;padding:18px 24px;display:flex;align-items:center;gap:16px;}
+.sticker .se{font-size:52px;}
+.sticker .st b{font-family:var(--font-head);font-weight:600;font-size:19px;color:var(--ink);display:block;}
+.sticker .st span{font-size:15px;color:var(--magenta);font-weight:800;letter-spacing:.04em;}
+.confetti{position:absolute;inset:0;pointer-events:none;z-index:1;}
+.confetti i{position:absolute;width:15px;height:15px;border-radius:3px;opacity:.9;animation:fall linear infinite;}
+@keyframes fall{0%{transform:translateY(-60px) rotate(0)}100%{transform:translateY(110vh) rotate(420deg)}}
+.reward-cta{flex:none;padding:18px 26px max(26px, env(safe-area-inset-bottom));}
+
+/* LOADING */
+.loading{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;text-align:center;padding:0 36px;}
+.loading .lf{font-size:90px;animation:bob 1s ease-in-out infinite;}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+.loading .lt{font-family:var(--font-head);font-weight:600;font-size:22px;color:var(--muted);}
+
+@media (prefers-reduced-motion: reduce){
+  .node .ring,.reward .vbig,.confetti i,.loading .lf{animation:none!important;}
+}
+</style>
+</head>
+<body>
+<div id="stage"></div>
+
+<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+<script type="text/babel" data-presets="react">
+const { useState, useEffect, useMemo, useRef } = React;
+
+/* ===================== Konstanten / Helpers ===================== */
+const KID = "Leander";
+const KEYS = "ABCD";
+const shuffle = (a) => { const x=[...a]; for(let i=x.length-1;i>0;i--){const j=(Math.random()*(i+1))|0;[x[i],x[j]]=[x[j],x[i]];} return x; };
+const norm = (s) => (s||"").toLowerCase().trim().replace(/\s+/g,' ').replace(/[.\u2013]/g,'-');
+const pick = (a) => a[(Math.random()*a.length)|0];
+function load(k, def){ try{ const v=localStorage.getItem(k); return v===null?def:JSON.parse(v);}catch(e){return def;} }
+function save(k, v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
+const playableCount = (p) => (p.lessons||[]).filter(l=>!l.locked && (l.questions||[]).length>0).length;
+
+function validateProject(obj){
+  if(!obj || typeof obj!=="object") return "Das ist keine gültige Projekt-Datei.";
+  if(!obj.name || typeof obj.name!=="string") return "Dem Projekt fehlt ein „name“.";
+  if(!Array.isArray(obj.lessons) || obj.lessons.length===0) return "Das Projekt hat keine „lessons“ (Lektionen).";
+  for(const l of obj.lessons){
+    if(!l.id || !l.name) return "Eine Lektion hat keine „id“ oder keinen „name“.";
+    if(!l.locked && (!Array.isArray(l.questions) || l.questions.length===0))
+      return `Lektion „${l.name}“ ist offen, hat aber keine Fragen.`;
+  }
+  return null;
+}
+
+/* ===================== MAP ===================== */
+function MapBox({ project, onPick, picked, result, highlight, interactive }){
+  return (
+    <div className="mapbox">
+      <img src={project.map} alt={"Karte – "+project.name} />
+      {(project.districts||[]).map(d=>{
+        if(highlight && d.n!==highlight) return null;
+        let cls = "hot";
+        if(highlight && d.n===highlight) cls += " good";
+        if(picked===d.n){ cls += result==="good" ? " good" : result==="bad" ? " bad" : ""; }
+        return (
+          <div key={d.n} className={cls}
+               style={{ left:d.x+"%", top:d.y+"%", cursor: interactive?"pointer":"default" }}
+               onClick={()=> interactive && onPick && onPick(d.n)}>
+            <div className="num">{d.n}</div>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+/* ===================== Fragetypen ===================== */
+function MapQ({ project, q, state, setAnswer }){
+  return (
+    <div className="q-area">
+      <div className="q-prompt" dangerouslySetInnerHTML={{__html:q.prompt}} />
+      <MapBox project={project} interactive={state.phase==="answering"} picked={state.answer}
+              result={state.phase==="checked" ? (state.correct?"good":"bad") : null}
+              onPick={(n)=> setAnswer(n)} />
+      <div className="map-cap">// Original-Karte der inneren Stadtteile von Villach</div>
+    </div>
+  );
+}
+function ChoiceQ({ q, state, setAnswer }){
+  return (
+    <div className="q-area">
+      <div className="q-prompt" dangerouslySetInnerHTML={{__html:q.prompt}} />
+      <div className="choices">
+        {q.options.map((opt,i)=>{
+          let cls="choice";
+          if(state.phase==="answering"){ if(state.answer===i) cls+=" sel"; }
+          else { if(i===q.answer) cls+=" good"; else if(state.answer===i) cls+=" bad"; else cls+=" dim"; }
+          return (
+            <button key={i} className={cls} onClick={()=> state.phase==="answering" && setAnswer(i)}>
+              <span className="k">{KEYS[i]}</span>{opt}
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+function TypeQ({ project, q, state, setAnswer }){
+  const ref = useRef(null);
+  useEffect(()=>{ if(ref.current && state.phase==="answering") setTimeout(()=>ref.current&&ref.current.focus(),60); },[]);
+  let cls="type-in";
+  if(state.phase==="checked") cls += state.correct?" good":" bad";
+  const solName = q.highlight ? ((project.districts||[]).find(d=>d.n===q.highlight)||{}).name
+                              : (q.accept && q.accept[0]);
+  return (
+    <div className="q-area">
+      <div className="q-prompt" dangerouslySetInnerHTML={{__html:q.prompt}} />
+      {q.highlight && project.map && (
+        <div className="hl-card"><MapBox project={project} highlight={q.highlight} interactive={false} /></div>
+      )}
+      <input ref={ref} className={cls} placeholder={q.placeholder||"Antwort eintippen…"}
+             value={state.answer||""} disabled={state.phase==="checked"}
+             autoCapitalize="off" autoCorrect="off" spellCheck={false}
+             onChange={e=> setAnswer(e.target.value)} />
+      {state.phase==="checked" && !state.correct && solName && (
+        <div className="q-prompt" style={{fontSize:"20px",marginTop:"16px",color:"var(--green-d)"}}>
+          Richtig wäre: <b style={{color:"var(--green-d)"}}>{solName}</b>
+        </div>
+      )}
+    </div>
+  );
+}
+function MatchQ({ q, onSolved }){
+  const lefts  = useMemo(()=> shuffle(q.pairs.map((p,i)=>({...p,idx:i}))), []);
+  const rights = useMemo(()=> shuffle(q.pairs.map((p,i)=>({...p,idx:i}))), []);
+  const [sel, setSel]   = useState(null);
+  const [done, setDone] = useState({});
+  const [miss, setMiss] = useState(null);
+  const solved = useRef(false);
+  function tap(side, idx){
+    if(done[idx]!==undefined) return;
+    setMiss(null);
+    if(!sel){ setSel({side, idx}); return; }
+    if(sel.side===side){ setSel({side, idx}); return; }
+    if(sel.idx===idx){
+      const order = Object.keys(done).length + 1;
+      const nd = {...done, [idx]:order};
+      setDone(nd); setSel(null);
+      if(Object.keys(nd).length===q.pairs.length && !solved.current){ solved.current=true; setTimeout(onSolved,450); }
+    } else {
+      const l = side==="L" ? idx : sel.idx, r = side==="R" ? idx : sel.idx;
+      setMiss({l, r}); setSel(null); setTimeout(()=> setMiss(null), 450);
+    }
+  }
+  const cell = (it, side) => {
+    let cls = "mitem" + (side==="L" ? " emo" : "");
+    if(done[it.idx]!==undefined) cls += " done";
+    else if(sel && sel.side===side && sel.idx===it.idx) cls += " sel";
+    if(miss && (side==="L"?miss.l:miss.r)===it.idx) cls += " miss";
+    return (
+      <button key={it.idx} className={cls} onClick={()=>tap(side, it.idx)}>
+        {done[it.idx]!==undefined && <span className="bdg">{done[it.idx]}</span>}
+        {side==="L" ? it.left : it.right}
+      </button>
+    );
+  };
+  return (
+    <div className="q-area">
+      <div className="q-prompt" dangerouslySetInnerHTML={{__html:q.prompt}} />
+      <div className="q-sub">Tippe ein <b>Bild</b> und dann das passende <b>Wort</b>. 👆</div>
+      <div className="match">
+        <div className="col">{lefts.map(it=> cell(it,"L"))}</div>
+        <div className="col">{rights.map(it=> cell(it,"R"))}</div>
+      </div>
+    </div>
+  );
+}
+
+/* ===================== Übung ===================== */
+function Exercise({ project, lesson, onExit, onDone }){
+  const qs = lesson.questions;
+  const [qi, setQi] = useState(0);
+  const [hearts, setHearts] = useState(3);
+  const [correctCount, setCorrectCount] = useState(0);
+  const [st, setSt] = useState({ phase:"answering", answer:null, correct:false });
+  const q = qs[qi];
+  function setAnswer(v){ setSt(s=>({...s, answer:v})); }
+  function check(){
+    let ok=false;
+    if(q.type==="map")    ok = st.answer===q.target;
+    if(q.type==="choice") ok = st.answer===q.answer;
+    if(q.type==="type")   ok = q.accept.some(a=> norm(a)===norm(st.answer||""));
+    setSt(s=>({...s, phase:"checked", correct:ok}));
+    if(ok) setCorrectCount(c=>c+1); else setHearts(h=>Math.max(0,h-1));
+  }
+  function matchSolved(){ setCorrectCount(c=>c+1); setSt(s=>({...s, phase:"checked", correct:true})); }
+  function next(){
+    if(qi+1 < qs.length){ setQi(qi+1); setSt({ phase:"answering", answer:null, correct:false }); }
+    else { onDone({ xp: correctCount*5, sticker: lesson.sticker }); }
+  }
+  const canCheck = q.type==="type" ? (st.answer && st.answer.trim().length>0) : (st.answer!==null && st.answer!==undefined);
+  const progress = ((qi + (st.phase==="checked"?1:0)) / qs.length) * 100;
+  return (
+    <div className="screen">
+      <div className="body">
+        <div className="ex-top pad-top">
+          <button className="x" onClick={onExit} aria-label="Übung beenden">✕</button>
+          <div className="ex-bar"><i style={{width:progress+"%"}}></i></div>
+          <span className="hearts">{"❤️".repeat(hearts)}{"🤍".repeat(3-hearts)}</span>
+        </div>
+        {q.type==="map"    && <MapQ project={project} q={q} state={st} setAnswer={setAnswer} />}
+        {q.type==="choice" && <ChoiceQ q={q} state={st} setAnswer={setAnswer} />}
+        {q.type==="type"   && <TypeQ project={project} q={q} state={st} setAnswer={setAnswer} />}
+        {q.type==="match"  && <MatchQ key={qi} q={q} onSolved={matchSolved} />}
+        {q.type!=="match" && st.phase==="answering" && (
+          <div className="foot">
+            <button className="btn btn-primary" disabled={!canCheck} onClick={check}>Prüfen</button>
+          </div>
+        )}
+        {st.phase==="checked" && (
+          <div className={"foot "+(st.correct?"good":"bad")}>
+            <div className="fb">
+              <span className="ic">{st.correct?"🦊":"💪"}</span>
+              <div className="tx">
+                <b>{st.correct ? pick(["Bravo!","Stark! 💪","Perfekt! 🎉","Genau richtig!","Top gemacht!"]) : "Fast! Schau nochmal."}</b>
+                <span>{st.correct ? "Richtig!" : "Nicht schlimm – weiter geht's!"}</span>
+              </div>
+            </div>
+            <button className={"btn "+(st.correct?"btn-green":"btn-primary")} onClick={next}>Weiter</button>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+/* ===================== Belohnung ===================== */
+function Reward({ lesson, xp, onContinue }){
+  const cols=["#24B1B1","#FDEB9E","#C13383","#4B5694","#3fbfbf","#58a700"];
+  const bits = useMemo(()=> Array.from({length:34},()=>({
+    l:Math.random()*100, c:cols[(Math.random()*cols.length)|0],
+    d:(Math.random()*2.4).toFixed(2), du:(2.4+Math.random()*1.8).toFixed(2)
+  })),[]);
+  return (
+    <div className="screen">
+      <div className="body">
+        <div className="reward">
+          <div className="confetti">
+            {bits.map((b,i)=>(<i key={i} style={{left:b.l+"%",background:b.c,animationDelay:b.d+"s",animationDuration:b.du+"s"}}></i>))}
+          </div>
+          <div className="vbig">🦊</div>
+          <h2>Geschafft, {KID}! 🎉</h2>
+          <div className="sub">{lesson.name} sitzt – super gemacht!</div>
+          <div className="xpbig">+{xp} XP ⭐</div>
+          {lesson.sticker && (
+            <div className="sticker">
+              <div className="se">{lesson.sticker.emoji}</div>
+              <div className="st"><span>NEUER STICKER</span><b>{lesson.sticker.title}</b></div>
+            </div>
+          )}
+        </div>
+        <div className="reward-cta"><button className="btn btn-green" onClick={onContinue}>Weiter →</button></div>
+      </div>
+    </div>
+  );
+}
+
+/* ===================== Lernpfad ===================== */
+function Path({ project, doneSet, xp, streak, onStart, onBack }){
+  const playable = (project.lessons||[]).filter(l=>!l.locked && (l.questions||[]).length>0);
+  const firstName = playable[0] ? playable[0].name : null;
+  const secondName = playable[1] ? playable[1].name : null;
+  return (
+    <div className="screen">
+      <div className="body">
+        <div className="ph-top pad-top">
+          <button className="back" onClick={onBack} aria-label="Zurück">←</button>
+          <div className="ttl"><b>{project.icon} {project.name}</b><span>{project.subtitle||""}</span></div>
+          <div className="spacer"></div>
+          <div className="chips"><span className="chip flame">🔥 {streak}</span><span className="chip xp">⭐ {xp}</span></div>
+        </div>
+        <div className="vili">
+          <div className="face">🦊</div>
+          <div className="bubble">
+            {firstName
+              ? <>Hallo {KID}! Üben wir <b>{firstName}</b>{secondName?<> und <b>{secondName}</b></>:null}? 🚂</>
+              : <>Hallo {KID}! Such dir eine Lektion aus. ✨</>}
+          </div>
+        </div>
+        <div className="path">
+          <div className="lessons">
+            {(project.lessons||[]).map((l,i)=>{
+              const isDone = doneSet.includes(l.id);
+              const playableNode = !l.locked && (l.questions||[]).length>0;
+              const ready = playableNode && !isDone;
+              const cls = !playableNode ? "lock" : isDone ? "done play" : "ready play";
+              return (
+                <div key={l.id} className={"node-row "+(i%2?"r ":"")+(!playableNode?"lockc":"")}>
+                  <button className={"node "+cls} onClick={()=> playableNode && onStart(l)} aria-label={l.name}>
+                    {!playableNode ? "🔒" : l.icon}
+                    {ready && <span className="ring"></span>}
+                    {isDone && <span className="star">⭐</span>}
+                  </button>
+                  <div className="lbl">{l.name}
+                    <small>{!playableNode ? "Bald verfügbar" : isDone ? "★ Geschafft" : "Jetzt üben!"}</small>
+                  </div>
+                </div>
+              );
+            })}
+            <div className="node-row">
+              <div className="node trophy">🏆</div>
+              <div className="lbl">Großes Quiz<small>Bald verfügbar</small></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ===================== Startbildschirm ===================== */
+function Home({ tiles, progress, xp, streak, onOpen, onNew }){
+  return (
+    <div className="screen">
+      <div className="body">
+        <div className="appbar pad-top">
+          <div className="greet"><b>Hallo {KID}! 👋</b><span>Schön, dass du da bist</span></div>
+          <div className="spacer"></div>
+          <div className="chips">
+            <span className="chip flame">🔥 {streak}</span>
+            <span className="chip xp">⭐ {xp}</span>
+          </div>
+        </div>
+        <div className="vili">
+          <div className="face">🦊</div>
+          <div className="bubble">Bereit zum Üben? <b>Such dir ein Projekt aus!</b></div>
+        </div>
+        <div className="s-h">📚 Deine Lernprojekte</div>
+        {tiles.length===0
+          ? <div className="empty">Noch keine Projekte. Leg unten dein erstes an! 👇</div>
+          : <div className="tiles">
+              {tiles.map(t=>{
+                const total = t.lessonCount;
+                const done = (progress[t.id]||[]).length;
+                const pct = total ? Math.min(100, Math.round(done/total*100)) : 0;
+                const finished = total>0 && done>=total;
+                return (
+                  <button key={t.id} className="tile" onClick={()=> onOpen(t)}>
+                    <div className="ic" style={{background:t.iconBg||"var(--teal-soft)"}}>{t.icon||"📘"}</div>
+                    <div className="info">
+                      <b>{t.name}</b>
+                      <div className="pm">{finished ? "Geschafft! 🎉" : `${done} von ${total} Lektionen`}</div>
+                      <div className="bar"><i style={{width:pct+"%"}}></i></div>
+                    </div>
+                    {finished && <div className="done">✅</div>}
+                  </button>
+                );
+              })}
+            </div>}
+        <div className="cta-wrap">
+          <button className="btn btn-primary" onClick={onNew}>＋ Neues Projekt anlegen</button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ===================== Neues Projekt ===================== */
+const SYMBOLS = ["🗺️","🏰","⛰️","🚆","🌳","⭐","✖️","✏️","🔤","🧮","🔬","🌍"];
+function NewProject({ onCancel, onCreate }){
+  const [name, setName] = useState("");
+  const [icon, setIcon] = useState("🗺️");
+  const [fileName, setFileName] = useState(null);
+  const [parsed, setParsed] = useState(null);
+  const [err, setErr] = useState(null);
+  const [info, setInfo] = useState(null);
+  const [over, setOver] = useState(false);
+  const [showPaste, setShowPaste] = useState(false);
+  const [pasteText, setPasteText] = useState("");
+  const fileRef = useRef(null);
+
+  function acceptJSON(text, fname){
+    setErr(null); setInfo(null);
+    let obj;
+    try { obj = JSON.parse(text); }
+    catch(e){ setParsed(null); setFileName(null); setErr("Die Datei ist kein gültiges JSON. 🙈"); return; }
+    const v = validateProject(obj);
+    if(v){ setParsed(null); setFileName(null); setErr(v); return; }
+    setParsed(obj);
+    setFileName(fname || (obj.name+".json"));
+    if(!name) setName(obj.name);
+    if(obj.icon) setIcon(obj.icon);
+    setInfo(`„${obj.name}“ erkannt – ${obj.lessons.filter(l=>!l.locked).length} Lektion(en) bereit. ✅`);
+  }
+  function readFile(file){
+    if(!file) return;
+    const r = new FileReader();
+    r.onload = () => acceptJSON(String(r.result), file.name);
+    r.onerror = () => setErr("Datei konnte nicht gelesen werden.");
+    r.readAsText(file);
+  }
+  function onDrop(e){ e.preventDefault(); setOver(false); const f=e.dataTransfer.files&&e.dataTransfer.files[0]; if(f) readFile(f); }
+  function create(){
+    if(!parsed){ setErr("Lade zuerst einen Inhalt hoch oder tippe ihn ein. 📄"); return; }
+    onCreate({ ...parsed, id: parsed.id || ("proj-"+Date.now()), name: name.trim() || parsed.name, icon });
+  }
+  return (
+    <div className="screen">
+      <div className="body">
+        <div className="appbar titled pad-top">
+          <button className="back" onClick={onCancel} aria-label="Zurück">←</button>
+          <div className="title">Neues Projekt 🎒</div>
+        </div>
+        <div className="vili" style={{paddingBottom:"10px"}}>
+          <div className="face">🦊</div>
+          <div className="bubble">Lade eine <b>Inhalts-Datei</b> hoch – dann üben wir gemeinsam!</div>
+        </div>
+        <div className="field">
+          <label>Wie soll dein Projekt heißen?</label>
+          <input className="input" value={name} placeholder="z. B. Stadtteile von Villach" onChange={e=>setName(e.target.value)} />
+        </div>
+        <div className="field">
+          <label>Such dir ein Symbol aus</label>
+          <div className="emoji-pick">
+            {SYMBOLS.map(s=>(<span key={s} className={s===icon?"on":""} onClick={()=>setIcon(s)}>{s}</span>))}
+          </div>
+        </div>
+        <div className="field" style={{marginBottom:"8px"}}><label>Inhalt hinzufügen</label></div>
+        <div className={"dropzone"+(over?" over":"")}
+             onDragOver={e=>{e.preventDefault();setOver(true);}} onDragLeave={()=>setOver(false)} onDrop={onDrop}
+             onClick={()=> fileRef.current && fileRef.current.click()}>
+          <div className="di">📄</div>
+          <b>Inhalt hierher ziehen</b>
+          <p>Projekt-Datei (.json) vom Gerät</p>
+          {fileName && <div className="fname">✓ {fileName}</div>}
+        </div>
+        <input ref={fileRef} type="file" accept="application/json,.json" style={{display:"none"}} onChange={e=> readFile(e.target.files[0])} />
+        <div className="imp-btns">
+          <button className="soon" onClick={()=>{ setErr(null); setInfo("📷 Foto-Import kommt in einer späteren Ausbaustufe – dann macht Vili automatisch Übungen aus dem Schulheft. Für jetzt: Datei oder „Selbst tippen“."); }}>
+            <span className="e">📷</span>Foto
+          </button>
+          <button onClick={()=> fileRef.current && fileRef.current.click()}><span className="e">📁</span>Datei</button>
+          <button onClick={()=> setShowPaste(s=>!s)}><span className="e">✍️</span>Selbst tippen</button>
+        </div>
+        {showPaste && (
+          <div className="field" style={{marginTop:"16px"}}>
+            <label>Projekt-JSON einfügen</label>
+            <textarea className="paste-area" value={pasteText} placeholder='{ "name": "...", "lessons": [ ... ] }' onChange={e=>setPasteText(e.target.value)} />
+            <button className="btn btn-ghost" style={{marginTop:"12px",fontSize:"17px",padding:"14px"}} onClick={()=> acceptJSON(pasteText, null)}>Inhalt übernehmen</button>
+          </div>
+        )}
+        {err && <div className="note err">{err}</div>}
+        {info && !err && <div className="note info">{info}</div>}
+        <div className="cta-wrap">
+          <button className="btn btn-primary" disabled={!parsed} onClick={create}>Projekt erstellen ✨</button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ===================== Hilfs-Screens ===================== */
+function Loading({ text }){
+  return (
+    <div className="screen"><div className="body"><div className="loading">
+      <div className="lf">🦊</div><div className="lt">{text||"Vili holt die Übungen…"}</div>
+    </div></div></div>
+  );
+}
+function Fatal({ msg, onRetry }){
+  return (
+    <div className="screen"><div className="body"><div className="loading">
+      <div className="lf" style={{animation:"none"}}>🙈</div>
+      <div className="lt" style={{maxWidth:"420px"}}>{msg}</div>
+      {onRetry && <button className="btn btn-primary" style={{maxWidth:"260px"}} onClick={onRetry}>Nochmal versuchen</button>}
+    </div></div></div>
+  );
+}
+
+/* ===================== App (lädt Manifest + Themen bei Bedarf) ===================== */
+function App(){
+  const [manifest, setManifest] = useState(null);     // [{id,name,icon,iconBg,subtitle,file,lessonCount}]
+  const [manifestErr, setManifestErr] = useState(null);
+  const [userProjects, setUserProjects] = useState(()=> load("lernfuchs_userprojects", []));
+  const [progress, setProgress] = useState(()=> load("lernfuchs_done", {}));
+  const [xp, setXp]   = useState(()=> load("lernfuchs_xp", 240));
+  const [streak]      = useState(()=> load("lernfuchs_streak", 5));
+  const [scene, setScene] = useState({ name:"home" });
+  const [lastXp, setLastXp] = useState(0);
+  const cache = useRef({});   // id -> volle Projektdaten (im Speicher, nur einmal laden)
+
+  useEffect(()=> save("lernfuchs_userprojects", userProjects), [userProjects]);
+  useEffect(()=> save("lernfuchs_done", progress), [progress]);
+  useEffect(()=> save("lernfuchs_xp", xp), [xp]);
+
+  // Manifest einmalig laden (winzig)
+  useEffect(()=>{
+    let ok=true;
+    fetch("manifest.json", {cache:"no-cache"})
+      .then(r=>{ if(!r.ok) throw new Error("HTTP "+r.status); return r.json(); })
+      .then(j=>{ if(ok) setManifest(j.projects||[]); })
+      .catch(()=>{ if(ok) setManifestErr(
+        "Die Themenliste konnte nicht geladen werden. Bitte öffne die App über ihre Web-Adresse (GitHub Pages) – beim lokalen Öffnen blockiert der Browser das Nachladen."); });
+    return ()=>{ ok=false; };
+  }, []);
+
+  // Kacheln am Start = eingebaute (Manifest) + eigene (localStorage)
+  const tiles = useMemo(()=>{
+    const builtin = (manifest||[]).map(m=>({ ...m, source:"builtin" }));
+    const user = userProjects.map(p=>({
+      id:p.id, name:p.name, icon:p.icon, iconBg:p.iconBg, subtitle:p.subtitle,
+      lessonCount: playableCount(p), source:"user"
+    }));
+    return [...builtin, ...user];
+  }, [manifest, userProjects]);
+
+  const doneFor = (pid) => progress[pid] || [];
+
+  function gotoPath(full){
+    cache.current[full.id] = full;
+    setScene({ name:"path", projectId: full.id });
+  }
+  function openTile(t){
+    if(cache.current[t.id]) return setScene({ name:"path", projectId:t.id });
+    if(t.source==="user"){
+      const full = userProjects.find(p=>p.id===t.id);
+      if(full) return gotoPath(full);
+    }
+    // eingebautes Thema bei Bedarf nachladen
+    setScene({ name:"loading", projectId:t.id });
+    fetch(t.file, {cache:"force-cache"})
+      .then(r=>{ if(!r.ok) throw new Error("HTTP "+r.status); return r.json(); })
+      .then(full=> gotoPath(full))
+      .catch(()=> setScene({ name:"loaderr", projectId:t.id, tile:t }));
+  }
+
+  function startLesson(l){ setScene(s=>({ name:"exercise", projectId:s.projectId, lesson:l })); }
+  function exitEx(){ setScene(s=>({ name:"path", projectId:s.projectId })); }
+  function finishEx(res){
+    setLastXp(res.xp); setXp(x=>x+res.xp);
+    const pid = scene.projectId, lid = scene.lesson.id;
+    setProgress(pr=>{ const cur=pr[pid]||[]; return cur.includes(lid) ? pr : {...pr,[pid]:[...cur,lid]}; });
+    setScene(s=>({ name:"reward", projectId:s.projectId, lesson:s.lesson }));
+  }
+  function createProject(proj){
+    setUserProjects(list=>[...list.filter(p=>p.id!==proj.id), proj]);
+    gotoPath(proj);
+  }
+
+  const activeProject = scene.projectId ? cache.current[scene.projectId] : null;
+
+  if(manifestErr && scene.name==="home")
+    return <Fatal msg={manifestErr} onRetry={()=>{ setManifestErr(null); setManifest(null);
+      fetch("manifest.json",{cache:"no-cache"}).then(r=>r.json()).then(j=>setManifest(j.projects||[]))
+        .catch(()=>setManifestErr(manifestErr)); }} />;
+
+  if(scene.name==="home"){
+    if(!manifest) return <Loading text="Lade deine Projekte…" />;
+    return <Home tiles={tiles} progress={progress} xp={xp} streak={streak}
+                 onOpen={openTile} onNew={()=>setScene({name:"new"})} />;
+  }
+  if(scene.name==="loading") return <Loading text="Vili holt die Übungen…" />;
+  if(scene.name==="loaderr")
+    return <Fatal msg="Dieses Thema konnte nicht geladen werden."
+                  onRetry={()=> openTile(scene.tile)} />;
+  if(scene.name==="new")
+    return <NewProject onCancel={()=>setScene({name:"home"})} onCreate={createProject} />;
+  if(scene.name==="path" && activeProject)
+    return <Path project={activeProject} doneSet={doneFor(activeProject.id)} xp={xp} streak={streak}
+                 onStart={startLesson} onBack={()=>setScene({name:"home"})} />;
+  if(scene.name==="exercise" && activeProject)
+    return <Exercise project={activeProject} lesson={scene.lesson} onExit={exitEx} onDone={finishEx} />;
+  if(scene.name==="reward" && activeProject)
+    return <Reward lesson={scene.lesson} xp={lastXp} onContinue={()=>setScene({name:"path",projectId:scene.projectId})} />;
+
+  // Fallback (z. B. Reload mitten in einer Übung -> Cache leer)
+  return <Loading text="Einen Moment…" />;
+}
+
+ReactDOM.createRoot(document.getElementById('stage')).render(<App/>);
+</script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+{
+  "id": "beispiel-thema",
+  "name": "Beispiel-Thema",
+  "icon": "🌍",
+  "iconBg": "var(--yellow-soft)",
+  "subtitle": "So sieht ein neues Thema aus",
+  "lessons": [
+    {
+      "id": "lektion-1",
+      "name": "Erste Lektion",
+      "icon": "⭐",
+      "sticker": { "emoji": "🏅", "title": "Erste Lektion geschafft!" },
+      "questions": [
+        { "type": "choice", "prompt": "Eine Frage mit <b>einer</b> richtigen Antwort?",
+          "options": ["Richtige Antwort", "Falsch", "Auch falsch", "Ebenfalls falsch"], "answer": 0 },
+        { "type": "type", "prompt": "Tippe das Lösungswort ein: ✍️",
+          "accept": ["lösung", "loesung"], "placeholder": "Wort eintippen…", "hint": "Beginnt mit L." },
+        { "type": "match", "prompt": "Verbinde, was zusammengehört! 🔗",
+          "pairs": [
+            { "left": "🐶", "right": "Hund" },
+            { "left": "🐱", "right": "Katze" },
+            { "left": "🐮", "right": "Kuh" }
+          ] }
+      ]
+    },
+    {
+      "id": "lektion-2",
+      "name": "Zweite Lektion",
+      "icon": "🔒",
+      "locked": true,
+      "questions": []
+    }
+  ]
+}

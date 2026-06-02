@@ -1,0 +1,78 @@
+{
+  "id": "villach-stadtteile",
+  "name": "Stadtteile von Villach",
+  "icon": "🗺️",
+  "iconBg": "var(--teal-soft)",
+  "fach": "Sachunterricht",
+  "klasse": "3. Klasse VS",
+  "subtitle": "Innere Stadtteile · 3. Klasse",
+  "map": "projects/villach-map.jpg",
+  "districts": [
+    { "n": 1, "name": "Lind",                  "x": 63.5, "y": 14 },
+    { "n": 2, "name": "Seebach-Wasenboden",    "x": 80,   "y": 22 },
+    { "n": 3, "name": "St. Agathen und Perau", "x": 83.5, "y": 40 },
+    { "n": 4, "name": "Auen",                  "x": 61,   "y": 75 },
+    { "n": 5, "name": "Warmbad-Judendorf",     "x": 31,   "y": 75 },
+    { "n": 6, "name": "Völkendorf",            "x": 53,   "y": 41.5 },
+    { "n": 7, "name": "St. Martin",            "x": 49.5, "y": 19 }
+  ],
+  "lessons": [
+    {
+      "id": "lind", "n": 1, "name": "Lind", "icon": "🏙️", "color": "#7ec8e3",
+      "sticker": { "emoji": "🏟️", "title": "Sport-Stadion Lind freigeschaltet!" },
+      "questions": [
+        { "type": "map", "prompt": "Tippe auf <b>Lind</b> auf der Karte! 🗺️", "target": 1,
+          "hint": "Lind liegt im Norden – nördlich vom Hauptbahnhof." },
+        { "type": "choice", "prompt": "Wo liegt <b>Lind</b>? 🧭",
+          "options": ["Nördlich des Hauptbahnhofs", "Im Warmbad", "Am Faaker See", "Südlich der Drau"], "answer": 0 },
+        { "type": "type", "prompt": "Schreibe den Namen von Stadtteil <b>Nr. 1</b>: ✍️",
+          "highlight": 1, "accept": ["lind"], "placeholder": "Stadtteil eintippen…", "hint": "4 Buchstaben, beginnt mit L." },
+        { "type": "choice", "prompt": "Welches große Technologie-Unternehmen ist in Lind? 💻",
+          "options": ["Lam Research", "Infineon", "Red Bull", "Magna"], "answer": 0 },
+        { "type": "match", "prompt": "Verbinde, was es in <b>Lind</b> gibt! 🔗",
+          "pairs": [
+            { "left": "🏟️", "right": "Sport-Stadion" },
+            { "left": "🏫", "right": "HAK / HASCH" },
+            { "left": "💻", "right": "Lam Research" },
+            { "left": "⚽", "right": "Ballspielhalle" }
+          ] },
+        { "type": "choice", "prompt": "Wie <b>groß</b> ist Lind? 📏",
+          "options": ["Einer der größeren Stadtteile", "Der kleinste Stadtteil", "Eine kleine Insel", "Nur ein Park"], "answer": 0 },
+        { "type": "type", "prompt": "Schreibe das Technologie-Unternehmen richtig: 💻",
+          "accept": ["lam research"], "placeholder": "Firmenname eintippen…", "hint": "Zwei Wörter: „Lam …“ (engl. für Forschung)." }
+      ]
+    },
+    {
+      "id": "seebach", "n": 2, "name": "Seebach-Wasenboden", "icon": "🚉", "color": "#cfcfcf",
+      "sticker": { "emoji": "🚉", "title": "Hauptbahnhof-Sticker freigeschaltet!" },
+      "questions": [
+        { "type": "map", "prompt": "Tippe auf <b>Seebach-Wasenboden</b>! 🗺️", "target": 2,
+          "hint": "Liegt nordöstlich der Innenstadt, gleich bei der Drau." },
+        { "type": "choice", "prompt": "Welcher wichtige Bahnhof liegt hier? 🚉",
+          "options": ["Hauptbahnhof", "Westbahnhof", "Seebahnhof", "Faaker Bahnhof"], "answer": 0 },
+        { "type": "type", "prompt": "Schreibe den Namen von Stadtteil <b>Nr. 2</b>: ✍️",
+          "highlight": 2, "accept": ["seebach-wasenboden", "seebach wasenboden"],
+          "placeholder": "Stadtteil eintippen…", "hint": "Doppelname mit Bindestrich: „Seebach-…“." },
+        { "type": "choice", "prompt": "Welche Behörde ist in Seebach-Wasenboden? 👮",
+          "options": ["Landespolizeidirektion", "Rathaus", "Bezirksgericht", "Finanzamt"], "answer": 0 },
+        { "type": "match", "prompt": "Verbinde, was es hier gibt! 🔗",
+          "pairs": [
+            { "left": "⚰️", "right": "Zentral-Friedhof" },
+            { "left": "🛹", "right": "Skaterpark" },
+            { "left": "🚉", "right": "Hauptbahnhof" },
+            { "left": "🪖", "right": "Rohrkaserne" }
+          ] },
+        { "type": "choice", "prompt": "Wo liegt Seebach-Wasenboden? 🧭",
+          "options": ["Nordöstlich der Innenstadt", "Im Süden am Berg", "Am Ossiacher See", "Westlich vom Warmbad"], "answer": 0 },
+        { "type": "type", "prompt": "Wie heißt der große Friedhof hier? ✍️",
+          "accept": ["zentral-friedhof", "zentralfriedhof", "zentral friedhof"],
+          "placeholder": "Antwort eintippen…", "hint": "„Zentral-…“ – wo Villach seine Verstorbenen bestattet." }
+      ]
+    },
+    { "id": "stagathen",   "n": 3, "name": "St. Agathen und Perau", "icon": "🌳", "locked": true, "questions": [] },
+    { "id": "auen",        "n": 4, "name": "Auen",                  "icon": "🏰", "locked": true, "questions": [] },
+    { "id": "warmbad",     "n": 5, "name": "Warmbad-Judendorf",     "icon": "♨️", "locked": true, "questions": [] },
+    { "id": "voelkendorf", "n": 6, "name": "Völkendorf",            "icon": "🏘️", "locked": true, "questions": [] },
+    { "id": "stmartin",    "n": 7, "name": "St. Martin",            "icon": "⛪", "locked": true, "questions": [] }
+  ]
+}
