@@ -938,7 +938,7 @@ function App(){
     }
     // eingebautes Thema bei Bedarf nachladen
     setScene({ name:"loading", projectId:t.id });
-    fetch(t.file, {cache:"force-cache"})
+    fetch(t.file, {cache:"no-cache"})
       .then(r=>{ if(!r.ok) throw new Error("HTTP "+r.status); return r.json(); })
       .then(full=> gotoPath(full))
       .catch(()=> setScene({ name:"loaderr", projectId:t.id, tile:t }));
