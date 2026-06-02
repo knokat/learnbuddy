@@ -238,6 +238,7 @@ input,textarea{font-family:var(--font-body);}
 @keyframes cheer{0%,100%{transform:rotate(-6deg) translateY(0)}50%{transform:rotate(6deg) translateY(-12px)}}
 .reward h2{font-family:var(--font-head);font-weight:700;font-size:42px;color:var(--magenta);margin-top:18px;}
 .reward .sub{color:var(--muted);font-weight:800;font-size:20px;margin-top:6px;}
+.reward .score{margin-top:10px;font-family:var(--font-head);font-weight:600;font-size:20px;color:var(--teal-d);}
 .reward .xpbig{margin-top:24px;background:var(--yellow);color:#7a5b00;font-family:var(--font-head);font-weight:700;font-size:28px;padding:12px 32px;border-radius:40px;box-shadow:0 6px 0 var(--yellow-d);}
 .sticker{margin-top:22px;background:#fff;border:var(--card-bd);box-shadow:var(--card-sh);border-radius:22px;padding:18px 24px;display:flex;align-items:center;gap:16px;}
 .sticker .se{font-size:52px;}
@@ -547,7 +548,7 @@ function Exercise({ project, lesson, onExit, onDone }){
   function matchSolved(){ setCorrectCount(c=>c+1); setSt(s=>({...s, phase:"correct", correct:true})); }
   function next(){
     if(qi+1 < qs.length){ setQi(qi+1); setSt({ phase:"answering", answer:null, correct:false, results:null, lostHeart:false }); }
-    else { onDone({ xp: correctCount*5, sticker: lesson.sticker }); }
+    else { onDone({ xp: correctCount*5, sticker: lesson.sticker, correct: correctCount, total: qs.length }); }
   }
 
   function blanksNeeded(){
@@ -630,7 +631,7 @@ function Exercise({ project, lesson, onExit, onDone }){
 }
 
 /* ===================== Belohnung ===================== */
-function Reward({ lesson, xp, onContinue }){
+function Reward({ lesson, xp, correct, total, onContinue }){
   const cols=["#24B1B1","#FDEB9E","#C13383","#4B5694","#3fbfbf","#58a700"];
   const bits = useMemo(()=> Array.from({length:34},()=>({
     l:Math.random()*100, c:cols[(Math.random()*cols.length)|0],
@@ -646,6 +647,9 @@ function Reward({ lesson, xp, onContinue }){
           <div className="vbig">🦊</div>
           <h2>Geschafft, {KID}! 🎉</h2>
           <div className="sub">{lesson.name} sitzt – super gemacht!</div>
+          {typeof total==="number" && total>0 && (
+            <div className="score">🎯 {correct} von {total} Aufgaben richtig</div>
+          )}
           <div className="xpbig">+{xp} XP ⭐</div>
           {lesson.sticker && (
             <div className="sticker">
@@ -881,7 +885,7 @@ function App(){
   const [xp, setXp]   = useState(()=> load("lernfuchs_xp", 240));
   const [streak]      = useState(()=> load("lernfuchs_streak", 5));
   const [scene, setScene] = useState({ name:"home" });
-  const [lastXp, setLastXp] = useState(0);
+  const [lastRes, setLastRes] = useState({ xp:0, correct:0, total:0 });
   const cache = useRef({});   // id -> volle Projektdaten (im Speicher, nur einmal laden)
 
   useEffect(()=> save("lernfuchs_userprojects", userProjects), [userProjects]);
@@ -932,7 +936,7 @@ function App(){
   function startLesson(l){ setScene(s=>({ name:"exercise", projectId:s.projectId, lesson:l })); }
   function exitEx(){ setScene(s=>({ name:"path", projectId:s.projectId })); }
   function finishEx(res){
-    setLastXp(res.xp); setXp(x=>x+res.xp);
+    setLastRes({ xp:res.xp, correct:res.correct, total:res.total }); setXp(x=>x+res.xp);
     const pid = scene.projectId, lid = scene.lesson.id;
     setProgress(pr=>{ const cur=pr[pid]||[]; return cur.includes(lid) ? pr : {...pr,[pid]:[...cur,lid]}; });
     setScene(s=>({ name:"reward", projectId:s.projectId, lesson:s.lesson }));
@@ -966,7 +970,7 @@ function App(){
   if(scene.name==="exercise" && activeProject)
     return <Exercise project={activeProject} lesson={scene.lesson} onExit={exitEx} onDone={finishEx} />;
   if(scene.name==="reward" && activeProject)
-    return <Reward lesson={scene.lesson} xp={lastXp} onContinue={()=>setScene({name:"path",projectId:scene.projectId})} />;
+    return <Reward lesson={scene.lesson} xp={lastRes.xp} correct={lastRes.correct} total={lastRes.total} onContinue={()=>setScene({name:"path",projectId:scene.projectId})} />;
 
   // Fallback (z. B. Reload mitten in einer Übung -> Cache leer)
   return <Loading text="Einen Moment…" />;
