@@ -36,6 +36,17 @@
             { "left": "💻", "right": "Lam Research" },
             { "left": "⚽", "right": "Ballspielhalle" }
           ] },
+        { "type": "collect", "prompt": "In <b>Lind</b> gibt es noch mehr! Ergänze, was fehlt. 🏙️",
+          "given": [
+            { "symbol": "🏟️", "name": "Sport-Stadion" },
+            { "symbol": "⚽", "name": "Ballspielhalle" },
+            { "symbol": "💻", "name": "Lam Research" }
+          ],
+          "blanks": [
+            { "symbol": "🏫", "name": "Volksschule", "accept": ["volksschule", "vs"] },
+            { "symbol": "🧸", "name": "Kindergarten", "accept": ["kindergarten", "kiga"] },
+            { "symbol": "🤸", "name": "Sport-MS", "accept": ["sport-ms", "sport ms", "sportms", "sport-mittelschule", "sport mittelschule", "sportmittelschule"] }
+          ] },
         { "type": "choice", "prompt": "Wie <b>groß</b> ist Lind? 📏",
           "options": ["Einer der größeren Stadtteile", "Der kleinste Stadtteil", "Eine kleine Insel", "Nur ein Park"], "answer": 0 },
         { "type": "type", "prompt": "Schreibe das Technologie-Unternehmen richtig: 💻",
@@ -61,6 +72,26 @@
             { "left": "🛹", "right": "Skaterpark" },
             { "left": "🚉", "right": "Hauptbahnhof" },
             { "left": "🪖", "right": "Rohrkaserne" }
+          ] },
+        { "type": "collect", "prompt": "In <b>Seebach-Wasenboden</b> gibt es noch mehr! Ergänze, was fehlt. 🚉",
+          "given": [
+            { "symbol": "🚉", "name": "Hauptbahnhof" },
+            { "symbol": "🪖", "name": "Rohrkaserne" },
+            { "symbol": "👮", "name": "Landespolizeidirektion" }
+          ],
+          "blanks": [
+            { "symbol": "🧸", "name": "Kindergarten Tratten", "accept": ["kindergarten tratten", "kiga tratten", "tratten", "kindergarten"] },
+            { "symbol": "🏫", "name": "Volksschule", "accept": ["volksschule", "vs"] }
+          ] },
+        { "type": "cloze", "prompt": "Ergänze den Satz über das Naherholungsgebiet! 📝",
+          "segments": [
+            { "text": "In Seebach-Wasenboden gibt es ein großes " },
+            { "blank": { "name": "Naherholungsgebiet", "accept": ["naherholungsgebiet", "naherholungs-gebiet"], "placeholder": "…" } },
+            { "text": ". Dort liegt der " },
+            { "blank": { "name": "größten Spielplatz", "accept": ["größten spielplatz", "grössten spielplatz", "groessten spielplatz", "größter spielplatz", "grösster spielplatz", "spielplatz"], "placeholder": "…" } },
+            { "text": " Villachs und ein " },
+            { "blank": { "name": "Skatepark", "accept": ["skatepark", "skaterpark"], "placeholder": "…" } },
+            { "text": "." }
           ] },
         { "type": "choice", "prompt": "Wo liegt Seebach-Wasenboden? 🧭",
           "options": ["Nordöstlich der Innenstadt", "Im Süden am Berg", "Am Ossiacher See", "Westlich vom Warmbad"], "answer": 0 },
