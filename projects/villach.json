@@ -65,37 +65,44 @@
         {
           "type": "map",
           "prompt": "Tippe auf <b>Lind</b> auf der Karte! 🗺️",
-          "target": 1
+          "target": 1,
+          "grp": "find"
         },
         {
           "type": "map",
           "prompt": "Tippe auf <b>Seebach-Wasenboden</b> auf der Karte! 🗺️",
-          "target": 2
+          "target": 2,
+          "grp": "find"
         },
         {
           "type": "map",
           "prompt": "Tippe auf <b>St. Agathen und Perau</b> auf der Karte! 🗺️",
-          "target": 3
+          "target": 3,
+          "grp": "find"
         },
         {
           "type": "map",
           "prompt": "Tippe auf <b>Auen</b> auf der Karte! 🗺️",
-          "target": 4
+          "target": 4,
+          "grp": "find"
         },
         {
           "type": "map",
           "prompt": "Tippe auf <b>Warmbad-Judendorf</b> auf der Karte! 🗺️",
-          "target": 5
+          "target": 5,
+          "grp": "find"
         },
         {
           "type": "map",
           "prompt": "Tippe auf <b>Völkendorf</b> auf der Karte! 🗺️",
-          "target": 6
+          "target": 6,
+          "grp": "find"
         },
         {
           "type": "map",
           "prompt": "Tippe auf <b>St. Martin</b> auf der Karte! 🗺️",
-          "target": 7
+          "target": 7,
+          "grp": "find"
         }
       ]
     },
@@ -117,7 +124,8 @@
           "accept": [
             "lind"
           ],
-          "placeholder": "Stadtteil eintippen…"
+          "placeholder": "Stadtteil eintippen…",
+          "grp": "w1"
         },
         {
           "type": "type",
@@ -127,7 +135,8 @@
             "seebach-wasenboden",
             "seebach wasenboden"
           ],
-          "placeholder": "Stadtteil eintippen…"
+          "placeholder": "Stadtteil eintippen…",
+          "grp": "w1"
         },
         {
           "type": "type",
@@ -137,7 +146,8 @@
             "st. agathen und perau",
             "st agathen und perau"
           ],
-          "placeholder": "Stadtteil eintippen…"
+          "placeholder": "Stadtteil eintippen…",
+          "grp": "w1"
         },
         {
           "type": "type",
@@ -146,7 +156,8 @@
           "accept": [
             "auen"
           ],
-          "placeholder": "Stadtteil eintippen…"
+          "placeholder": "Stadtteil eintippen…",
+          "grp": "w1"
         },
         {
           "type": "type",
@@ -156,7 +167,8 @@
             "warmbad-judendorf",
             "warmbad judendorf"
           ],
-          "placeholder": "Stadtteil eintippen…"
+          "placeholder": "Stadtteil eintippen…",
+          "grp": "w1"
         },
         {
           "type": "type",
@@ -166,7 +178,8 @@
             "völkendorf",
             "voelkendorf"
           ],
-          "placeholder": "Stadtteil eintippen…"
+          "placeholder": "Stadtteil eintippen…",
+          "grp": "w1"
         },
         {
           "type": "type",
@@ -176,7 +189,8 @@
             "st. martin",
             "st martin"
           ],
-          "placeholder": "Stadtteil eintippen…"
+          "placeholder": "Stadtteil eintippen…",
+          "grp": "w1"
         },
         {
           "type": "type",
@@ -186,7 +200,8 @@
             "lind"
           ],
           "prefix": "L",
-          "placeholder": "…"
+          "placeholder": "…",
+          "grp": "w2"
         },
         {
           "type": "type",
@@ -197,7 +212,8 @@
             "seebach wasenboden"
           ],
           "prefix": "Seeb",
-          "placeholder": "…"
+          "placeholder": "…",
+          "grp": "w2"
         },
         {
           "type": "type",
@@ -208,7 +224,8 @@
             "st agathen und perau"
           ],
           "prefix": "St. A",
-          "placeholder": "…"
+          "placeholder": "…",
+          "grp": "w2"
         },
         {
           "type": "type",
@@ -218,7 +235,8 @@
             "auen"
           ],
           "prefix": "Au",
-          "placeholder": "…"
+          "placeholder": "…",
+          "grp": "w2"
         },
         {
           "type": "type",
@@ -229,7 +247,8 @@
             "warmbad judendorf"
           ],
           "prefix": "Warm",
-          "placeholder": "…"
+          "placeholder": "…",
+          "grp": "w2"
         },
         {
           "type": "type",
@@ -240,7 +259,8 @@
             "voelkendorf"
           ],
           "prefix": "Völk",
-          "placeholder": "…"
+          "placeholder": "…",
+          "grp": "w2"
         },
         {
           "type": "type",
@@ -251,7 +271,8 @@
             "st martin"
           ],
           "prefix": "St. M",
-          "placeholder": "…"
+          "placeholder": "…",
+          "grp": "w2"
         }
       ]
     },
