@@ -354,7 +354,7 @@ function ChoiceQ({ q, state, setAnswer }){
 }
 function TypeQ({ project, q, state, setAnswer }){
   const ref = useRef(null);
-  useEffect(()=>{ if(ref.current && state.phase==="answering") setTimeout(()=>ref.current&&ref.current.focus(),60); },[state.phase]);
+  useEffect(()=>{ if(ref.current && state.phase==="answering") setTimeout(()=>{ if(ref.current){ ref.current.focus(); const v=ref.current.value; try{ ref.current.setSelectionRange(v.length, v.length); }catch(e){} } },60); },[state.phase]);
   const answering = state.phase==="answering";
   let cls="type-in";
   if(state.phase==="correct") cls+=" good";
@@ -367,6 +367,7 @@ function TypeQ({ project, q, state, setAnswer }){
       {q.highlight && project.map && (
         <div className="hl-card"><MapBox project={project} highlight={q.highlight} interactive={false} /></div>
       )}
+      {q.prefix && answering && <div className="q-sub">Schreib das Wort fertig! ✍️</div>}
       <input ref={ref} className={cls} placeholder={q.placeholder||"Antwort eintippen…"}
              value={state.answer||""} disabled={!answering}
              autoCapitalize="off" autoCorrect="off" spellCheck={false}
@@ -503,10 +504,11 @@ function ClozeQ({ q, state, setAnswer }){
 /* ===================== Übung ===================== */
 function Exercise({ project, lesson, onExit, onDone }){
   const qs = lesson.questions;
+  const initAnswer = (qq) => (qq && qq.type==="type" && qq.prefix) ? qq.prefix : null;
   const [qi, setQi] = useState(0);
   const [hearts, setHearts] = useState(3);
   const [correctCount, setCorrectCount] = useState(0);
-  const [st, setSt] = useState({ phase:"answering", answer:null, correct:false, results:null, lostHeart:false });
+  const [st, setSt] = useState(()=>({ phase:"answering", answer: initAnswer(qs[0]), correct:false, results:null, lostHeart:false }));
   const q = qs[qi];
   function setAnswer(v){ setSt(s=>({...s, answer:v})); }
 
@@ -547,7 +549,7 @@ function Exercise({ project, lesson, onExit, onDone }){
   function reveal(){ setSt(s=>({...s, phase:"revealed"})); }
   function matchSolved(){ setCorrectCount(c=>c+1); setSt(s=>({...s, phase:"correct", correct:true})); }
   function next(){
-    if(qi+1 < qs.length){ setQi(qi+1); setSt({ phase:"answering", answer:null, correct:false, results:null, lostHeart:false }); }
+    if(qi+1 < qs.length){ const nq=qs[qi+1]; setQi(qi+1); setSt({ phase:"answering", answer: initAnswer(nq), correct:false, results:null, lostHeart:false }); }
     else { onDone({ xp: correctCount*5, sticker: lesson.sticker, correct: correctCount, total: qs.length }); }
   }
 
@@ -666,9 +668,11 @@ function Reward({ lesson, xp, correct, total, onContinue }){
 
 /* ===================== Lernpfad ===================== */
 function Path({ project, doneSet, xp, streak, onStart, onBack }){
-  const playable = (project.lessons||[]).filter(l=>!l.locked && (l.questions||[]).length>0);
-  const firstName = playable[0] ? playable[0].name : null;
-  const secondName = playable[1] ? playable[1].name : null;
+  const isGated = (l) => l.requires && !doneSet.includes(l.requires);
+  const available = (project.lessons||[]).filter(l=> !l.locked && (l.questions||[]).length>0 && !isGated(l));
+  const todo = available.filter(l=> !doneSet.includes(l.id));
+  const firstName  = (todo[0]||available[0]) ? (todo[0]||available[0]).name : null;
+  const secondName = todo[1] ? todo[1].name : null;
   return (
     <div className="screen">
       <div className="body">
@@ -689,19 +693,26 @@ function Path({ project, doneSet, xp, streak, onStart, onBack }){
         <div className="path">
           <div className="lessons">
             {(project.lessons||[]).map((l,i)=>{
+              const gated = isGated(l);                       // Voraussetzung noch nicht erfüllt
+              const masked = gated && l.mask;                 // Name verbergen (nur Stadtteile)
               const isDone = doneSet.includes(l.id);
-              const playableNode = !l.locked && (l.questions||[]).length>0;
+              const hasContent = (l.questions||[]).length>0;
+              const playableNode = !l.locked && hasContent && !gated;
               const ready = playableNode && !isDone;
               const cls = !playableNode ? "lock" : isDone ? "done play" : "ready play";
+              const label = masked ? ("Stadtteil " + (l.n!=null ? l.n : "?")) : l.name;
+              const sub = gated ? (masked ? "Erst die Karte lernen" : "Erst freischalten")
+                        : !hasContent ? "Bald verfügbar"
+                        : isDone ? "★ Geschafft" : "Jetzt üben!";
               return (
                 <div key={l.id} className={"node-row "+(i%2?"r ":"")+(!playableNode?"lockc":"")}>
-                  <button className={"node "+cls} onClick={()=> playableNode && onStart(l)} aria-label={l.name}>
+                  <button className={"node "+cls} onClick={()=> playableNode && onStart(l)} aria-label={label}>
                     {!playableNode ? "🔒" : l.icon}
                     {ready && <span className="ring"></span>}
                     {isDone && <span className="star">⭐</span>}
                   </button>
-                  <div className="lbl">{l.name}
-                    <small>{!playableNode ? "Bald verfügbar" : isDone ? "★ Geschafft" : "Jetzt üben!"}</small>
+                  <div className="lbl">{label}
+                    <small>{sub}</small>
                   </div>
                 </div>
               );
