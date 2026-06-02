@@ -165,6 +165,8 @@ input,textarea{font-family:var(--font-body);}
 .hot .num{font-family:var(--font-head);font-weight:700;font-size:26px;color:#fff;width:46px;height:46px;border-radius:50%;background:rgba(33,36,59,.82);display:grid;place-items:center;box-shadow:0 2px 6px rgba(0,0,0,.3);}
 .hot.good{border:4px solid var(--green);background:rgba(88,167,0,.22);}
 .hot.good .num{background:var(--green);}
+.hot.sel{border:4px solid var(--teal);background:rgba(36,177,177,.25);}
+.hot.sel .num{background:var(--teal);}
 .hot.bad{border:4px solid var(--red);background:rgba(224,67,107,.2);}
 .hot.bad .num{background:var(--red);animation:shake .4s;}
 @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
@@ -274,6 +276,17 @@ const { useState, useEffect, useMemo, useRef } = React;
 const KID = "Leander";
 const KEYS = "ABCD";
 const shuffle = (a) => { const x=[...a]; for(let i=x.length-1;i>0;i--){const j=(Math.random()*(i+1))|0;[x[i],x[j]]=[x[j],x[i]];} return x; };
+// mischt Fragen innerhalb zusammenhängender Gruppen mit gleichem grp; Reihenfolge der Gruppen bleibt
+const orderQuestions = (qs) => {
+  const out=[]; let i=0;
+  while(i<qs.length){
+    const g=qs[i].grp;
+    if(g==null){ out.push(qs[i]); i++; continue; }
+    let j=i; while(j<qs.length && qs[j].grp===g) j++;
+    out.push(...shuffle(qs.slice(i,j))); i=j;
+  }
+  return out;
+};
 const norm = (s) => (s||"").toLowerCase().trim().replace(/\s+/g,' ').replace(/[.\u2013]/g,'-');
 const pick = (a) => a[(Math.random()*a.length)|0];
 function load(k, def){ try{ const v=localStorage.getItem(k); return v===null?def:JSON.parse(v);}catch(e){return def;} }
@@ -302,7 +315,7 @@ function MapBox({ project, onPick, picked, result, highlight, revealTarget, inte
         let cls = "hot";
         if(highlight && d.n===highlight) cls += " good";
         if(revealTarget && d.n===revealTarget) cls += " good";
-        if(picked===d.n){ cls += result==="good" ? " good" : result==="bad" ? " bad" : ""; }
+        if(picked===d.n){ cls += result==="good" ? " good" : result==="bad" ? " bad" : " sel"; }
         return (
           <div key={d.n} className={cls}
                style={{ left:d.x+"%", top:d.y+"%", cursor: interactive?"pointer":"default" }}
@@ -503,7 +516,7 @@ function ClozeQ({ q, state, setAnswer }){
 
 /* ===================== Übung ===================== */
 function Exercise({ project, lesson, onExit, onDone }){
-  const qs = lesson.questions;
+  const [qs] = useState(()=> orderQuestions(lesson.questions));
   const initAnswer = (qq) => (qq && qq.type==="type" && qq.prefix) ? qq.prefix : null;
   const [qi, setQi] = useState(0);
   const [hearts, setHearts] = useState(3);
