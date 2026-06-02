@@ -189,6 +189,38 @@ input,textarea{font-family:var(--font-body);}
 .mitem.miss{animation:shake .4s;border-color:var(--red);background:var(--red-soft);}
 .mitem .bdg{position:absolute;top:-10px;left:-10px;width:30px;height:30px;border-radius:50%;background:var(--green);color:#fff;font-family:var(--font-head);font-weight:700;font-size:16px;display:grid;place-items:center;box-shadow:0 2px 4px rgba(0,0,0,.2);}
 
+/* collect (ergänzen) */
+.collect{display:flex;flex-direction:column;gap:12px;}
+.citem{display:flex;align-items:center;gap:14px;background:#fff;border:2.5px solid var(--indigo-soft);border-radius:18px;padding:12px 16px;box-shadow:0 4px 0 var(--indigo-soft);min-height:66px;}
+.citem .cs{font-size:34px;flex:none;width:46px;text-align:center;}
+.citem.given{background:var(--teal-soft);border-color:#bfe6e6;box-shadow:0 4px 0 #bfe6e6;}
+.citem.given .cn{font-family:var(--font-head);font-weight:600;font-size:21px;color:var(--ink);flex:1;}
+.citem .ck{margin-left:auto;color:var(--green);font-size:24px;font-weight:800;flex:none;}
+.citem.given .ck{color:var(--teal-d);}
+.citem .cin{flex:1;min-width:0;width:100%;background:transparent;border:none;outline:none;font-family:var(--font-head);font-weight:500;font-size:22px;color:var(--ink);}
+.citem.blank{border-style:dashed;}
+.citem.blank.good{border-style:solid;border-color:var(--green);background:var(--green-soft);box-shadow:0 4px 0 #c4e89a;}
+.citem.blank.bad{border-style:solid;border-color:var(--red);background:var(--red-soft);box-shadow:0 4px 0 #f6c0d2;}
+.citem .csol{margin-left:auto;font-family:var(--font-head);font-weight:700;font-size:18px;color:var(--green-d);flex:none;padding-left:8px;}
+
+/* cloze (Lückentext) */
+.cloze{font-family:var(--font-head);font-weight:500;font-size:24px;line-height:2;color:var(--ink);}
+.cz-in{font-family:var(--font-head);font-weight:600;font-size:22px;color:var(--ink);border:none;border-bottom:3px solid #C9CCE0;background:var(--yellow-soft);border-radius:9px 9px 0 0;padding:3px 10px;margin:0 4px;outline:none;text-align:center;min-width:90px;vertical-align:baseline;}
+.cz-in::placeholder{color:#bdbfd2;}
+.cz-in:focus{border-bottom-color:var(--teal);}
+.cz-in.good{border-bottom-color:var(--green);background:var(--green-soft);color:var(--green-d);}
+.cz-in.bad{border-bottom-color:var(--red);background:var(--red-soft);color:var(--red);}
+.cz-sol{margin-top:24px;font-family:var(--font-head);font-weight:500;font-size:20px;color:var(--green-d);}
+.cz-sol b{font-weight:700;}
+
+/* zwei Auswahl-Buttons (nochmal / Lösung) */
+.foot-2{display:flex;gap:12px;}
+.foot-2 .btn{flex:1;font-size:18px;padding:16px 12px;}
+.btn-retry{background:var(--teal);color:#fff;box-shadow:0 6px 0 var(--teal-d);}
+.btn-retry:active{transform:translateY(4px);box-shadow:0 2px 0 var(--teal-d);}
+.btn-reveal{background:#fff;color:var(--muted);border:2px solid var(--indigo-soft);box-shadow:0 4px 0 var(--indigo-soft);}
+.btn-reveal:active{transform:translateY(3px);box-shadow:0 1px 0 var(--indigo-soft);}
+
 .foot{flex:none;padding:18px 26px max(24px, env(safe-area-inset-bottom));transition:background .2s;}
 .foot.good{background:var(--green-soft);}
 .foot.bad{background:var(--red-soft);}
@@ -260,7 +292,7 @@ function validateProject(obj){
 }
 
 /* ===================== MAP ===================== */
-function MapBox({ project, onPick, picked, result, highlight, interactive }){
+function MapBox({ project, onPick, picked, result, highlight, revealTarget, interactive }){
   return (
     <div className="mapbox">
       <img src={project.map} alt={"Karte – "+project.name} />
@@ -268,6 +300,7 @@ function MapBox({ project, onPick, picked, result, highlight, interactive }){
         if(highlight && d.n!==highlight) return null;
         let cls = "hot";
         if(highlight && d.n===highlight) cls += " good";
+        if(revealTarget && d.n===revealTarget) cls += " good";
         if(picked===d.n){ cls += result==="good" ? " good" : result==="bad" ? " bad" : ""; }
         return (
           <div key={d.n} className={cls}
@@ -283,27 +316,33 @@ function MapBox({ project, onPick, picked, result, highlight, interactive }){
 
 /* ===================== Fragetypen ===================== */
 function MapQ({ project, q, state, setAnswer }){
+  const answering = state.phase==="answering";
+  const result = state.phase==="correct" ? "good"
+               : (state.phase==="wrong" || state.phase==="revealed") ? "bad" : null;
   return (
     <div className="q-area">
       <div className="q-prompt" dangerouslySetInnerHTML={{__html:q.prompt}} />
-      <MapBox project={project} interactive={state.phase==="answering"} picked={state.answer}
-              result={state.phase==="checked" ? (state.correct?"good":"bad") : null}
+      <MapBox project={project} interactive={answering} picked={state.answer}
+              result={result} revealTarget={state.phase==="revealed" ? q.target : null}
               onPick={(n)=> setAnswer(n)} />
       <div className="map-cap">// Original-Karte der inneren Stadtteile von Villach</div>
     </div>
   );
 }
 function ChoiceQ({ q, state, setAnswer }){
+  const answering = state.phase==="answering";
+  const wrong = state.phase==="wrong";
   return (
     <div className="q-area">
       <div className="q-prompt" dangerouslySetInnerHTML={{__html:q.prompt}} />
       <div className="choices">
         {q.options.map((opt,i)=>{
           let cls="choice";
-          if(state.phase==="answering"){ if(state.answer===i) cls+=" sel"; }
+          if(answering){ if(state.answer===i) cls+=" sel"; }
+          else if(wrong){ if(state.answer===i) cls+=" bad"; }
           else { if(i===q.answer) cls+=" good"; else if(state.answer===i) cls+=" bad"; else cls+=" dim"; }
           return (
-            <button key={i} className={cls} onClick={()=> state.phase==="answering" && setAnswer(i)}>
+            <button key={i} className={cls} onClick={()=> answering && setAnswer(i)}>
               <span className="k">{KEYS[i]}</span>{opt}
             </button>
           );
@@ -314,9 +353,11 @@ function ChoiceQ({ q, state, setAnswer }){
 }
 function TypeQ({ project, q, state, setAnswer }){
   const ref = useRef(null);
-  useEffect(()=>{ if(ref.current && state.phase==="answering") setTimeout(()=>ref.current&&ref.current.focus(),60); },[]);
+  useEffect(()=>{ if(ref.current && state.phase==="answering") setTimeout(()=>ref.current&&ref.current.focus(),60); },[state.phase]);
+  const answering = state.phase==="answering";
   let cls="type-in";
-  if(state.phase==="checked") cls += state.correct?" good":" bad";
+  if(state.phase==="correct") cls+=" good";
+  else if(state.phase==="wrong" || state.phase==="revealed") cls+=" bad";
   const solName = q.highlight ? ((project.districts||[]).find(d=>d.n===q.highlight)||{}).name
                               : (q.accept && q.accept[0]);
   return (
@@ -326,10 +367,10 @@ function TypeQ({ project, q, state, setAnswer }){
         <div className="hl-card"><MapBox project={project} highlight={q.highlight} interactive={false} /></div>
       )}
       <input ref={ref} className={cls} placeholder={q.placeholder||"Antwort eintippen…"}
-             value={state.answer||""} disabled={state.phase==="checked"}
+             value={state.answer||""} disabled={!answering}
              autoCapitalize="off" autoCorrect="off" spellCheck={false}
              onChange={e=> setAnswer(e.target.value)} />
-      {state.phase==="checked" && !state.correct && solName && (
+      {state.phase==="revealed" && solName && (
         <div className="q-prompt" style={{fontSize:"20px",marginTop:"16px",color:"var(--green-d)"}}>
           Richtig wäre: <b style={{color:"var(--green-d)"}}>{solName}</b>
         </div>
@@ -383,30 +424,147 @@ function MatchQ({ q, onSolved }){
   );
 }
 
+/* ===================== Fragetyp: collect (ergänzen) ===================== */
+function CollectQ({ q, state, setAnswer }){
+  const answering = state.phase==="answering";
+  const reveal = state.phase==="revealed";
+  const vals = Array.isArray(state.answer) ? state.answer : q.blanks.map(()=> "");
+  function setAt(i, v){ const n = q.blanks.map((_,k)=> vals[k]||""); n[i]=v; setAnswer(n); }
+  return (
+    <div className="q-area">
+      <div className="q-prompt" dangerouslySetInnerHTML={{__html:q.prompt}} />
+      <div className="q-sub">Das gibt es schon – <b>was fehlt noch?</b> ✍️</div>
+      <div className="collect">
+        {q.given.map((g,i)=>(
+          <div key={"g"+i} className="citem given">
+            <span className="cs">{g.symbol}</span>
+            <span className="cn">{g.name}</span>
+            <span className="ck">✓</span>
+          </div>
+        ))}
+        {q.blanks.map((b,i)=>{
+          const ok = !answering ? !!(state.results && state.results[i]) : null;
+          let cls = "citem blank";
+          if(!answering) cls += ok ? " good" : " bad";
+          return (
+            <div key={"b"+i} className={cls}>
+              <span className="cs">{b.symbol}</span>
+              <input className="cin" placeholder={b.placeholder||"hier eintippen…"}
+                     value={vals[i]||""} disabled={!answering}
+                     autoCapitalize="off" autoCorrect="off" spellCheck={false}
+                     onChange={e=> setAt(i, e.target.value)} />
+              {!answering && (ok
+                ? <span className="ck">✓</span>
+                : reveal ? <span className="csol">{b.name}</span> : null)}
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+/* ===================== Fragetyp: cloze (Lückentext) ===================== */
+const clozeBlanks = (q) => q.segments.filter(s=>s.blank).map(s=>s.blank);
+function ClozeQ({ q, state, setAnswer }){
+  const answering = state.phase==="answering";
+  const reveal = state.phase==="revealed";
+  const blanks = clozeBlanks(q);
+  const vals = Array.isArray(state.answer) ? state.answer : blanks.map(()=> "");
+  function setAt(i, v){ const n = blanks.map((_,k)=> vals[k]||""); n[i]=v; setAnswer(n); }
+  let bi = -1;
+  return (
+    <div className="q-area">
+      <div className="q-prompt" dangerouslySetInnerHTML={{__html:q.prompt}} />
+      <div className="cloze">
+        {q.segments.map((seg,si)=>{
+          if(seg.text!==undefined) return <span key={si} className="cz-t">{seg.text}</span>;
+          const i = ++bi; const b = seg.blank;
+          const ok = !answering ? !!(state.results && state.results[i]) : null;
+          let cls = "cz-in";
+          if(!answering) cls += ok ? " good" : " bad";
+          const w = Math.max(6, (b.name||"").length + 1);
+          return (
+            <input key={si} className={cls} value={vals[i]||""} disabled={!answering}
+                   placeholder={b.placeholder||"…"} style={{width:w+"ch"}}
+                   autoCapitalize="off" autoCorrect="off" spellCheck={false}
+                   onChange={e=> setAt(i, e.target.value)} />
+          );
+        })}
+      </div>
+      {reveal && (
+        <div className="cz-sol">Lösung: <b>{blanks.map(b=>b.name).join(" · ")}</b></div>
+      )}
+    </div>
+  );
+}
+
 /* ===================== Übung ===================== */
 function Exercise({ project, lesson, onExit, onDone }){
   const qs = lesson.questions;
   const [qi, setQi] = useState(0);
   const [hearts, setHearts] = useState(3);
   const [correctCount, setCorrectCount] = useState(0);
-  const [st, setSt] = useState({ phase:"answering", answer:null, correct:false });
+  const [st, setSt] = useState({ phase:"answering", answer:null, correct:false, results:null, lostHeart:false });
   const q = qs[qi];
   function setAnswer(v){ setSt(s=>({...s, answer:v})); }
-  function check(){
+
+  function evaluate(){
+    if(q.type==="collect"){
+      const vals = Array.isArray(st.answer) ? st.answer : [];
+      const results = q.blanks.map((b,i)=> b.accept.some(a=> norm(a)===norm(vals[i]||"")));
+      return { ok: results.every(Boolean), results };
+    }
+    if(q.type==="cloze"){
+      const blanks = clozeBlanks(q);
+      const vals = Array.isArray(st.answer) ? st.answer : [];
+      const results = blanks.map((b,i)=> b.accept.some(a=> norm(a)===norm(vals[i]||"")));
+      return { ok: results.every(Boolean), results };
+    }
     let ok=false;
     if(q.type==="map")    ok = st.answer===q.target;
     if(q.type==="choice") ok = st.answer===q.answer;
     if(q.type==="type")   ok = q.accept.some(a=> norm(a)===norm(st.answer||""));
-    setSt(s=>({...s, phase:"checked", correct:ok}));
-    if(ok) setCorrectCount(c=>c+1); else setHearts(h=>Math.max(0,h-1));
+    return { ok, results:null };
   }
-  function matchSolved(){ setCorrectCount(c=>c+1); setSt(s=>({...s, phase:"checked", correct:true})); }
+  function check(){
+    const { ok, results } = evaluate();
+    if(ok){
+      setCorrectCount(c=>c+1);
+      setSt(s=>({...s, phase:"correct", correct:true, results}));
+    } else {
+      if(!st.lostHeart) setHearts(h=>Math.max(0,h-1));
+      setSt(s=>({...s, phase:"wrong", correct:false, results, lostHeart:true}));
+    }
+  }
+  function retry(){
+    setSt(s=>{
+      const clear = (q.type==="choice" || q.type==="map");
+      return {...s, phase:"answering", answer: clear ? null : s.answer, results:null, correct:false};
+    });
+  }
+  function reveal(){ setSt(s=>({...s, phase:"revealed"})); }
+  function matchSolved(){ setCorrectCount(c=>c+1); setSt(s=>({...s, phase:"correct", correct:true})); }
   function next(){
-    if(qi+1 < qs.length){ setQi(qi+1); setSt({ phase:"answering", answer:null, correct:false }); }
+    if(qi+1 < qs.length){ setQi(qi+1); setSt({ phase:"answering", answer:null, correct:false, results:null, lostHeart:false }); }
     else { onDone({ xp: correctCount*5, sticker: lesson.sticker }); }
   }
-  const canCheck = q.type==="type" ? (st.answer && st.answer.trim().length>0) : (st.answer!==null && st.answer!==undefined);
-  const progress = ((qi + (st.phase==="checked"?1:0)) / qs.length) * 100;
+
+  function blanksNeeded(){
+    if(q.type==="collect") return q.blanks.length;
+    if(q.type==="cloze")   return clozeBlanks(q).length;
+    return 0;
+  }
+  const canCheck = (()=>{
+    if(q.type==="type") return !!(st.answer && st.answer.trim().length>0);
+    if(q.type==="collect" || q.type==="cloze"){
+      const n = blanksNeeded();
+      return Array.isArray(st.answer) && st.answer.filter((v,i)=> i<n && v && v.trim().length>0).length===n;
+    }
+    return st.answer!==null && st.answer!==undefined;
+  })();
+  const done = (st.phase==="correct" || st.phase==="revealed");
+  const progress = ((qi + (done?1:0)) / qs.length) * 100;
   return (
     <div className="screen">
       <div className="body">
@@ -419,21 +577,51 @@ function Exercise({ project, lesson, onExit, onDone }){
         {q.type==="choice" && <ChoiceQ q={q} state={st} setAnswer={setAnswer} />}
         {q.type==="type"   && <TypeQ project={project} q={q} state={st} setAnswer={setAnswer} />}
         {q.type==="match"  && <MatchQ key={qi} q={q} onSolved={matchSolved} />}
+        {q.type==="collect" && <CollectQ q={q} state={st} setAnswer={setAnswer} />}
+        {q.type==="cloze"  && <ClozeQ q={q} state={st} setAnswer={setAnswer} />}
+
         {q.type!=="match" && st.phase==="answering" && (
           <div className="foot">
             <button className="btn btn-primary" disabled={!canCheck} onClick={check}>Prüfen</button>
           </div>
         )}
-        {st.phase==="checked" && (
-          <div className={"foot "+(st.correct?"good":"bad")}>
+        {st.phase==="wrong" && (
+          <div className="foot bad">
             <div className="fb">
-              <span className="ic">{st.correct?"🦊":"💪"}</span>
+              <span className="ic">💪</span>
               <div className="tx">
-                <b>{st.correct ? pick(["Bravo!","Stark! 💪","Perfekt! 🎉","Genau richtig!","Top gemacht!"]) : "Fast! Schau nochmal."}</b>
-                <span>{st.correct ? "Richtig!" : "Nicht schlimm – weiter geht's!"}</span>
+                <b>Fast! Was möchtest du tun?</b>
+                <span>Nochmal probieren oder die Lösung sehen?</span>
               </div>
             </div>
-            <button className={"btn "+(st.correct?"btn-green":"btn-primary")} onClick={next}>Weiter</button>
+            <div className="foot-2">
+              <button className="btn btn-retry" onClick={retry}>↻ Nochmal</button>
+              <button className="btn btn-reveal" onClick={reveal}>Lösung zeigen</button>
+            </div>
+          </div>
+        )}
+        {st.phase==="correct" && (
+          <div className="foot good">
+            <div className="fb">
+              <span className="ic">🦊</span>
+              <div className="tx">
+                <b>{pick(["Bravo!","Stark! 💪","Perfekt! 🎉","Genau richtig!","Top gemacht!"])}</b>
+                <span>Richtig!</span>
+              </div>
+            </div>
+            <button className="btn btn-green" onClick={next}>Weiter</button>
+          </div>
+        )}
+        {st.phase==="revealed" && (
+          <div className="foot bad">
+            <div className="fb">
+              <span className="ic">📘</span>
+              <div className="tx">
+                <b>Das ist die Lösung</b>
+                <span>Schau sie dir an – beim nächsten Mal klappt's!</span>
+              </div>
+            </div>
+            <button className="btn btn-primary" onClick={next}>Weiter</button>
           </div>
         )}
       </div>
