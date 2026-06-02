@@ -32,7 +32,7 @@
         { "type": "match", "prompt": "Verbinde, was es in <b>Lind</b> gibt! 🔗",
           "pairs": [
             { "left": "🏟️", "right": "Sport-Stadion" },
-            { "left": "🏫", "right": "HAK / HASCH" },
+            { "left": "🏫", "right": "HAK/HAS" },
             { "left": "💻", "right": "Lam Research" },
             { "left": "⚽", "right": "Ballspielhalle" }
           ] },
@@ -40,10 +40,11 @@
           "given": [
             { "symbol": "🏟️", "name": "Sport-Stadion" },
             { "symbol": "⚽", "name": "Ballspielhalle" },
-            { "symbol": "💻", "name": "Lam Research" }
+            { "symbol": "💻", "name": "Lam Research" },
+            { "symbol": "🏫", "name": "HAK/HAS" }
           ],
           "blanks": [
-            { "symbol": "🏫", "name": "Volksschule", "accept": ["volksschule", "vs"] },
+            { "symbol": "🎒", "name": "Volksschule", "accept": ["volksschule", "vs"] },
             { "symbol": "🧸", "name": "Kindergarten", "accept": ["kindergarten", "kiga"] },
             { "symbol": "🤸", "name": "Sport-MS", "accept": ["sport-ms", "sport ms", "sportms", "sport-mittelschule", "sport mittelschule", "sportmittelschule"] }
           ] },
