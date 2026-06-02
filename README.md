@@ -52,7 +52,43 @@ müssen nicht ins Repo.
 
 // Paare verbinden
 { "type": "match", "prompt": "Verbinde!", "pairs": [ { "left": "🐶", "right": "Hund" } ] }
+
+// Ergänzen: Bekanntes steht da (mit Symbol), Kind tippt das Fehlende ein
+{ "type": "collect", "prompt": "Was fehlt noch?",
+  "given":  [ { "symbol": "🏟️", "name": "Sport-Stadion" } ],
+  "blanks": [ { "symbol": "🏫", "name": "Volksschule", "accept": ["volksschule","vs"] } ] }
+// Lückentext: Satz mit Lücken, Kind tippt die fehlenden Wörter
+{ "type": "cloze", "prompt": "Ergänze den Satz!",
+  "segments": [
+    { "text": "In Seebach gibt es ein " },
+    { "blank": { "name": "Naherholungsgebiet", "accept": ["naherholungsgebiet"] } },
+    { "text": "." }
+  ] }
 ```
+
+**Feedback bei falscher Antwort:** Bei jeder Aufgabe (außer Paare verbinden, das sich selbst löst)
+kann das Kind nach einer falschen Antwort wählen: **„↻ Nochmal"** (nochmal versuchen – bei
+Tipp-/Ergänz-/Lückentext-Aufgaben bleibt das Getippte erhalten, damit man nur korrigieren muss)
+oder **„Lösung zeigen"** (zeigt die richtige Antwort an). Ein Herz wird pro Frage höchstens
+einmal abgezogen, egal wie oft man es erneut versucht.
+
+**Inhaltsregel für `collect` (wichtig):**
+1. Unter `given` dürfen NUR Dinge stehen, die in derselben Lektion bereits in einer früheren
+   Frage vorkamen — dem Kind wird nichts als „bekannt" präsentiert, was es nicht geübt hat.
+2. Unter `given` müssen ALLE bereits in der Lektion vorgekommenen Einträge dieser Kategorie
+   stehen (z. B. alle bisher genannten Einrichtungen des Stadtteils). Sonst könnte das Kind
+   etwas, das es schon gelernt hat, als „fehlend" eintippen, obwohl es gar nicht als Lösung
+   hinterlegt ist.
+3. `blanks` enthält nur **neue** Einträge, die vorher noch nicht gezeigt wurden.
+4. Gleiche Dinge bekommen dasselbe Symbol wie zuvor in der Lektion, und innerhalb einer
+   `collect`-Frage ist jedes Symbol eindeutig (z. B. 🏫 = HAK/HAS, 🎒 = Volksschule).
+
+**Inhaltsregel für Frage-Texte (`prompt`):** Der `prompt` (die Aufgaben-Überschrift) darf die
+gesuchte Antwort nicht verraten — vor allem bei `type`, `cloze` und den `collect`-`blanks`, wo
+das Kind die Antwort selbst eintippt. Das Lösungswort (oder ein wesentlicher Wortbestandteil)
+darf nicht in der Überschrift stehen. Beispiel: Ein Lückentext, bei dem „Naherholungsgebiet"
+gesucht ist, darf dieses Wort nicht in der Überschrift nennen. (Bei `choice` unkritisch, da die
+Antwort ohnehin unter den Optionen steht.)
 
 Für Karten-Themen zusätzlich im Projekt:
 ```jsonc
