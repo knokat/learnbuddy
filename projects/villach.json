@@ -1640,19 +1640,19 @@
               "grp": "info",
               "pairs": [
                 {
-                  "left": "🐒",
+                  "left": "Affenberg",
                   "right": "Landskron"
                 },
                 {
-                  "left": "🎓",
+                  "left": "Fachhochschule",
                   "right": "St. Magdalen"
                 },
                 {
-                  "left": "⛪",
+                  "left": "Wallfahrtskirche",
                   "right": "Maria Gail"
                 },
                 {
-                  "left": "🧗",
+                  "left": "Hochseilgarten",
                   "right": "Drobollach und Egg"
                 }
               ]
@@ -1735,7 +1735,680 @@
       "icon": "⛲",
       "iconBg": "var(--indigo-soft)",
       "subtitle": "Innenstadt & Hauptplatz",
-      "lessons": []
+      "lessons": [
+        {
+          "id": "hauptplatz-gassen",
+          "name": "Gassen & Straßen",
+          "icon": "🛣️",
+          "questions": [
+            {
+              "type": "type",
+              "prompt": "Wie heißt <b>Nr. 1</b> auf der Karte? ✍️",
+              "highlight": 1,
+              "accept": [
+                "hauptplatz"
+              ],
+              "placeholder": "Name eintippen…",
+              "grp": "g1"
+            },
+            {
+              "type": "type",
+              "prompt": "Wie heißt <b>Nr. 2</b> auf der Karte? ✍️",
+              "highlight": 2,
+              "accept": [
+                "stadtbrücke",
+                "stadtbruecke"
+              ],
+              "placeholder": "Name eintippen…",
+              "grp": "g1"
+            },
+            {
+              "type": "type",
+              "prompt": "Wie heißt <b>Nr. 3</b> auf der Karte? ✍️",
+              "highlight": 3,
+              "accept": [
+                "bahnhofsstraße",
+                "bahnhofsstrasse",
+                "bahnhofstraße",
+                "bahnhofstrasse"
+              ],
+              "placeholder": "Name eintippen…",
+              "grp": "g1"
+            },
+            {
+              "type": "type",
+              "prompt": "Wie heißt <b>Nr. 4</b> auf der Karte? ✍️",
+              "highlight": 4,
+              "accept": [
+                "draulände",
+                "draulaende"
+              ],
+              "placeholder": "Name eintippen…",
+              "grp": "g1"
+            },
+            {
+              "type": "type",
+              "prompt": "Wie heißt <b>Nr. 6</b> auf der Karte? ✍️",
+              "highlight": 6,
+              "accept": [
+                "lederergasse"
+              ],
+              "placeholder": "Name eintippen…",
+              "grp": "g1"
+            },
+            {
+              "type": "type",
+              "prompt": "Wie heißt <b>Nr. 7</b> auf der Karte? ✍️",
+              "highlight": 7,
+              "accept": [
+                "karlgasse"
+              ],
+              "placeholder": "Name eintippen…",
+              "grp": "g1"
+            },
+            {
+              "type": "type",
+              "prompt": "Wie heißt <b>Nr. 8</b> auf der Karte? ✍️",
+              "highlight": 8,
+              "accept": [
+                "rathausgasse"
+              ],
+              "placeholder": "Name eintippen…",
+              "grp": "g1"
+            },
+            {
+              "type": "type",
+              "prompt": "Wie heißt <b>Nr. 9</b> auf der Karte? ✍️",
+              "highlight": 9,
+              "accept": [
+                "seilergasse"
+              ],
+              "placeholder": "Name eintippen…",
+              "grp": "g1"
+            },
+            {
+              "type": "type",
+              "prompt": "Wie heißt <b>Nr. 10</b> auf der Karte? ✍️",
+              "highlight": 10,
+              "accept": [
+                "gerbergasse"
+              ],
+              "placeholder": "Name eintippen…",
+              "grp": "g1"
+            },
+            {
+              "type": "type",
+              "prompt": "Wie heißt <b>Nr. 11</b> auf der Karte? ✍️",
+              "highlight": 11,
+              "accept": [
+                "ankershofengasse"
+              ],
+              "placeholder": "Name eintippen…",
+              "grp": "g1"
+            },
+            {
+              "type": "type",
+              "prompt": "Wie heißt <b>Nr. 12</b> auf der Karte? ✍️",
+              "highlight": 12,
+              "accept": [
+                "nikolaigasse"
+              ],
+              "placeholder": "Name eintippen…",
+              "grp": "g1"
+            },
+            {
+              "type": "type",
+              "prompt": "Wie heißt <b>Nr. 13</b> auf der Karte? ✍️",
+              "highlight": 13,
+              "accept": [
+                "khevenhüllergasse",
+                "khevenhuellergasse",
+                "kevenhüllergasse",
+                "kevenhuellergasse"
+              ],
+              "placeholder": "Name eintippen…",
+              "grp": "g1"
+            }
+          ]
+        },
+        {
+          "id": "hauptplatz-orte",
+          "name": "Plätze & Orte",
+          "icon": "📍",
+          "questions": [
+            {
+              "type": "type",
+              "prompt": "Wie heißt <b>Nr. 5</b> auf der Karte? ✍️",
+              "highlight": 5,
+              "accept": [
+                "drau"
+              ],
+              "placeholder": "Name eintippen…",
+              "grp": "o1"
+            },
+            {
+              "type": "type",
+              "prompt": "Wie heißt <b>Nr. 14</b> auf der Karte? ✍️",
+              "highlight": 14,
+              "accept": [
+                "unterer kirchplatz"
+              ],
+              "placeholder": "Name eintippen…",
+              "grp": "o1"
+            },
+            {
+              "type": "type",
+              "prompt": "Wie heißt <b>Nr. 15</b> auf der Karte? ✍️",
+              "highlight": 15,
+              "accept": [
+                "oberer kirchplatz"
+              ],
+              "placeholder": "Name eintippen…",
+              "grp": "o1"
+            },
+            {
+              "type": "type",
+              "prompt": "Wie heißt <b>Nr. 16</b> auf der Karte? ✍️",
+              "highlight": 16,
+              "accept": [
+                "stadtpfarrkirche"
+              ],
+              "placeholder": "Name eintippen…",
+              "grp": "o1"
+            },
+            {
+              "type": "type",
+              "prompt": "Wie heißt <b>Nr. 17</b> auf der Karte? ✍️",
+              "highlight": 17,
+              "accept": [
+                "dreifaltigkeitssäule",
+                "dreifaltigkeitssaeule",
+                "dreifaltigkeitssaule"
+              ],
+              "placeholder": "Name eintippen…",
+              "grp": "o1"
+            },
+            {
+              "type": "type",
+              "prompt": "Wie heißt <b>Nr. 18</b> auf der Karte? ✍️",
+              "highlight": 18,
+              "accept": [
+                "rathausplatz"
+              ],
+              "placeholder": "Name eintippen…",
+              "grp": "o1"
+            },
+            {
+              "type": "type",
+              "prompt": "Wie heißt <b>Nr. 19</b> auf der Karte? ✍️",
+              "highlight": 19,
+              "accept": [
+                "rathaus"
+              ],
+              "placeholder": "Name eintippen…",
+              "grp": "o1"
+            }
+          ]
+        },
+        {
+          "id": "hauptplatz-geschichte",
+          "name": "Früher & heute",
+          "icon": "💡",
+          "questions": [
+            {
+              "type": "choice",
+              "prompt": "Wie alt ist der Hauptplatz ungefähr?",
+              "options": [
+                "über 800 Jahre",
+                "über 80 Jahre",
+                "über 200 Jahre",
+                "über 8000 Jahre"
+              ],
+              "answer": 0,
+              "grp": "hist"
+            },
+            {
+              "type": "choice",
+              "prompt": "Was war der Hauptplatz schon vor langer Zeit?",
+              "options": [
+                "ein Marktplatz",
+                "ein Bahnhof",
+                "ein Fußballplatz",
+                "ein Schwimmbad"
+              ],
+              "answer": 0,
+              "grp": "hist"
+            },
+            {
+              "type": "choice",
+              "prompt": "Was gab es am Hauptplatz mehrmals pro Woche?",
+              "options": [
+                "Wochenmärkte",
+                "Konzerte",
+                "Zirkusvorstellungen",
+                "Autorennen"
+              ],
+              "answer": 0,
+              "grp": "hist"
+            },
+            {
+              "type": "choice",
+              "prompt": "Seit wann ist der Hauptplatz eine Fußgängerzone?",
+              "options": [
+                "seit 1988",
+                "seit 1888",
+                "seit 2008",
+                "seit 1948"
+              ],
+              "answer": 0,
+              "grp": "hist"
+            },
+            {
+              "type": "choice",
+              "prompt": "Was bedeutet Fußgängerzone?",
+              "options": [
+                "keine Autos",
+                "keine Menschen",
+                "keine Geschäfte",
+                "keine Bäume"
+              ],
+              "answer": 0,
+              "grp": "hist"
+            },
+            {
+              "type": "choice",
+              "prompt": "Was fuhr früher am Hauptplatz?",
+              "options": [
+                "Autos und Kutschen",
+                "U-Bahnen",
+                "Schiffe",
+                "Seilbahnen"
+              ],
+              "answer": 0,
+              "grp": "hist"
+            },
+            {
+              "type": "cloze",
+              "prompt": "Ergänze die Lücke im Satz!",
+              "grp": "hist",
+              "segments": [
+                {
+                  "text": "Der Hauptplatz ist der "
+                },
+                {
+                  "blank": {
+                    "name": "Mittelpunkt",
+                    "accept": [
+                      "mittelpunkt"
+                    ],
+                    "placeholder": "…"
+                  }
+                },
+                {
+                  "text": " der Stadt."
+                }
+              ]
+            },
+            {
+              "type": "choice",
+              "prompt": "Über manchen engen Gassen stützen Bögen die Häuser bei Erdbeben. Wie heißen sie?",
+              "options": [
+                "Schwibbögen",
+                "Regenbögen",
+                "Torbögen",
+                "Brückenbögen"
+              ],
+              "answer": 0,
+              "grp": "hist"
+            }
+          ]
+        },
+        {
+          "id": "hauptplatz-sehenswuerdigkeiten",
+          "name": "Sehenswürdigkeiten",
+          "icon": "⛪",
+          "questions": [
+            {
+              "type": "choice",
+              "prompt": "Was steht in der Mitte des Hauptplatzes?",
+              "options": [
+                "die Dreifaltigkeitssäule",
+                "das Rathaus",
+                "ein Springbrunnen",
+                "ein Riesenrad"
+              ],
+              "answer": 0,
+              "grp": "sw"
+            },
+            {
+              "type": "choice",
+              "prompt": "Warum wurde die Dreifaltigkeitssäule gebaut?",
+              "options": [
+                "wegen schrecklicher Seuchen",
+                "wegen eines Krieges",
+                "wegen eines Hochwassers",
+                "wegen eines Festes"
+              ],
+              "answer": 0,
+              "grp": "sw"
+            },
+            {
+              "type": "choice",
+              "prompt": "Welche ist die wichtigste Kirche in Villach?",
+              "options": [
+                "die Stadtpfarrkirche St. Jakob",
+                "die Wallfahrtskirche",
+                "die Klosterkirche",
+                "der Dom"
+              ],
+              "answer": 0,
+              "grp": "sw"
+            },
+            {
+              "type": "choice",
+              "prompt": "Was zerstörte 1348 die Stadtpfarrkirche?",
+              "options": [
+                "ein Erdbeben",
+                "ein Großbrand",
+                "ein Sturm",
+                "ein Krieg"
+              ],
+              "answer": 0,
+              "grp": "sw"
+            },
+            {
+              "type": "choice",
+              "prompt": "Wie hoch ist der Stadtpfarrturm?",
+              "options": [
+                "94 m",
+                "49 m",
+                "194 m",
+                "14 m"
+              ],
+              "answer": 0,
+              "grp": "sw"
+            },
+            {
+              "type": "choice",
+              "prompt": "Was ist der Stadtpfarrturm in ganz Kärnten?",
+              "options": [
+                "der höchste Kirchturm",
+                "der älteste Turm",
+                "der kleinste Turm",
+                "der einzige Turm"
+              ],
+              "answer": 0,
+              "grp": "sw"
+            },
+            {
+              "type": "choice",
+              "prompt": "Wie viele Treppenstufen hat der Stadtpfarrturm?",
+              "options": [
+                "239",
+                "139",
+                "339",
+                "23"
+              ],
+              "answer": 0,
+              "grp": "sw"
+            },
+            {
+              "type": "choice",
+              "prompt": "Wie viele Glocken hat der Stadtpfarrturm?",
+              "options": [
+                "6 Glocken",
+                "3 Glocken",
+                "12 Glocken",
+                "1 Glocke"
+              ],
+              "answer": 0,
+              "grp": "sw"
+            },
+            {
+              "type": "choice",
+              "prompt": "Was machte früher der Turmwächter?",
+              "options": [
+                "er warnte vor Feuer und Gefahren",
+                "er läutete zum Mittagessen",
+                "er verkaufte Eintrittskarten",
+                "er putzte die Fenster"
+              ],
+              "answer": 0,
+              "grp": "sw"
+            }
+          ]
+        },
+        {
+          "id": "hauptplatz-stadtmauer",
+          "name": "Die alte Stadtmauer",
+          "icon": "🧱",
+          "questions": [
+            {
+              "type": "choice",
+              "prompt": "Warum baute man eine Ringmauer um Villach?",
+              "options": [
+                "zum Schutz vor Überfällen",
+                "für den Handel",
+                "als Sportplatz",
+                "für Touristen"
+              ],
+              "answer": 0,
+              "grp": "sm"
+            },
+            {
+              "type": "choice",
+              "prompt": "Wie viele Rundtürme hatte der Wehrgang?",
+              "options": [
+                "14",
+                "4",
+                "40",
+                "7"
+              ],
+              "answer": 0,
+              "grp": "sm"
+            },
+            {
+              "type": "choice",
+              "prompt": "Was lag außen rund um die Mauer?",
+              "options": [
+                "ein Wassergraben",
+                "ein Garten",
+                "ein Wald",
+                "eine Straße"
+              ],
+              "answer": 0,
+              "grp": "sm"
+            },
+            {
+              "type": "choice",
+              "prompt": "War der Wassergraben mit Wasser gefüllt?",
+              "options": [
+                "nein",
+                "ja, immer",
+                "nur im Sommer",
+                "nur bei Regen"
+              ],
+              "answer": 0,
+              "grp": "sm"
+            },
+            {
+              "type": "choice",
+              "prompt": "Wie viele Tore hatte die Ringmauer?",
+              "options": [
+                "4 Tore",
+                "2 Tore",
+                "6 Tore",
+                "10 Tore"
+              ],
+              "answer": 0,
+              "grp": "sm"
+            },
+            {
+              "type": "choice",
+              "prompt": "Was geschah mit den Toren in der Nacht?",
+              "options": [
+                "sie wurden verschlossen",
+                "sie blieben offen",
+                "sie wurden abgebaut",
+                "nichts"
+              ],
+              "answer": 0,
+              "grp": "sm"
+            },
+            {
+              "type": "match",
+              "prompt": "Verbinde das Tor mit seinem Ort! 🔗",
+              "grp": "sm",
+              "pairs": [
+                {
+                  "left": "Oberes Tor",
+                  "right": "Park Hotel"
+                },
+                {
+                  "left": "Unteres Tor",
+                  "right": "Draubrücke"
+                },
+                {
+                  "left": "Tränktor",
+                  "right": "Lederergasse"
+                },
+                {
+                  "left": "Salzstraßentor",
+                  "right": "Widmanngasse"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "hauptplatz-quiz",
+          "name": "Großes Quiz",
+          "icon": "🏆",
+          "quiz": true,
+          "quizCount": 12,
+          "sticker": {
+            "emoji": "🏆",
+            "title": "Hauptplatz-Held!"
+          }
+        }
+      ],
+      "map": "projects/villach-hauptplatz-map.png",
+      "districts": [
+        {
+          "n": 1,
+          "name": "Hauptplatz",
+          "x": 46.3,
+          "y": 38.4
+        },
+        {
+          "n": 2,
+          "name": "Stadtbrücke",
+          "x": 56.5,
+          "y": 21.3
+        },
+        {
+          "n": 3,
+          "name": "Bahnhofsstraße",
+          "x": 59.8,
+          "y": 7.6
+        },
+        {
+          "n": 4,
+          "name": "Draulände",
+          "x": 24.0,
+          "y": 21.1
+        },
+        {
+          "n": 5,
+          "name": "Drau",
+          "x": 43.9,
+          "y": 20.1
+        },
+        {
+          "n": 6,
+          "name": "Lederergasse",
+          "x": 21.0,
+          "y": 29.8
+        },
+        {
+          "n": 7,
+          "name": "Karlgasse",
+          "x": 23.1,
+          "y": 38.1
+        },
+        {
+          "n": 8,
+          "name": "Rathausgasse",
+          "x": 21.0,
+          "y": 46.0
+        },
+        {
+          "n": 9,
+          "name": "Seilergasse",
+          "x": 21.0,
+          "y": 52.0
+        },
+        {
+          "n": 10,
+          "name": "Gerbergasse",
+          "x": 61.9,
+          "y": 36.0
+        },
+        {
+          "n": 11,
+          "name": "Ankershofengasse",
+          "x": 52.8,
+          "y": 48.6
+        },
+        {
+          "n": 12,
+          "name": "Nikolaigasse",
+          "x": 74.9,
+          "y": 11.8
+        },
+        {
+          "n": 13,
+          "name": "Khevenhüllergasse",
+          "x": 69.9,
+          "y": 78.0
+        },
+        {
+          "n": 14,
+          "name": "Unterer Kirchplatz",
+          "x": 17.6,
+          "y": 71.7
+        },
+        {
+          "n": 15,
+          "name": "Oberer Kirchplatz",
+          "x": 15.9,
+          "y": 81.7
+        },
+        {
+          "n": 16,
+          "name": "Stadtpfarrkirche",
+          "x": 23.0,
+          "y": 76.1
+        },
+        {
+          "n": 17,
+          "name": "Dreifaltigkeitssäule",
+          "x": 36.8,
+          "y": 56.0
+        },
+        {
+          "n": 18,
+          "name": "Rathausplatz",
+          "x": 44.8,
+          "y": 82.9
+        },
+        {
+          "n": 19,
+          "name": "Rathaus",
+          "x": 46.9,
+          "y": 92.0
+        }
+      ]
     }
   ]
 }
