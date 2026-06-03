@@ -181,6 +181,9 @@ input,textarea{font-family:var(--font-body);}
 .hl-card img{display:block;width:100%;}
 .q-photo{margin:0 0 18px;border-radius:18px;overflow:hidden;border:var(--card-bd);box-shadow:var(--card-sh);}
 .q-photo img{display:block;width:100%;max-height:340px;object-fit:cover;}
+.q-photo.missing{border:2px dashed var(--magenta);box-shadow:none;}
+.q-photo.missing img{display:none;}
+.q-photo.missing::after{content:"📷 Bild fehlt – Datei in projects/ hochladen";display:block;padding:20px;text-align:center;color:var(--magenta);font-family:var(--font-head);font-weight:600;}
 
 .q-sub{font-family:var(--font-head);font-weight:500;font-size:18px;color:var(--muted);margin:-8px 0 18px;}
 .q-sub b{color:var(--ink);}
@@ -375,7 +378,7 @@ function ChoiceQ({ q, state, setAnswer }){
   return (
     <div className="q-area">
       <div className="q-prompt" dangerouslySetInnerHTML={{__html:q.prompt}} />
-      {q.image && <div className="q-photo"><img src={q.image} alt="" /></div>}
+      {q.image && <div className="q-photo"><img src={q.image} alt="" onError={(e)=>{ const p=e.currentTarget.closest('.q-photo'); if(p) p.classList.add('missing'); }} /></div>}
       <div className="choices">
         {q.options.map((opt,i)=>{
           let cls="choice";
