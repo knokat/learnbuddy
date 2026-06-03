@@ -193,86 +193,64 @@
           "grp": "w1"
         },
         {
-          "type": "type",
-          "prompt": "Welcher Stadtteil ist <b>Nr. 1</b>? ✍️",
-          "highlight": 1,
-          "accept": [
-            "lind"
-          ],
-          "prefix": "L",
-          "placeholder": "…",
-          "grp": "w2"
-        },
-        {
-          "type": "type",
-          "prompt": "Welcher Stadtteil ist <b>Nr. 2</b>? ✍️",
-          "highlight": 2,
-          "accept": [
-            "seebach-wasenboden",
-            "seebach wasenboden"
-          ],
-          "prefix": "Seeb",
-          "placeholder": "…",
-          "grp": "w2"
-        },
-        {
-          "type": "type",
-          "prompt": "Welcher Stadtteil ist <b>Nr. 3</b>? ✍️",
-          "highlight": 3,
-          "accept": [
-            "st. agathen und perau",
-            "st agathen und perau"
-          ],
-          "prefix": "St. A",
-          "placeholder": "…",
-          "grp": "w2"
-        },
-        {
-          "type": "type",
-          "prompt": "Welcher Stadtteil ist <b>Nr. 4</b>? ✍️",
-          "highlight": 4,
-          "accept": [
-            "auen"
-          ],
-          "prefix": "Au",
-          "placeholder": "…",
-          "grp": "w2"
-        },
-        {
-          "type": "type",
-          "prompt": "Welcher Stadtteil ist <b>Nr. 5</b>? ✍️",
-          "highlight": 5,
-          "accept": [
-            "warmbad-judendorf",
-            "warmbad judendorf"
-          ],
-          "prefix": "Warm",
-          "placeholder": "…",
-          "grp": "w2"
-        },
-        {
-          "type": "type",
-          "prompt": "Welcher Stadtteil ist <b>Nr. 6</b>? ✍️",
-          "highlight": 6,
-          "accept": [
-            "völkendorf",
-            "voelkendorf"
-          ],
-          "prefix": "Völk",
-          "placeholder": "…",
-          "grp": "w2"
-        },
-        {
-          "type": "type",
-          "prompt": "Welcher Stadtteil ist <b>Nr. 7</b>? ✍️",
-          "highlight": 7,
-          "accept": [
-            "st. martin",
-            "st martin"
-          ],
-          "prefix": "St. M",
-          "placeholder": "…",
-          "grp": "w2"
+          "type": "fillall",
+          "prompt": "Schreibe alle Stadtteile auf! ✍️",
+          "items": [
+            {
+              "name": "Lind",
+              "accept": [
+                "lind"
+              ],
+              "prefix": "L"
+            },
+            {
+              "name": "Seebach-Wasenboden",
+              "accept": [
+                "seebach-wasenboden",
+                "seebach wasenboden"
+              ],
+              "prefix": "S"
+            },
+            {
+              "name": "St. Agathen und Perau",
+              "accept": [
+                "st. agathen und perau",
+                "st agathen und perau"
+              ],
+              "prefix": "S"
+            },
+            {
+              "name": "Auen",
+              "accept": [
+                "auen"
+              ],
+              "prefix": "A"
+            },
+            {
+              "name": "Warmbad-Judendorf",
+              "accept": [
+                "warmbad-judendorf",
+                "warmbad judendorf"
+              ],
+              "prefix": "W"
+            },
+            {
+              "name": "Völkendorf",
+              "accept": [
+                "völkendorf",
+                "voelkendorf"
+              ],
+              "prefix": "V"
+            },
+            {
+              "name": "St. Martin",
+              "accept": [
+                "st. martin",
+                "st martin"
+              ],
+              "prefix": "S"
+            }
+          ]
         }
       ]
     },
