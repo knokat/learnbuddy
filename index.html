@@ -78,6 +78,7 @@ input,textarea{font-family:var(--font-body);}
 .s-h{font-family:var(--font-head);font-weight:600;font-size:20px;color:var(--ink);margin:6px 26px 12px;display:flex;align-items:center;gap:8px;}
 .tiles{display:flex;flex-direction:column;gap:12px;padding:0 26px;}
 .tile{display:flex;align-items:center;gap:16px;background:#fff;border:var(--card-bd);box-shadow:var(--card-sh);border-radius:20px;padding:16px;transition:transform .12s;width:100%;text-align:left;}
+.tile:disabled{opacity:.5;box-shadow:none;cursor:default;}
 .tile:active{transform:translateY(2px);}
 .tile .ic{width:60px;height:60px;border-radius:16px;display:grid;place-items:center;font-size:32px;flex:none;}
 .tile .info{flex:1;min-width:0;}
@@ -287,6 +288,29 @@ const orderQuestions = (qs) => {
   }
   return out;
 };
+// Quiz-Aufbau: zufällige Mischung; jede Frage trägt ihren Karten-Kontext (_map/_districts) mit.
+const QUIZ_TYPES = new Set(["map","choice","type","match","cloze"]);
+const collectQuiz = (section, pool, seen) => {
+  (section.lessons||[]).forEach(l=>{
+    if(l.quiz || l.mega) return;
+    (l.questions||[]).forEach(q=>{
+      if(!QUIZ_TYPES.has(q.type)) return;
+      const key = q.type + "|" + norm(q.prompt||"");
+      if(seen.has(key)) return;
+      seen.add(key);
+      pool.push({ ...q, _map: section.map, _districts: section.districts });
+    });
+  });
+};
+const buildSectionQuiz = (section, count) => {
+  const pool=[], seen=new Set(); collectQuiz(section||{}, pool, seen);
+  return shuffle(pool).slice(0, count||12);
+};
+const buildMegaQuiz = (project, count) => {
+  const pool=[], seen=new Set();
+  (project.sections||[]).forEach(sec=> collectQuiz(sec, pool, seen));
+  return shuffle(pool).slice(0, count||15);
+};
 const norm = (s) => (s||"").toLowerCase().trim().replace(/\s+/g,' ').replace(/[.\u2013]/g,'-');
 const pick = (a) => a[(Math.random()*a.length)|0];
 function load(k, def){ try{ const v=localStorage.getItem(k); return v===null?def:JSON.parse(v);}catch(e){return def;} }
@@ -306,11 +330,11 @@ function validateProject(obj){
 }
 
 /* ===================== MAP ===================== */
-function MapBox({ project, onPick, picked, result, highlight, revealTarget, interactive }){
+function MapBox({ map, districts, name, onPick, picked, result, highlight, revealTarget, interactive }){
   return (
     <div className="mapbox">
-      <img src={project.map} alt={"Karte – "+project.name} />
-      {(project.districts||[]).map(d=>{
+      <img src={map} alt={"Karte – "+(name||"Villach")} />
+      {(districts||[]).map(d=>{
         if(highlight && d.n!==highlight) return null;
         let cls = "hot";
         if(highlight && d.n===highlight) cls += " good";
@@ -329,17 +353,17 @@ function MapBox({ project, onPick, picked, result, highlight, revealTarget, inte
 }
 
 /* ===================== Fragetypen ===================== */
-function MapQ({ project, q, state, setAnswer }){
+function MapQ({ map, districts, q, state, setAnswer }){
   const answering = state.phase==="answering";
   const result = state.phase==="correct" ? "good"
                : (state.phase==="wrong" || state.phase==="revealed") ? "bad" : null;
   return (
     <div className="q-area">
       <div className="q-prompt" dangerouslySetInnerHTML={{__html:q.prompt}} />
-      <MapBox project={project} interactive={answering} picked={state.answer}
+      <MapBox map={map} districts={districts} interactive={answering} picked={state.answer}
               result={result} revealTarget={state.phase==="revealed" ? q.target : null}
               onPick={(n)=> setAnswer(n)} />
-      <div className="map-cap">// Original-Karte der inneren Stadtteile von Villach</div>
+      <div className="map-cap">// Original-Karte von Villach</div>
     </div>
   );
 }
@@ -365,20 +389,20 @@ function ChoiceQ({ q, state, setAnswer }){
     </div>
   );
 }
-function TypeQ({ project, q, state, setAnswer }){
+function TypeQ({ map, districts, q, state, setAnswer }){
   const ref = useRef(null);
   useEffect(()=>{ if(ref.current && state.phase==="answering") setTimeout(()=>{ if(ref.current){ ref.current.focus(); const v=ref.current.value; try{ ref.current.setSelectionRange(v.length, v.length); }catch(e){} } },60); },[state.phase]);
   const answering = state.phase==="answering";
   let cls="type-in";
   if(state.phase==="correct") cls+=" good";
   else if(state.phase==="wrong" || state.phase==="revealed") cls+=" bad";
-  const solName = q.highlight ? ((project.districts||[]).find(d=>d.n===q.highlight)||{}).name
+  const solName = q.highlight ? ((districts||[]).find(d=>d.n===q.highlight)||{}).name
                               : (q.accept && q.accept[0]);
   return (
     <div className="q-area">
       <div className="q-prompt" dangerouslySetInnerHTML={{__html:q.prompt}} />
-      {q.highlight && project.map && (
-        <div className="hl-card"><MapBox project={project} highlight={q.highlight} interactive={false} /></div>
+      {q.highlight && map && (
+        <div className="hl-card"><MapBox map={map} districts={districts} highlight={q.highlight} interactive={false} /></div>
       )}
       {q.prefix && answering && <div className="q-sub">Schreib das Wort fertig! ✍️</div>}
       <input ref={ref} className={cls} placeholder={q.placeholder||"Antwort eintippen…"}
@@ -547,8 +571,11 @@ function ClozeQ({ q, state, setAnswer }){
 }
 
 /* ===================== Übung ===================== */
-function Exercise({ project, lesson, onExit, onDone }){
-  const [qs] = useState(()=> orderQuestions(lesson.questions));
+function Exercise({ project, unit, lesson, onExit, onDone }){
+  const [qs] = useState(()=>
+    lesson.mega ? buildMegaQuiz(project, lesson.quizCount||15)
+    : lesson.quiz ? buildSectionQuiz(unit, lesson.quizCount||12)
+    : orderQuestions(lesson.questions));
   const initAnswer = (qq) => {
     if(!qq) return null;
     if(qq.type==="type" && qq.prefix) return qq.prefix;
@@ -644,9 +671,9 @@ function Exercise({ project, lesson, onExit, onDone }){
           <div className="ex-bar"><i style={{width:progress+"%"}}></i></div>
           <span className="hearts">{"❤️".repeat(hearts)}{"🤍".repeat(3-hearts)}</span>
         </div>
-        {q.type==="map"    && <MapQ project={project} q={q} state={st} setAnswer={setAnswer} />}
+        {q.type==="map"    && <MapQ map={q._map || (unit&&unit.map)} districts={q._districts || (unit&&unit.districts)} q={q} state={st} setAnswer={setAnswer} />}
         {q.type==="choice" && <ChoiceQ q={q} state={st} setAnswer={setAnswer} />}
-        {q.type==="type"   && <TypeQ project={project} q={q} state={st} setAnswer={setAnswer} />}
+        {q.type==="type"   && <TypeQ map={q._map || (unit&&unit.map)} districts={q._districts || (unit&&unit.districts)} q={q} state={st} setAnswer={setAnswer} />}
         {q.type==="match"  && <MatchQ key={qi} q={q} onSolved={matchSolved} />}
         {q.type==="collect" && <CollectQ q={q} state={st} setAnswer={setAnswer} />}
         {q.type==="fillall" && <FillAllQ q={q} state={st} setAnswer={setAnswer} />}
@@ -735,19 +762,18 @@ function Reward({ lesson, xp, correct, total, onContinue }){
   );
 }
 
-/* ===================== Lernpfad ===================== */
-function Path({ project, doneSet, xp, streak, onStart, onBack }){
-  const isGated = (l) => l.requires && !doneSet.includes(l.requires);
-  const available = (project.lessons||[]).filter(l=> !l.locked && (l.questions||[]).length>0 && !isGated(l));
-  const todo = available.filter(l=> !doneSet.includes(l.id));
-  const firstName  = (todo[0]||available[0]) ? (todo[0]||available[0]).name : null;
+/* ===================== Lernpfad (eines Bereichs) ===================== */
+function Path({ unit, doneSet, scores, xp, streak, onStart, onBack }){
+  const lessons = unit.lessons||[];
+  const todo = lessons.filter(l=> !l.locked && !l.quiz && (l.questions||[]).length>0 && !doneSet.includes(l.id));
+  const firstName  = todo[0] ? todo[0].name : null;
   const secondName = todo[1] ? todo[1].name : null;
   return (
     <div className="screen">
       <div className="body">
         <div className="ph-top pad-top">
           <button className="back" onClick={onBack} aria-label="Zurück">←</button>
-          <div className="ttl"><b>{project.icon} {project.name}</b><span>{project.subtitle||""}</span></div>
+          <div className="ttl"><b>{unit.icon} {unit.name}</b><span>{unit.subtitle||""}</span></div>
           <div className="spacer"></div>
           <div className="chips"><span className="chip flame">🔥 {streak}</span><span className="chip xp">⭐ {xp}</span></div>
         </div>
@@ -761,37 +787,89 @@ function Path({ project, doneSet, xp, streak, onStart, onBack }){
         </div>
         <div className="path">
           <div className="lessons">
-            {(project.lessons||[]).map((l,i)=>{
-              const gated = isGated(l);                       // Voraussetzung noch nicht erfüllt
-              const masked = gated && l.mask;                 // Name verbergen (nur Stadtteile)
+            {lessons.map((l,i)=>{
+              const isQuiz = !!l.quiz;
               const isDone = doneSet.includes(l.id);
-              const hasContent = (l.questions||[]).length>0;
-              const playableNode = !l.locked && hasContent && !gated;
-              const ready = playableNode && !isDone;
-              const cls = !playableNode ? "lock" : isDone ? "done play" : "ready play";
-              const label = masked ? ("Stadtteil " + (l.n!=null ? l.n : "?")) : l.name;
-              const sub = gated ? (masked ? "Erst die Karte lernen" : "Erst freischalten")
-                        : !hasContent ? "Bald verfügbar"
-                        : isDone ? "★ Geschafft" : "Jetzt üben!";
+              const hasContent = isQuiz || (l.questions||[]).length>0;
+              const playableNode = !l.locked && hasContent;
+              const ready = playableNode && !isDone && !isQuiz;
+              const cls = !playableNode ? "lock" : isQuiz ? "trophy play" : isDone ? "done play" : "ready play";
+              const sc = scores && scores[l.id];
+              const scoreTxt = sc ? `zuletzt ${sc.correct}/${sc.total} richtig` : null;
+              const sub = !hasContent ? "Bald verfügbar"
+                        : isQuiz ? (scoreTxt || "Alle Aufgaben gemischt!")
+                        : (scoreTxt || "Jetzt üben!");
               return (
                 <div key={l.id} className={"node-row "+(i%2?"r ":"")+(!playableNode?"lockc":"")}>
-                  <button className={"node "+cls} onClick={()=> playableNode && onStart(l)} aria-label={label}>
+                  <button className={"node "+cls} onClick={()=> playableNode && onStart(l)} aria-label={l.name}>
                     {!playableNode ? "🔒" : l.icon}
                     {ready && <span className="ring"></span>}
-                    {isDone && <span className="star">⭐</span>}
+                    {isDone && !isQuiz && <span className="star">⭐</span>}
                   </button>
-                  <div className="lbl">{label}
+                  <div className="lbl">{l.name}
                     <small>{sub}</small>
                   </div>
                 </div>
               );
             })}
-            <div className="node-row">
-              <div className="node trophy">🏆</div>
-              <div className="lbl">Großes Quiz<small>Bald verfügbar</small></div>
-            </div>
           </div>
         </div>
+      </div>
+    </div>
+  );
+}
+
+/* ===================== Bereichs-Auswahl ===================== */
+function SectionSelect({ project, progress, xp, streak, onOpenSection, onMega, onBack }){
+  const sections = project.sections||[];
+  const megaPool = sections.reduce((n,s)=> n + (s.lessons||[]).filter(l=>!l.quiz && (l.questions||[]).length).length, 0);
+  return (
+    <div className="screen">
+      <div className="body">
+        <div className="ph-top pad-top">
+          <button className="back" onClick={onBack} aria-label="Zurück">←</button>
+          <div className="ttl"><b>{project.icon} {project.name}</b><span>{project.subtitle||""}</span></div>
+          <div className="spacer"></div>
+          <div className="chips"><span className="chip flame">🔥 {streak}</span><span className="chip xp">⭐ {xp}</span></div>
+        </div>
+        <div className="vili">
+          <div className="face">🦊</div>
+          <div className="bubble">Was möchtest du üben, {KID}? <b>Wähl einen Bereich!</b></div>
+        </div>
+        <div className="s-h">📚 Bereiche</div>
+        <div className="tiles">
+          {sections.map(s=>{
+            const real = (s.lessons||[]).filter(l=>!l.quiz && (l.questions||[]).length);
+            const total = real.length;
+            const done = total ? real.filter(l=>(progress||[]).includes(l.id)).length : 0;
+            const empty = total===0;
+            const pct = total ? Math.round(done/total*100) : 0;
+            return (
+              <button key={s.id} className="tile" disabled={empty} onClick={()=> !empty && onOpenSection(s.id)}>
+                <div className="ic" style={{background:s.iconBg||"var(--teal-soft)"}}>{s.icon||"📘"}</div>
+                <div className="info">
+                  <b>{s.name}</b>
+                  <div className="pm">{empty ? "Bald verfügbar" : `${done} von ${total} Lektionen`}</div>
+                  {!empty && <div className="bar"><i style={{width:pct+"%"}}></i></div>}
+                </div>
+              </button>
+            );
+          })}
+        </div>
+        {megaPool>0 && (
+          <>
+            <div className="s-h">🏆 Quiz</div>
+            <div className="tiles">
+              <button className="tile" onClick={onMega}>
+                <div className="ic" style={{background:"var(--yellow)"}}>🏆</div>
+                <div className="info">
+                  <b>Riesen-Quiz</b>
+                  <div className="pm">Alle Villach-Themen gemischt!</div>
+                </div>
+              </button>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
@@ -962,6 +1040,7 @@ function App(){
   const [manifestErr, setManifestErr] = useState(null);
   const [userProjects, setUserProjects] = useState(()=> load("lernfuchs_userprojects", []));
   const [progress, setProgress] = useState(()=> load("lernfuchs_done", {}));
+  const [scoreboard, setScoreboard] = useState(()=> load("lernfuchs_scores", {}));
   const [xp, setXp]   = useState(()=> load("lernfuchs_xp", 240));
   const [streak]      = useState(()=> load("lernfuchs_streak", 5));
   const [scene, setScene] = useState({ name:"home" });
@@ -970,6 +1049,7 @@ function App(){
 
   useEffect(()=> save("lernfuchs_userprojects", userProjects), [userProjects]);
   useEffect(()=> save("lernfuchs_done", progress), [progress]);
+  useEffect(()=> save("lernfuchs_scores", scoreboard), [scoreboard]);
   useEffect(()=> save("lernfuchs_xp", xp), [xp]);
 
   // Manifest einmalig laden (winzig)
@@ -994,39 +1074,53 @@ function App(){
   }, [manifest, userProjects]);
 
   const doneFor = (pid) => progress[pid] || [];
+  const scoresFor = (pid) => scoreboard[pid] || {};
+  const unitFor = (proj, sectionId) => sectionId ? (proj.sections||[]).find(s=>s.id===sectionId) : proj;
 
-  function gotoPath(full){
+  function gotoProject(full){
     cache.current[full.id] = full;
-    setScene({ name:"path", projectId: full.id });
+    if((full.sections||[]).length) setScene({ name:"sections", projectId: full.id });
+    else setScene({ name:"path", projectId: full.id });   // einfache Projekte (ohne Bereiche)
   }
   function openTile(t){
-    if(cache.current[t.id]) return setScene({ name:"path", projectId:t.id });
+    if(cache.current[t.id]) return gotoProject(cache.current[t.id]);
     if(t.source==="user"){
       const full = userProjects.find(p=>p.id===t.id);
-      if(full) return gotoPath(full);
+      if(full) return gotoProject(full);
     }
-    // eingebautes Thema bei Bedarf nachladen
     setScene({ name:"loading", projectId:t.id });
     fetch(t.file, {cache:"no-cache"})
       .then(r=>{ if(!r.ok) throw new Error("HTTP "+r.status); return r.json(); })
-      .then(full=> gotoPath(full))
+      .then(full=> gotoProject(full))
       .catch(()=> setScene({ name:"loaderr", projectId:t.id, tile:t }));
   }
 
-  function startLesson(l){ setScene(s=>({ name:"exercise", projectId:s.projectId, lesson:l })); }
-  function exitEx(){ setScene(s=>({ name:"path", projectId:s.projectId })); }
+  function openSection(sectionId){ setScene(s=>({ name:"path", projectId:s.projectId, sectionId })); }
+  function startLesson(l){ setScene(s=>({ name:"exercise", projectId:s.projectId, sectionId:s.sectionId, lesson:l })); }
+  function startMega(){
+    setScene(s=>({ name:"exercise", projectId:s.projectId, sectionId:null,
+      lesson:{ id:"riesen-quiz", name:"Riesen-Quiz", icon:"🏆", mega:true, quizCount:15, sticker:{emoji:"🏆", title:"Villach-Champion!"} } }));
+  }
+  const backFromEx = (s) => s.lesson && s.lesson.mega ? { name:"sections", projectId:s.projectId }
+                                                      : { name:"path", projectId:s.projectId, sectionId:s.sectionId };
+  function exitEx(){ setScene(s=> backFromEx(s)); }
   function finishEx(res){
     setLastRes({ xp:res.xp, correct:res.correct, total:res.total }); setXp(x=>x+res.xp);
     const pid = scene.projectId, lid = scene.lesson.id;
-    setProgress(pr=>{ const cur=pr[pid]||[]; return cur.includes(lid) ? pr : {...pr,[pid]:[...cur,lid]}; });
-    setScene(s=>({ name:"reward", projectId:s.projectId, lesson:s.lesson }));
+    if(!scene.lesson.quiz && !scene.lesson.mega){
+      setProgress(pr=>{ const cur=pr[pid]||[]; return cur.includes(lid) ? pr : {...pr,[pid]:[...cur,lid]}; });
+    }
+    if(typeof res.total==="number")
+      setScoreboard(sb=> ({...sb, [pid]: {...(sb[pid]||{}), [lid]: {correct:res.correct, total:res.total}}}));
+    setScene(s=>({ name:"reward", projectId:s.projectId, sectionId:s.sectionId, lesson:s.lesson }));
   }
   function createProject(proj){
     setUserProjects(list=>[...list.filter(p=>p.id!==proj.id), proj]);
-    gotoPath(proj);
+    gotoProject(proj);
   }
 
   const activeProject = scene.projectId ? cache.current[scene.projectId] : null;
+  const activeUnit = activeProject ? unitFor(activeProject, scene.sectionId) : null;
 
   if(manifestErr && scene.name==="home")
     return <Fatal msg={manifestErr} onRetry={()=>{ setManifestErr(null); setManifest(null);
@@ -1044,13 +1138,18 @@ function App(){
                   onRetry={()=> openTile(scene.tile)} />;
   if(scene.name==="new")
     return <NewProject onCancel={()=>setScene({name:"home"})} onCreate={createProject} />;
-  if(scene.name==="path" && activeProject)
-    return <Path project={activeProject} doneSet={doneFor(activeProject.id)} xp={xp} streak={streak}
-                 onStart={startLesson} onBack={()=>setScene({name:"home"})} />;
+  if(scene.name==="sections" && activeProject)
+    return <SectionSelect project={activeProject} progress={doneFor(activeProject.id)} xp={xp} streak={streak}
+                 onOpenSection={openSection} onMega={startMega} onBack={()=>setScene({name:"home"})} />;
+  if(scene.name==="path" && activeUnit)
+    return <Path unit={activeUnit} doneSet={doneFor(activeProject.id)} scores={scoresFor(activeProject.id)} xp={xp} streak={streak}
+                 onStart={startLesson}
+                 onBack={()=> setScene((activeProject.sections||[]).length ? {name:"sections",projectId:activeProject.id} : {name:"home"})} />;
   if(scene.name==="exercise" && activeProject)
-    return <Exercise project={activeProject} lesson={scene.lesson} onExit={exitEx} onDone={finishEx} />;
+    return <Exercise project={activeProject} unit={activeUnit} lesson={scene.lesson} onExit={exitEx} onDone={finishEx} />;
   if(scene.name==="reward" && activeProject)
-    return <Reward lesson={scene.lesson} xp={lastRes.xp} correct={lastRes.correct} total={lastRes.total} onContinue={()=>setScene({name:"path",projectId:scene.projectId})} />;
+    return <Reward lesson={scene.lesson} xp={lastRes.xp} correct={lastRes.correct} total={lastRes.total}
+                   onContinue={()=> setScene(backFromEx(scene))} />;
 
   // Fallback (z. B. Reload mitten in einer Übung -> Cache leer)
   return <Loading text="Einen Moment…" />;
