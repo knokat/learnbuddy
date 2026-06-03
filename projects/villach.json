@@ -1868,6 +1868,16 @@
               ],
               "placeholder": "Name eintippen…",
               "grp": "g1"
+            },
+            {
+              "type": "type",
+              "prompt": "Wie heißt <b>Nr. 20</b> auf der Karte? ✍️",
+              "highlight": 20,
+              "accept": [
+                "leiningengasse"
+              ],
+              "placeholder": "Name eintippen…",
+              "grp": "g1"
             }
           ]
         },
@@ -2281,6 +2291,52 @@
           ]
         },
         {
+          "id": "hauptplatz-bilder",
+          "name": "Was ist das?",
+          "icon": "📷",
+          "questions": [
+            {
+              "type": "choice",
+              "image": "projects/foto-hauptplatz.jpg",
+              "prompt": "Was siehst du auf diesem Bild? 📷",
+              "options": [
+                "der Hauptplatz",
+                "der Bahnhof",
+                "das Rathaus",
+                "die Stadtmauer"
+              ],
+              "answer": 0,
+              "grp": "bild"
+            },
+            {
+              "type": "choice",
+              "image": "projects/foto-dreifaltigkeitssaeule.jpg",
+              "prompt": "Was ist das? 📷",
+              "options": [
+                "die Dreifaltigkeitssäule",
+                "der Stadtpfarrturm",
+                "ein Springbrunnen",
+                "ein Grabmal"
+              ],
+              "answer": 0,
+              "grp": "bild"
+            },
+            {
+              "type": "choice",
+              "image": "projects/foto-schwibbogen.jpg",
+              "prompt": "Was siehst du über dieser engen Gasse? 📷",
+              "options": [
+                "Schwibbögen",
+                "Regenbögen",
+                "Brücken",
+                "Tore"
+              ],
+              "answer": 0,
+              "grp": "bild"
+            }
+          ]
+        },
+        {
           "id": "hauptplatz-quiz",
           "name": "Großes Quiz",
           "icon": "🏆",
@@ -2407,6 +2463,12 @@
           "name": "Rathaus",
           "x": 46.9,
           "y": 92.0
+        },
+        {
+          "n": 20,
+          "name": "Leiningengasse",
+          "x": 56.0,
+          "y": 61.0
         }
       ]
     }
