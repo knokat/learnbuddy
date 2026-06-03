@@ -316,11 +316,11 @@
                   "right": "Sport-Stadion"
                 },
                 {
-                  "left": "🏫",
+                  "left": "📊",
                   "right": "HAK/HAS"
                 },
                 {
-                  "left": "💻",
+                  "left": "🔬",
                   "right": "Lam Research"
                 },
                 {
@@ -342,17 +342,17 @@
                   "name": "Ballspielhalle"
                 },
                 {
-                  "symbol": "💻",
+                  "symbol": "🔬",
                   "name": "Lam Research"
                 },
                 {
-                  "symbol": "🏫",
+                  "symbol": "📊",
                   "name": "HAK/HAS"
                 }
               ],
               "blanks": [
                 {
-                  "symbol": "🎒",
+                  "symbol": "🏫",
                   "name": "Volksschule",
                   "accept": [
                     "volksschule",
@@ -511,7 +511,7 @@
                   ]
                 },
                 {
-                  "symbol": "🎒",
+                  "symbol": "🏫",
                   "name": "Volksschule",
                   "accept": [
                     "volksschule",
@@ -663,7 +663,7 @@
                   "right": "Bowling-Center"
                 },
                 {
-                  "left": "🛍️",
+                  "left": "🛒",
                   "right": "Neukauf"
                 },
                 {
@@ -801,7 +801,7 @@
               ],
               "blanks": [
                 {
-                  "symbol": "🎒",
+                  "symbol": "🏫",
                   "name": "Volksschule",
                   "accept": [
                     "volksschule",
@@ -809,7 +809,7 @@
                   ]
                 },
                 {
-                  "symbol": "🏫",
+                  "symbol": "📚",
                   "name": "Mittelschule",
                   "accept": [
                     "mittelschule",
@@ -817,7 +817,7 @@
                   ]
                 },
                 {
-                  "symbol": "🎓",
+                  "symbol": "⚙️",
                   "name": "HTL",
                   "accept": [
                     "htl"
@@ -898,7 +898,7 @@
                   "right": "Maibachl"
                 },
                 {
-                  "left": "🌳",
+                  "left": "🌼",
                   "right": "Napoleonwiese"
                 },
                 {
@@ -924,7 +924,7 @@
                   "name": "Maibachl"
                 },
                 {
-                  "symbol": "🌳",
+                  "symbol": "🌼",
                   "name": "Napoleonwiese"
                 },
                 {
@@ -952,7 +952,7 @@
                   ]
                 },
                 {
-                  "symbol": "🩺",
+                  "symbol": "🧖",
                   "name": "Kurzentrum",
                   "accept": [
                     "kurzentrum",
@@ -1037,7 +1037,7 @@
               "prompt": "Verbinde, was es in <b>Völkendorf</b> gibt! 🔗",
               "pairs": [
                 {
-                  "left": "🏟️",
+                  "left": "🏒",
                   "right": "Villacher Stadthalle"
                 },
                 {
@@ -1045,7 +1045,7 @@
                   "right": "Mittelschule (Informatik)"
                 },
                 {
-                  "left": "🎓",
+                  "left": "🔨",
                   "right": "Fachberufsschule"
                 },
                 {
@@ -1059,7 +1059,7 @@
               "prompt": "In <b>Völkendorf</b> gibt es noch mehr! Ergänze, was fehlt. 🏟️",
               "given": [
                 {
-                  "symbol": "🏟️",
+                  "symbol": "🏒",
                   "name": "Villacher Stadthalle"
                 },
                 {
@@ -1067,7 +1067,7 @@
                   "name": "Mittelschule (Informatik)"
                 },
                 {
-                  "symbol": "🎓",
+                  "symbol": "🔨",
                   "name": "Fachberufsschule"
                 },
                 {
@@ -1077,7 +1077,7 @@
               ],
               "blanks": [
                 {
-                  "symbol": "🎒",
+                  "symbol": "🏫",
                   "name": "Volksschule",
                   "accept": [
                     "volksschule",
@@ -1177,7 +1177,7 @@
                   "right": "Fechthalle"
                 },
                 {
-                  "left": "🤸",
+                  "left": "🏋️",
                   "right": "Motorikpark"
                 },
                 {
@@ -1195,7 +1195,7 @@
               "prompt": "In <b>St. Martin</b> gibt es noch mehr! Ergänze, was fehlt. ⛪",
               "given": [
                 {
-                  "symbol": "🎓",
+                  "symbol": "🏛️",
                   "name": "Gymnasium St. Martin"
                 },
                 {
@@ -1203,7 +1203,7 @@
                   "name": "Fechthalle"
                 },
                 {
-                  "symbol": "🤸",
+                  "symbol": "🏋️",
                   "name": "Motorikpark"
                 },
                 {
@@ -1217,7 +1217,7 @@
               ],
               "blanks": [
                 {
-                  "symbol": "🎒",
+                  "symbol": "🏫",
                   "name": "Volksschule",
                   "accept": [
                     "volksschule",
@@ -1263,7 +1263,471 @@
       "icon": "🏡",
       "iconBg": "var(--yellow)",
       "subtitle": "Äußere Stadtteile",
-      "lessons": []
+      "lessons": [
+        {
+          "id": "vororte-karte",
+          "name": "Vororte finden",
+          "icon": "🗺️",
+          "questions": [
+            {
+              "type": "map",
+              "prompt": "Tippe auf <b>Fellach</b> auf der Karte! 🗺️",
+              "target": 1,
+              "grp": "find"
+            },
+            {
+              "type": "map",
+              "prompt": "Tippe auf <b>Vassach</b> auf der Karte! 🗺️",
+              "target": 2,
+              "grp": "find"
+            },
+            {
+              "type": "map",
+              "prompt": "Tippe auf <b>St. Leonhard</b> auf der Karte! 🗺️",
+              "target": 3,
+              "grp": "find"
+            },
+            {
+              "type": "map",
+              "prompt": "Tippe auf <b>Landskron</b> auf der Karte! 🗺️",
+              "target": 4,
+              "grp": "find"
+            },
+            {
+              "type": "map",
+              "prompt": "Tippe auf <b>St. Magdalen</b> auf der Karte! 🗺️",
+              "target": 5,
+              "grp": "find"
+            },
+            {
+              "type": "map",
+              "prompt": "Tippe auf <b>St. Ulrich</b> auf der Karte! 🗺️",
+              "target": 6,
+              "grp": "find"
+            },
+            {
+              "type": "map",
+              "prompt": "Tippe auf <b>Drobollach und Egg</b> auf der Karte! 🗺️",
+              "target": 7,
+              "grp": "find"
+            },
+            {
+              "type": "map",
+              "prompt": "Tippe auf <b>Maria Gail</b> auf der Karte! 🗺️",
+              "target": 8,
+              "grp": "find"
+            },
+            {
+              "type": "map",
+              "prompt": "Tippe auf <b>Federaun</b> auf der Karte! 🗺️",
+              "target": 9,
+              "grp": "find"
+            }
+          ]
+        },
+        {
+          "id": "vororte-schreiben",
+          "name": "Vororte schreiben",
+          "icon": "✍️",
+          "questions": [
+            {
+              "type": "type",
+              "prompt": "Wie heißt der Vorort <b>Nr. 1</b>? ✍️",
+              "highlight": 1,
+              "accept": [
+                "fellach"
+              ],
+              "placeholder": "Vorort eintippen…",
+              "grp": "w1"
+            },
+            {
+              "type": "type",
+              "prompt": "Wie heißt der Vorort <b>Nr. 2</b>? ✍️",
+              "highlight": 2,
+              "accept": [
+                "vassach"
+              ],
+              "placeholder": "Vorort eintippen…",
+              "grp": "w1"
+            },
+            {
+              "type": "type",
+              "prompt": "Wie heißt der Vorort <b>Nr. 3</b>? ✍️",
+              "highlight": 3,
+              "accept": [
+                "st. leonhard",
+                "st leonhard"
+              ],
+              "placeholder": "Vorort eintippen…",
+              "grp": "w1"
+            },
+            {
+              "type": "type",
+              "prompt": "Wie heißt der Vorort <b>Nr. 4</b>? ✍️",
+              "highlight": 4,
+              "accept": [
+                "landskron"
+              ],
+              "placeholder": "Vorort eintippen…",
+              "grp": "w1"
+            },
+            {
+              "type": "type",
+              "prompt": "Wie heißt der Vorort <b>Nr. 5</b>? ✍️",
+              "highlight": 5,
+              "accept": [
+                "st. magdalen",
+                "st magdalen"
+              ],
+              "placeholder": "Vorort eintippen…",
+              "grp": "w1"
+            },
+            {
+              "type": "type",
+              "prompt": "Wie heißt der Vorort <b>Nr. 6</b>? ✍️",
+              "highlight": 6,
+              "accept": [
+                "st. ulrich",
+                "st ulrich"
+              ],
+              "placeholder": "Vorort eintippen…",
+              "grp": "w1"
+            },
+            {
+              "type": "type",
+              "prompt": "Wie heißt der Vorort <b>Nr. 7</b>? ✍️",
+              "highlight": 7,
+              "accept": [
+                "drobollach und egg"
+              ],
+              "placeholder": "Vorort eintippen…",
+              "grp": "w1"
+            },
+            {
+              "type": "type",
+              "prompt": "Wie heißt der Vorort <b>Nr. 8</b>? ✍️",
+              "highlight": 8,
+              "accept": [
+                "maria gail"
+              ],
+              "placeholder": "Vorort eintippen…",
+              "grp": "w1"
+            },
+            {
+              "type": "type",
+              "prompt": "Wie heißt der Vorort <b>Nr. 9</b>? ✍️",
+              "highlight": 9,
+              "accept": [
+                "federaun"
+              ],
+              "placeholder": "Vorort eintippen…",
+              "grp": "w1"
+            },
+            {
+              "type": "fillall",
+              "prompt": "Schreibe alle Vororte auf! ✍️",
+              "items": [
+                {
+                  "name": "Fellach",
+                  "accept": [
+                    "fellach"
+                  ],
+                  "prefix": "F"
+                },
+                {
+                  "name": "Vassach",
+                  "accept": [
+                    "vassach"
+                  ],
+                  "prefix": "V"
+                },
+                {
+                  "name": "St. Leonhard",
+                  "accept": [
+                    "st. leonhard",
+                    "st leonhard"
+                  ],
+                  "prefix": "S"
+                },
+                {
+                  "name": "Landskron",
+                  "accept": [
+                    "landskron"
+                  ],
+                  "prefix": "L"
+                },
+                {
+                  "name": "St. Magdalen",
+                  "accept": [
+                    "st. magdalen",
+                    "st magdalen"
+                  ],
+                  "prefix": "S"
+                },
+                {
+                  "name": "St. Ulrich",
+                  "accept": [
+                    "st. ulrich",
+                    "st ulrich"
+                  ],
+                  "prefix": "S"
+                },
+                {
+                  "name": "Drobollach und Egg",
+                  "accept": [
+                    "drobollach und egg"
+                  ],
+                  "prefix": "D"
+                },
+                {
+                  "name": "Maria Gail",
+                  "accept": [
+                    "maria gail"
+                  ],
+                  "prefix": "M"
+                },
+                {
+                  "name": "Federaun",
+                  "accept": [
+                    "federaun"
+                  ],
+                  "prefix": "F"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "vororte-infos",
+          "name": "Was gibt es wo?",
+          "icon": "💡",
+          "questions": [
+            {
+              "type": "choice",
+              "prompt": "In welcher Himmelsrichtung liegt <b>Fellach</b>?",
+              "options": [
+                "Norden",
+                "Osten",
+                "Süden",
+                "Westen"
+              ],
+              "answer": 3,
+              "grp": "info"
+            },
+            {
+              "type": "choice",
+              "prompt": "In welcher Himmelsrichtung liegt <b>St. Ulrich</b>?",
+              "options": [
+                "Norden",
+                "Osten",
+                "Süden",
+                "Westen"
+              ],
+              "answer": 1,
+              "grp": "info"
+            },
+            {
+              "type": "choice",
+              "prompt": "In welcher Himmelsrichtung liegt <b>Federaun</b>?",
+              "options": [
+                "Norden",
+                "Osten",
+                "Süden",
+                "Westen"
+              ],
+              "answer": 2,
+              "grp": "info"
+            },
+            {
+              "type": "choice",
+              "prompt": "In welcher Himmelsrichtung liegt <b>Landskron</b>?",
+              "options": [
+                "Nordosten",
+                "Nordwesten",
+                "Südosten",
+                "Südwesten"
+              ],
+              "answer": 0,
+              "grp": "info"
+            },
+            {
+              "type": "choice",
+              "prompt": "In welchem Vorort gibt es den <b>Silbersee</b>?",
+              "options": [
+                "St. Ulrich",
+                "Vassach",
+                "Federaun",
+                "Maria Gail"
+              ],
+              "answer": 0,
+              "grp": "info"
+            },
+            {
+              "type": "choice",
+              "prompt": "An welchem Vorort liegt der <b>Vassacher See</b>?",
+              "options": [
+                "Vassach",
+                "St. Leonhard",
+                "Fellach",
+                "St. Ulrich"
+              ],
+              "answer": 0,
+              "grp": "info"
+            },
+            {
+              "type": "choice",
+              "prompt": "Welcher Vorort ist der <b>größte und bevölkerungsreichste</b>?",
+              "options": [
+                "Landskron",
+                "Fellach",
+                "Maria Gail",
+                "St. Magdalen"
+              ],
+              "answer": 0,
+              "grp": "info"
+            },
+            {
+              "type": "choice",
+              "prompt": "Wo gibt es die <b>Fachhochschule</b> und den <b>Technologiepark</b>?",
+              "options": [
+                "St. Magdalen",
+                "St. Leonhard",
+                "Drobollach und Egg",
+                "Federaun"
+              ],
+              "answer": 0,
+              "grp": "info"
+            },
+            {
+              "type": "choice",
+              "prompt": "In welchem Vorort ist die <b>Pfarr- und Wallfahrtskirche</b>?",
+              "options": [
+                "Maria Gail",
+                "St. Ulrich",
+                "Vassach",
+                "Landskron"
+              ],
+              "answer": 0,
+              "grp": "info"
+            },
+            {
+              "type": "choice",
+              "prompt": "Wo gibt es den <b>Tabor mit Hochseilgarten</b> und den <b>Panorama Beach</b>?",
+              "options": [
+                "Drobollach und Egg",
+                "Maria Gail",
+                "Federaun",
+                "St. Magdalen"
+              ],
+              "answer": 0,
+              "grp": "info"
+            },
+            {
+              "type": "choice",
+              "prompt": "Durch welchen Vorort führt der <b>Römerweg</b>?",
+              "options": [
+                "Federaun",
+                "Fellach",
+                "Vassach",
+                "St. Leonhard"
+              ],
+              "answer": 0,
+              "grp": "info"
+            },
+            {
+              "type": "match",
+              "prompt": "Verbinde das Wahrzeichen mit dem richtigen Vorort! 🔗",
+              "grp": "info",
+              "pairs": [
+                {
+                  "left": "🐒",
+                  "right": "Landskron"
+                },
+                {
+                  "left": "🎓",
+                  "right": "St. Magdalen"
+                },
+                {
+                  "left": "⛪",
+                  "right": "Maria Gail"
+                },
+                {
+                  "left": "🧗",
+                  "right": "Drobollach und Egg"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "vororte-quiz",
+          "name": "Großes Quiz",
+          "icon": "🏆",
+          "quiz": true,
+          "quizCount": 10,
+          "sticker": {
+            "emoji": "🏆",
+            "title": "Vororte-Profi!"
+          }
+        }
+      ],
+      "map": "projects/villach-vororte-map.jpg",
+      "districts": [
+        {
+          "n": 1,
+          "name": "Fellach",
+          "x": 40.5,
+          "y": 32.4
+        },
+        {
+          "n": 2,
+          "name": "Vassach",
+          "x": 54.7,
+          "y": 29.2
+        },
+        {
+          "n": 3,
+          "name": "St. Leonhard",
+          "x": 60.4,
+          "y": 35.4
+        },
+        {
+          "n": 4,
+          "name": "Landskron",
+          "x": 75.6,
+          "y": 28.6
+        },
+        {
+          "n": 5,
+          "name": "St. Magdalen",
+          "x": 69.7,
+          "y": 40.8
+        },
+        {
+          "n": 6,
+          "name": "St. Ulrich",
+          "x": 78.2,
+          "y": 46.9
+        },
+        {
+          "n": 7,
+          "name": "Drobollach und Egg",
+          "x": 78.2,
+          "y": 60.3
+        },
+        {
+          "n": 8,
+          "name": "Maria Gail",
+          "x": 66.8,
+          "y": 64.4
+        },
+        {
+          "n": 9,
+          "name": "Federaun",
+          "x": 30.0,
+          "y": 80.4
+        }
+      ]
     },
     {
       "id": "hauptplatz",
