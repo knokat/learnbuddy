@@ -179,6 +179,8 @@ input,textarea{font-family:var(--font-body);}
 .type-in.bad{border-color:var(--red);background:var(--red-soft);}
 .hl-card{margin:0 0 18px;border-radius:18px;overflow:hidden;border:var(--card-bd);position:relative;}
 .hl-card img{display:block;width:100%;}
+.q-photo{margin:0 0 18px;border-radius:18px;overflow:hidden;border:var(--card-bd);box-shadow:var(--card-sh);}
+.q-photo img{display:block;width:100%;max-height:340px;object-fit:cover;}
 
 .q-sub{font-family:var(--font-head);font-weight:500;font-size:18px;color:var(--muted);margin:-8px 0 18px;}
 .q-sub b{color:var(--ink);}
@@ -373,6 +375,7 @@ function ChoiceQ({ q, state, setAnswer }){
   return (
     <div className="q-area">
       <div className="q-prompt" dangerouslySetInnerHTML={{__html:q.prompt}} />
+      {q.image && <div className="q-photo"><img src={q.image} alt="" /></div>}
       <div className="choices">
         {q.options.map((opt,i)=>{
           let cls="choice";
@@ -418,6 +421,7 @@ function TypeQ({ map, districts, q, state, setAnswer }){
   );
 }
 function MatchQ({ q, onSolved }){
+  const useWords = q.pairs.some(p=> /[a-zA-ZäöüÄÖÜß]/.test(p.left||""));
   const lefts  = useMemo(()=> shuffle(q.pairs.map((p,i)=>({...p,idx:i}))), []);
   const rights = useMemo(()=> shuffle(q.pairs.map((p,i)=>({...p,idx:i}))), []);
   const [sel, setSel]   = useState(null);
@@ -440,7 +444,7 @@ function MatchQ({ q, onSolved }){
     }
   }
   const cell = (it, side) => {
-    let cls = "mitem" + (side==="L" ? " emo" : "");
+    let cls = "mitem" + (side==="L" && !useWords ? " emo" : "");
     if(done[it.idx]!==undefined) cls += " done";
     else if(sel && sel.side===side && sel.idx===it.idx) cls += " sel";
     if(miss && (side==="L"?miss.l:miss.r)===it.idx) cls += " miss";
@@ -454,7 +458,9 @@ function MatchQ({ q, onSolved }){
   return (
     <div className="q-area">
       <div className="q-prompt" dangerouslySetInnerHTML={{__html:q.prompt}} />
-      <div className="q-sub">Tippe ein <b>Bild</b> und dann das passende <b>Wort</b>. 👆</div>
+      <div className="q-sub">{useWords
+        ? <>Tippe ein <b>Wort</b> und dann das passende <b>Wort</b>. 👆</>
+        : <>Tippe ein <b>Bild</b> und dann das passende <b>Wort</b>. 👆</>}</div>
       <div className="match">
         <div className="col">{lefts.map(it=> cell(it,"L"))}</div>
         <div className="col">{rights.map(it=> cell(it,"R"))}</div>
