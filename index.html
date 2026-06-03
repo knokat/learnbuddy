@@ -479,6 +479,38 @@ function CollectQ({ q, state, setAnswer }){
   );
 }
 
+/* ===================== Fragetyp: fillall (alle auf einmal, mit Anfangsbuchstaben) ===================== */
+function FillAllQ({ q, state, setAnswer }){
+  const answering = state.phase==="answering";
+  const reveal = state.phase==="revealed";
+  const vals = Array.isArray(state.answer) ? state.answer : q.items.map(it=> it.prefix||"");
+  function setAt(i, v){ const n = q.items.map((it,k)=> (vals[k] != null ? vals[k] : (it.prefix||""))); n[i]=v; setAnswer(n); }
+  return (
+    <div className="q-area">
+      <div className="q-prompt" dangerouslySetInnerHTML={{__html:q.prompt}} />
+      <div className="q-sub">Alle Stadtteile – schreib jeden fertig! ✍️</div>
+      <div className="collect">
+        {q.items.map((it,i)=>{
+          const ok = !answering ? !!(state.results && state.results[i]) : null;
+          let cls = "citem blank";
+          if(!answering) cls += ok ? " good" : " bad";
+          return (
+            <div key={i} className={cls}>
+              <input className="cin" placeholder={it.placeholder||"…"}
+                     value={vals[i] != null ? vals[i] : (it.prefix||"")} disabled={!answering}
+                     autoCapitalize="off" autoCorrect="off" spellCheck={false}
+                     onChange={e=> setAt(i, e.target.value)} />
+              {!answering && (ok
+                ? <span className="ck">✓</span>
+                : reveal ? <span className="csol">{it.name}</span> : null)}
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
 /* ===================== Fragetyp: cloze (Lückentext) ===================== */
 const clozeBlanks = (q) => q.segments.filter(s=>s.blank).map(s=>s.blank);
 function ClozeQ({ q, state, setAnswer }){
@@ -517,7 +549,12 @@ function ClozeQ({ q, state, setAnswer }){
 /* ===================== Übung ===================== */
 function Exercise({ project, lesson, onExit, onDone }){
   const [qs] = useState(()=> orderQuestions(lesson.questions));
-  const initAnswer = (qq) => (qq && qq.type==="type" && qq.prefix) ? qq.prefix : null;
+  const initAnswer = (qq) => {
+    if(!qq) return null;
+    if(qq.type==="type" && qq.prefix) return qq.prefix;
+    if(qq.type==="fillall") return (qq.items||[]).map(it=> it.prefix||"");
+    return null;
+  };
   const [qi, setQi] = useState(0);
   const [hearts, setHearts] = useState(3);
   const [correctCount, setCorrectCount] = useState(0);
@@ -529,6 +566,20 @@ function Exercise({ project, lesson, onExit, onDone }){
     if(q.type==="collect"){
       const vals = Array.isArray(st.answer) ? st.answer : [];
       const results = q.blanks.map((b,i)=> b.accept.some(a=> norm(a)===norm(vals[i]||"")));
+      return { ok: results.every(Boolean), results };
+    }
+    if(q.type==="fillall"){
+      const vals = Array.isArray(st.answer) ? st.answer : [];
+      const items = q.items;
+      // Welcher Stadtteil (Index) passt zur Eingabe?
+      const matched = items.map((_,i)=> items.findIndex(it=> it.accept.some(a=> norm(a)===norm(vals[i]||""))));
+      const results = items.map((it,i)=>{
+        const m = matched[i];
+        if(m<0) return false;
+        const startsOk = norm(items[m].name).startsWith(norm(it.prefix||""));   // passt zum Anfangsbuchstaben des Feldes
+        const unique = matched.indexOf(m)===i && matched.lastIndexOf(m)===i;     // kein Stadtteil doppelt
+        return startsOk && unique;
+      });
       return { ok: results.every(Boolean), results };
     }
     if(q.type==="cloze"){
@@ -569,10 +620,14 @@ function Exercise({ project, lesson, onExit, onDone }){
   function blanksNeeded(){
     if(q.type==="collect") return q.blanks.length;
     if(q.type==="cloze")   return clozeBlanks(q).length;
+    if(q.type==="fillall") return q.items.length;
     return 0;
   }
   const canCheck = (()=>{
     if(q.type==="type") return !!(st.answer && st.answer.trim().length>0);
+    if(q.type==="fillall"){
+      return Array.isArray(st.answer) && q.items.every((it,i)=> (st.answer[i]||"").trim().length > (it.prefix||"").trim().length);
+    }
     if(q.type==="collect" || q.type==="cloze"){
       const n = blanksNeeded();
       return Array.isArray(st.answer) && st.answer.filter((v,i)=> i<n && v && v.trim().length>0).length===n;
@@ -594,6 +649,7 @@ function Exercise({ project, lesson, onExit, onDone }){
         {q.type==="type"   && <TypeQ project={project} q={q} state={st} setAnswer={setAnswer} />}
         {q.type==="match"  && <MatchQ key={qi} q={q} onSolved={matchSolved} />}
         {q.type==="collect" && <CollectQ q={q} state={st} setAnswer={setAnswer} />}
+        {q.type==="fillall" && <FillAllQ q={q} state={st} setAnswer={setAnswer} />}
         {q.type==="cloze"  && <ClozeQ q={q} state={st} setAnswer={setAnswer} />}
 
         {q.type!=="match" && st.phase==="answering" && (
