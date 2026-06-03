@@ -622,31 +622,389 @@
       "id": "stagathen",
       "n": 3,
       "name": "St. Agathen und Perau",
-      "icon": "🌳",
-      "locked": true,
-      "questions": [],
+      "icon": "🎬",
+      "questions": [
+        {
+          "type": "map",
+          "prompt": "Tippe auf <b>St. Agathen und Perau</b> auf der Karte! 🗺️",
+          "target": 3
+        },
+        {
+          "type": "choice",
+          "prompt": "Wo liegt <b>St. Agathen und Perau</b>? 🧭",
+          "options": [
+            "Östlich der Innenstadt",
+            "Im Süden am Berg",
+            "Am Faaker See",
+            "Westlich vom Warmbad"
+          ],
+          "answer": 0
+        },
+        {
+          "type": "type",
+          "prompt": "Wie heißt der Stadtteil <b>Nr. 3</b>? ✍️",
+          "highlight": 3,
+          "accept": [
+            "st. agathen und perau",
+            "st agathen und perau"
+          ],
+          "placeholder": "Stadtteil eintippen…"
+        },
+        {
+          "type": "choice",
+          "prompt": "Welches Kino wurde in <b>St. Agathen und Perau</b> neu gebaut? 🎬",
+          "options": [
+            "Cineplexx",
+            "Megaplex",
+            "Cinecity",
+            "UCI Kino"
+          ],
+          "answer": 0
+        },
+        {
+          "type": "choice",
+          "prompt": "Wie heißt das Einkaufszentrum in <b>St. Agathen und Perau</b>? 🛍️",
+          "options": [
+            "Neukauf",
+            "Atrio",
+            "City Park",
+            "Südpark"
+          ],
+          "answer": 0
+        },
+        {
+          "type": "match",
+          "prompt": "Verbinde, was es in <b>St. Agathen und Perau</b> gibt! 🔗",
+          "pairs": [
+            {
+              "left": "🎬",
+              "right": "Cineplexx"
+            },
+            {
+              "left": "🎳",
+              "right": "Bowling-Center"
+            },
+            {
+              "left": "🛍️",
+              "right": "Neukauf"
+            },
+            {
+              "left": "🧸",
+              "right": "2 Kindergärten"
+            }
+          ]
+        },
+        {
+          "type": "cloze",
+          "prompt": "Ergänze die Lücken im Satz! 📝",
+          "segments": [
+            {
+              "text": "Die beiden Kindergärten heißen "
+            },
+            {
+              "blank": {
+                "name": "Purzelini",
+                "accept": [
+                  "purzelini"
+                ],
+                "placeholder": "…"
+              }
+            },
+            {
+              "text": " und "
+            },
+            {
+              "blank": {
+                "name": "Perau",
+                "accept": [
+                  "perau"
+                ],
+                "placeholder": "…"
+              }
+            },
+            {
+              "text": "."
+            }
+          ]
+        }
+      ],
       "requires": "uebersicht-schreiben",
-      "mask": true
+      "mask": true,
+      "sticker": {
+        "emoji": "🎬",
+        "title": "Cineplexx-Kino freigeschaltet!"
+      }
     },
     {
       "id": "auen",
       "n": 4,
       "name": "Auen",
-      "icon": "🏰",
-      "locked": true,
-      "questions": [],
+      "icon": "🏭",
+      "questions": [
+        {
+          "type": "map",
+          "prompt": "Tippe auf <b>Auen</b> auf der Karte! 🗺️",
+          "target": 4
+        },
+        {
+          "type": "choice",
+          "prompt": "Wo liegt <b>Auen</b>? 🧭",
+          "options": [
+            "Südöstlich der Innenstadt",
+            "Nördlich vom Bahnhof",
+            "Am Ossiacher See",
+            "Auf einem Berg"
+          ],
+          "answer": 0
+        },
+        {
+          "type": "type",
+          "prompt": "Wie heißt der Stadtteil <b>Nr. 4</b>? ✍️",
+          "highlight": 4,
+          "accept": [
+            "auen"
+          ],
+          "placeholder": "Stadtteil eintippen…"
+        },
+        {
+          "type": "choice",
+          "prompt": "Was ist das Besondere an <b>Auen</b>? 📏",
+          "options": [
+            "Es ist der zweitgrößte Stadtteil",
+            "Es ist der größte Stadtteil",
+            "Es ist der kleinste Stadtteil",
+            "Es ist eine Insel"
+          ],
+          "answer": 0
+        },
+        {
+          "type": "choice",
+          "prompt": "Welcher große Arbeitgeber ist in <b>Auen</b>? 🏭",
+          "options": [
+            "Infineon",
+            "Lam Research",
+            "Red Bull",
+            "Magna"
+          ],
+          "answer": 0
+        },
+        {
+          "type": "match",
+          "prompt": "Verbinde, was es in <b>Auen</b> gibt! 🔗",
+          "pairs": [
+            {
+              "left": "🏭",
+              "right": "Infineon"
+            },
+            {
+              "left": "🛍️",
+              "right": "Atrio"
+            },
+            {
+              "left": "🚗",
+              "right": "Autohäuser & Großhandel"
+            }
+          ]
+        },
+        {
+          "type": "collect",
+          "prompt": "In <b>Auen</b> gibt es noch mehr! Ergänze, was fehlt. 🏭",
+          "given": [
+            {
+              "symbol": "🏭",
+              "name": "Infineon"
+            },
+            {
+              "symbol": "🛍️",
+              "name": "Atrio"
+            },
+            {
+              "symbol": "🚗",
+              "name": "Autohäuser & Großhandel"
+            }
+          ],
+          "blanks": [
+            {
+              "symbol": "🎒",
+              "name": "Volksschule",
+              "accept": [
+                "volksschule",
+                "vs"
+              ]
+            },
+            {
+              "symbol": "🏫",
+              "name": "Mittelschule",
+              "accept": [
+                "mittelschule",
+                "ms"
+              ]
+            },
+            {
+              "symbol": "🎓",
+              "name": "HTL",
+              "accept": [
+                "htl"
+              ]
+            }
+          ]
+        }
+      ],
       "requires": "uebersicht-schreiben",
-      "mask": true
+      "mask": true,
+      "sticker": {
+        "emoji": "🏭",
+        "title": "Infineon-Sticker freigeschaltet!"
+      }
     },
     {
       "id": "warmbad",
       "n": 5,
       "name": "Warmbad-Judendorf",
       "icon": "♨️",
-      "locked": true,
-      "questions": [],
+      "questions": [
+        {
+          "type": "map",
+          "prompt": "Tippe auf <b>Warmbad-Judendorf</b> auf der Karte! 🗺️",
+          "target": 5
+        },
+        {
+          "type": "choice",
+          "prompt": "Wo liegt <b>Warmbad-Judendorf</b>? 🧭",
+          "options": [
+            "Südwestlich der Innenstadt",
+            "Nördlich vom Bahnhof",
+            "Mitten in der Altstadt",
+            "Am Faaker See"
+          ],
+          "answer": 0
+        },
+        {
+          "type": "type",
+          "prompt": "Wie heißt der Stadtteil <b>Nr. 5</b>? ✍️",
+          "highlight": 5,
+          "accept": [
+            "warmbad-judendorf",
+            "warmbad judendorf"
+          ],
+          "placeholder": "Stadtteil eintippen…"
+        },
+        {
+          "type": "choice",
+          "prompt": "Was für ein Viertel ist <b>Warmbad-Judendorf</b>? 🏛️",
+          "options": [
+            "Ein historisch interessantes Viertel",
+            "Ein Industriegebiet",
+            "Ein Bahnhofsviertel",
+            "Eine kleine Insel"
+          ],
+          "answer": 0
+        },
+        {
+          "type": "choice",
+          "prompt": "Welche große Therme gibt es in <b>Warmbad</b>? ♨️",
+          "options": [
+            "KärntenTherme",
+            "Therme Wien",
+            "AQUA DOME",
+            "Tauern Spa"
+          ],
+          "answer": 0
+        },
+        {
+          "type": "match",
+          "prompt": "Verbinde, was es in <b>Warmbad-Judendorf</b> gibt! 🔗",
+          "pairs": [
+            {
+              "left": "♨️",
+              "right": "KärntenTherme"
+            },
+            {
+              "left": "💧",
+              "right": "Maibachl"
+            },
+            {
+              "left": "🌳",
+              "right": "Napoleonwiese"
+            },
+            {
+              "left": "🎾",
+              "right": "Sportpark Tennis"
+            },
+            {
+              "left": "🚸",
+              "right": "ÖAMTC-Verkehrsgarten"
+            }
+          ]
+        },
+        {
+          "type": "collect",
+          "prompt": "In <b>Warmbad-Judendorf</b> gibt es noch mehr! Ergänze, was fehlt. ♨️",
+          "given": [
+            {
+              "symbol": "♨️",
+              "name": "KärntenTherme"
+            },
+            {
+              "symbol": "💧",
+              "name": "Maibachl"
+            },
+            {
+              "symbol": "🌳",
+              "name": "Napoleonwiese"
+            },
+            {
+              "symbol": "🎾",
+              "name": "Sportpark Tennis"
+            },
+            {
+              "symbol": "🚸",
+              "name": "ÖAMTC-Verkehrsgarten"
+            }
+          ],
+          "blanks": [
+            {
+              "symbol": "🐴",
+              "name": "Reitstall",
+              "accept": [
+                "reitstall"
+              ]
+            },
+            {
+              "symbol": "🏥",
+              "name": "Privatklinik",
+              "accept": [
+                "privatklinik"
+              ]
+            },
+            {
+              "symbol": "🩺",
+              "name": "Kurzentrum",
+              "accept": [
+                "kurzentrum",
+                "kur-zentrum"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "choice",
+          "prompt": "Für welche Branche gibt es in <b>Warmbad-Judendorf</b> besondere Schulen? 🏫",
+          "options": [
+            "Tourismus",
+            "Technik",
+            "Landwirtschaft",
+            "Kunst"
+          ],
+          "answer": 0
+        }
+      ],
       "requires": "uebersicht-schreiben",
-      "mask": true
+      "mask": true,
+      "sticker": {
+        "emoji": "♨️",
+        "title": "KärntenTherme freigeschaltet!"
+      }
     },
     {
       "id": "voelkendorf",
