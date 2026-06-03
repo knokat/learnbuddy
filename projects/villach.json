@@ -1010,21 +1010,271 @@
       "id": "voelkendorf",
       "n": 6,
       "name": "Völkendorf",
-      "icon": "🏘️",
-      "locked": true,
-      "questions": [],
+      "icon": "🏟️",
+      "questions": [
+        {
+          "type": "map",
+          "prompt": "Tippe auf <b>Völkendorf</b> auf der Karte! 🗺️",
+          "target": 6
+        },
+        {
+          "type": "choice",
+          "prompt": "Wo liegt <b>Völkendorf</b>? 🧭",
+          "options": [
+            "Westlich der Innenstadt",
+            "Östlich vom Bahnhof",
+            "Am Faaker See",
+            "Im Süden am Berg"
+          ],
+          "answer": 0
+        },
+        {
+          "type": "type",
+          "prompt": "Wie heißt der Stadtteil <b>Nr. 6</b>? ✍️",
+          "highlight": 6,
+          "accept": [
+            "völkendorf",
+            "voelkendorf"
+          ],
+          "placeholder": "Stadtteil eintippen…"
+        },
+        {
+          "type": "choice",
+          "prompt": "Welche große Halle gibt es in <b>Völkendorf</b>? 🏟️",
+          "options": [
+            "Villacher Stadthalle",
+            "Olympiahalle",
+            "Messehalle",
+            "Stadtsaal"
+          ],
+          "answer": 0
+        },
+        {
+          "type": "choice",
+          "prompt": "Was kann man in der Villacher Stadthalle erleben? 🏒",
+          "options": [
+            "Eishockey und Konzerte",
+            "Autorennen",
+            "Skispringen",
+            "Pferderennen"
+          ],
+          "answer": 0
+        },
+        {
+          "type": "match",
+          "prompt": "Verbinde, was es in <b>Völkendorf</b> gibt! 🔗",
+          "pairs": [
+            {
+              "left": "🏟️",
+              "right": "Villacher Stadthalle"
+            },
+            {
+              "left": "💻",
+              "right": "Mittelschule (Informatik)"
+            },
+            {
+              "left": "🎓",
+              "right": "Fachberufsschule"
+            },
+            {
+              "left": "🚴",
+              "right": "Wander- & Radwege"
+            }
+          ]
+        },
+        {
+          "type": "collect",
+          "prompt": "In <b>Völkendorf</b> gibt es noch mehr! Ergänze, was fehlt. 🏟️",
+          "given": [
+            {
+              "symbol": "🏟️",
+              "name": "Villacher Stadthalle"
+            },
+            {
+              "symbol": "💻",
+              "name": "Mittelschule (Informatik)"
+            },
+            {
+              "symbol": "🎓",
+              "name": "Fachberufsschule"
+            },
+            {
+              "symbol": "🚴",
+              "name": "Wander- & Radwege"
+            }
+          ],
+          "blanks": [
+            {
+              "symbol": "🎒",
+              "name": "Volksschule",
+              "accept": [
+                "volksschule",
+                "vs"
+              ]
+            },
+            {
+              "symbol": "🧸",
+              "name": "2 Kindergärten",
+              "accept": [
+                "2 kindergärten",
+                "2 kindergaerten",
+                "zwei kindergärten",
+                "kindergärten",
+                "kindergaerten",
+                "2 kindergarten"
+              ]
+            },
+            {
+              "symbol": "🩺",
+              "name": "viele Ärzte",
+              "accept": [
+                "viele ärzte",
+                "ärzte",
+                "aerzte",
+                "viele aerzte"
+              ]
+            }
+          ]
+        }
+      ],
       "requires": "uebersicht-schreiben",
-      "mask": true
+      "mask": true,
+      "sticker": {
+        "emoji": "🏟️",
+        "title": "Villacher Stadthalle freigeschaltet!"
+      }
     },
     {
       "id": "stmartin",
       "n": 7,
       "name": "St. Martin",
       "icon": "⛪",
-      "locked": true,
-      "questions": [],
+      "questions": [
+        {
+          "type": "map",
+          "prompt": "Tippe auf <b>St. Martin</b> auf der Karte! 🗺️",
+          "target": 7
+        },
+        {
+          "type": "choice",
+          "prompt": "Wo liegt <b>St. Martin</b>? 🧭",
+          "options": [
+            "Nordwestlich der Innenstadt",
+            "Südlich der Drau",
+            "Am Ossiacher See",
+            "Mitten in der Altstadt"
+          ],
+          "answer": 0
+        },
+        {
+          "type": "type",
+          "prompt": "Wie heißt der Stadtteil <b>Nr. 7</b>? ✍️",
+          "highlight": 7,
+          "accept": [
+            "st. martin",
+            "st martin"
+          ],
+          "placeholder": "Stadtteil eintippen…"
+        },
+        {
+          "type": "choice",
+          "prompt": "Welche höhere Schule gibt es in <b>St. Martin</b>? 🎓",
+          "options": [
+            "Gymnasium St. Martin",
+            "HTL",
+            "Tourismusschule",
+            "Handelsakademie"
+          ],
+          "answer": 0
+        },
+        {
+          "type": "choice",
+          "prompt": "Welche besondere Sporthalle gibt es in <b>St. Martin</b>? 🤺",
+          "options": [
+            "Eine Fechthalle",
+            "Eine Boxhalle",
+            "Eine Kletterhalle",
+            "Eine Eishalle"
+          ],
+          "answer": 0
+        },
+        {
+          "type": "match",
+          "prompt": "Verbinde, was es in <b>St. Martin</b> gibt! 🔗",
+          "pairs": [
+            {
+              "left": "🤺",
+              "right": "Fechthalle"
+            },
+            {
+              "left": "🤸",
+              "right": "Motorikpark"
+            },
+            {
+              "left": "🏃",
+              "right": "Sportzentrum"
+            },
+            {
+              "left": "🌳",
+              "right": "Parks"
+            }
+          ]
+        },
+        {
+          "type": "collect",
+          "prompt": "In <b>St. Martin</b> gibt es noch mehr! Ergänze, was fehlt. ⛪",
+          "given": [
+            {
+              "symbol": "🎓",
+              "name": "Gymnasium St. Martin"
+            },
+            {
+              "symbol": "🤺",
+              "name": "Fechthalle"
+            },
+            {
+              "symbol": "🤸",
+              "name": "Motorikpark"
+            },
+            {
+              "symbol": "🏃",
+              "name": "Sportzentrum"
+            },
+            {
+              "symbol": "🌳",
+              "name": "Parks"
+            }
+          ],
+          "blanks": [
+            {
+              "symbol": "🎒",
+              "name": "Volksschule",
+              "accept": [
+                "volksschule",
+                "vs"
+              ]
+            },
+            {
+              "symbol": "🧸",
+              "name": "2 Kindergärten",
+              "accept": [
+                "2 kindergärten",
+                "2 kindergaerten",
+                "zwei kindergärten",
+                "kindergärten",
+                "kindergaerten",
+                "2 kindergarten"
+              ]
+            }
+          ]
+        }
+      ],
       "requires": "uebersicht-schreiben",
-      "mask": true
+      "mask": true,
+      "sticker": {
+        "emoji": "🤺",
+        "title": "Fechthalle freigeschaltet!"
+      }
     }
   ]
 }
