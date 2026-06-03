@@ -3,10 +3,10 @@
   "projects": [
     {
       "id": "villach-stadtteile",
-      "name": "Stadtteile von Villach",
+      "name": "Villach",
       "icon": "🗺️",
       "iconBg": "var(--teal-soft)",
-      "subtitle": "Innere Stadtteile · 3. Klasse",
+      "subtitle": "Sachunterricht · 3. Klasse",
       "file": "projects/villach.json",
       "lessonCount": 9
     }
