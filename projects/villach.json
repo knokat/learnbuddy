@@ -1,1258 +1,1277 @@
 {
   "id": "villach-stadtteile",
-  "name": "Stadtteile von Villach",
+  "name": "Villach",
   "icon": "🗺️",
   "iconBg": "var(--teal-soft)",
-  "fach": "Sachunterricht",
-  "klasse": "3. Klasse VS",
-  "subtitle": "Innere Stadtteile · 3. Klasse",
-  "map": "projects/villach-map.jpg",
-  "districts": [
+  "subtitle": "Sachunterricht · 3. Klasse",
+  "sections": [
     {
-      "n": 1,
-      "name": "Lind",
-      "x": 63.5,
-      "y": 14
-    },
-    {
-      "n": 2,
-      "name": "Seebach-Wasenboden",
-      "x": 80,
-      "y": 22
-    },
-    {
-      "n": 3,
-      "name": "St. Agathen und Perau",
-      "x": 83.5,
-      "y": 40
-    },
-    {
-      "n": 4,
-      "name": "Auen",
-      "x": 61,
-      "y": 75
-    },
-    {
-      "n": 5,
-      "name": "Warmbad-Judendorf",
-      "x": 31,
-      "y": 75
-    },
-    {
-      "n": 6,
-      "name": "Völkendorf",
-      "x": 53,
-      "y": 41.5
-    },
-    {
-      "n": 7,
-      "name": "St. Martin",
-      "x": 49.5,
-      "y": 19
-    }
-  ],
-  "lessons": [
-    {
-      "id": "uebersicht-karte",
-      "n": 0,
-      "name": "Stadtteile finden",
-      "icon": "🗺️",
-      "sticker": {
-        "emoji": "🧭",
-        "title": "Stadtteil-Karte gemeistert!"
-      },
-      "questions": [
+      "id": "stadtteile",
+      "name": "Stadtteile",
+      "icon": "🏘️",
+      "iconBg": "var(--teal-soft)",
+      "subtitle": "Innere Stadtteile",
+      "map": "projects/villach-map.jpg",
+      "districts": [
         {
-          "type": "map",
-          "prompt": "Tippe auf <b>Lind</b> auf der Karte! 🗺️",
-          "target": 1,
-          "grp": "find"
+          "n": 1,
+          "name": "Lind",
+          "x": 63.5,
+          "y": 14
         },
         {
-          "type": "map",
-          "prompt": "Tippe auf <b>Seebach-Wasenboden</b> auf der Karte! 🗺️",
-          "target": 2,
-          "grp": "find"
+          "n": 2,
+          "name": "Seebach-Wasenboden",
+          "x": 80,
+          "y": 22
         },
         {
-          "type": "map",
-          "prompt": "Tippe auf <b>St. Agathen und Perau</b> auf der Karte! 🗺️",
-          "target": 3,
-          "grp": "find"
+          "n": 3,
+          "name": "St. Agathen und Perau",
+          "x": 83.5,
+          "y": 40
         },
         {
-          "type": "map",
-          "prompt": "Tippe auf <b>Auen</b> auf der Karte! 🗺️",
-          "target": 4,
-          "grp": "find"
+          "n": 4,
+          "name": "Auen",
+          "x": 61,
+          "y": 75
         },
         {
-          "type": "map",
-          "prompt": "Tippe auf <b>Warmbad-Judendorf</b> auf der Karte! 🗺️",
-          "target": 5,
-          "grp": "find"
+          "n": 5,
+          "name": "Warmbad-Judendorf",
+          "x": 31,
+          "y": 75
         },
         {
-          "type": "map",
-          "prompt": "Tippe auf <b>Völkendorf</b> auf der Karte! 🗺️",
-          "target": 6,
-          "grp": "find"
+          "n": 6,
+          "name": "Völkendorf",
+          "x": 53,
+          "y": 41.5
         },
         {
-          "type": "map",
-          "prompt": "Tippe auf <b>St. Martin</b> auf der Karte! 🗺️",
-          "target": 7,
-          "grp": "find"
+          "n": 7,
+          "name": "St. Martin",
+          "x": 49.5,
+          "y": 19
         }
-      ]
-    },
-    {
-      "id": "uebersicht-schreiben",
-      "n": 0,
-      "name": "Stadtteile schreiben",
-      "icon": "✍️",
-      "requires": "uebersicht-karte",
-      "sticker": {
-        "emoji": "📝",
-        "title": "Alle Stadtteile geschrieben!"
-      },
-      "questions": [
+      ],
+      "lessons": [
         {
-          "type": "type",
-          "prompt": "Wie heißt der Stadtteil <b>Nr. 1</b>? ✍️",
-          "highlight": 1,
-          "accept": [
-            "lind"
-          ],
-          "placeholder": "Stadtteil eintippen…",
-          "grp": "w1"
-        },
-        {
-          "type": "type",
-          "prompt": "Wie heißt der Stadtteil <b>Nr. 2</b>? ✍️",
-          "highlight": 2,
-          "accept": [
-            "seebach-wasenboden",
-            "seebach wasenboden"
-          ],
-          "placeholder": "Stadtteil eintippen…",
-          "grp": "w1"
-        },
-        {
-          "type": "type",
-          "prompt": "Wie heißt der Stadtteil <b>Nr. 3</b>? ✍️",
-          "highlight": 3,
-          "accept": [
-            "st. agathen und perau",
-            "st agathen und perau"
-          ],
-          "placeholder": "Stadtteil eintippen…",
-          "grp": "w1"
-        },
-        {
-          "type": "type",
-          "prompt": "Wie heißt der Stadtteil <b>Nr. 4</b>? ✍️",
-          "highlight": 4,
-          "accept": [
-            "auen"
-          ],
-          "placeholder": "Stadtteil eintippen…",
-          "grp": "w1"
-        },
-        {
-          "type": "type",
-          "prompt": "Wie heißt der Stadtteil <b>Nr. 5</b>? ✍️",
-          "highlight": 5,
-          "accept": [
-            "warmbad-judendorf",
-            "warmbad judendorf"
-          ],
-          "placeholder": "Stadtteil eintippen…",
-          "grp": "w1"
-        },
-        {
-          "type": "type",
-          "prompt": "Wie heißt der Stadtteil <b>Nr. 6</b>? ✍️",
-          "highlight": 6,
-          "accept": [
-            "völkendorf",
-            "voelkendorf"
-          ],
-          "placeholder": "Stadtteil eintippen…",
-          "grp": "w1"
-        },
-        {
-          "type": "type",
-          "prompt": "Wie heißt der Stadtteil <b>Nr. 7</b>? ✍️",
-          "highlight": 7,
-          "accept": [
-            "st. martin",
-            "st martin"
-          ],
-          "placeholder": "Stadtteil eintippen…",
-          "grp": "w1"
-        },
-        {
-          "type": "fillall",
-          "prompt": "Schreibe alle Stadtteile auf! ✍️",
-          "items": [
+          "id": "uebersicht-karte",
+          "n": 0,
+          "name": "Stadtteile finden",
+          "icon": "🗺️",
+          "sticker": {
+            "emoji": "🧭",
+            "title": "Stadtteil-Karte gemeistert!"
+          },
+          "questions": [
             {
-              "name": "Lind",
+              "type": "map",
+              "prompt": "Tippe auf <b>Lind</b> auf der Karte! 🗺️",
+              "target": 1,
+              "grp": "find"
+            },
+            {
+              "type": "map",
+              "prompt": "Tippe auf <b>Seebach-Wasenboden</b> auf der Karte! 🗺️",
+              "target": 2,
+              "grp": "find"
+            },
+            {
+              "type": "map",
+              "prompt": "Tippe auf <b>St. Agathen und Perau</b> auf der Karte! 🗺️",
+              "target": 3,
+              "grp": "find"
+            },
+            {
+              "type": "map",
+              "prompt": "Tippe auf <b>Auen</b> auf der Karte! 🗺️",
+              "target": 4,
+              "grp": "find"
+            },
+            {
+              "type": "map",
+              "prompt": "Tippe auf <b>Warmbad-Judendorf</b> auf der Karte! 🗺️",
+              "target": 5,
+              "grp": "find"
+            },
+            {
+              "type": "map",
+              "prompt": "Tippe auf <b>Völkendorf</b> auf der Karte! 🗺️",
+              "target": 6,
+              "grp": "find"
+            },
+            {
+              "type": "map",
+              "prompt": "Tippe auf <b>St. Martin</b> auf der Karte! 🗺️",
+              "target": 7,
+              "grp": "find"
+            }
+          ]
+        },
+        {
+          "id": "uebersicht-schreiben",
+          "n": 0,
+          "name": "Stadtteile schreiben",
+          "icon": "✍️",
+          "sticker": {
+            "emoji": "📝",
+            "title": "Alle Stadtteile geschrieben!"
+          },
+          "questions": [
+            {
+              "type": "type",
+              "prompt": "Wie heißt der Stadtteil <b>Nr. 1</b>? ✍️",
+              "highlight": 1,
               "accept": [
                 "lind"
               ],
-              "prefix": "L"
+              "placeholder": "Stadtteil eintippen…",
+              "grp": "w1"
             },
             {
-              "name": "Seebach-Wasenboden",
+              "type": "type",
+              "prompt": "Wie heißt der Stadtteil <b>Nr. 2</b>? ✍️",
+              "highlight": 2,
               "accept": [
                 "seebach-wasenboden",
                 "seebach wasenboden"
               ],
-              "prefix": "S"
+              "placeholder": "Stadtteil eintippen…",
+              "grp": "w1"
             },
             {
-              "name": "St. Agathen und Perau",
+              "type": "type",
+              "prompt": "Wie heißt der Stadtteil <b>Nr. 3</b>? ✍️",
+              "highlight": 3,
               "accept": [
                 "st. agathen und perau",
                 "st agathen und perau"
               ],
-              "prefix": "S"
+              "placeholder": "Stadtteil eintippen…",
+              "grp": "w1"
             },
             {
-              "name": "Auen",
+              "type": "type",
+              "prompt": "Wie heißt der Stadtteil <b>Nr. 4</b>? ✍️",
+              "highlight": 4,
               "accept": [
                 "auen"
               ],
-              "prefix": "A"
+              "placeholder": "Stadtteil eintippen…",
+              "grp": "w1"
             },
             {
-              "name": "Warmbad-Judendorf",
+              "type": "type",
+              "prompt": "Wie heißt der Stadtteil <b>Nr. 5</b>? ✍️",
+              "highlight": 5,
               "accept": [
                 "warmbad-judendorf",
                 "warmbad judendorf"
               ],
-              "prefix": "W"
+              "placeholder": "Stadtteil eintippen…",
+              "grp": "w1"
             },
             {
-              "name": "Völkendorf",
+              "type": "type",
+              "prompt": "Wie heißt der Stadtteil <b>Nr. 6</b>? ✍️",
+              "highlight": 6,
               "accept": [
                 "völkendorf",
                 "voelkendorf"
               ],
-              "prefix": "V"
+              "placeholder": "Stadtteil eintippen…",
+              "grp": "w1"
             },
             {
-              "name": "St. Martin",
+              "type": "type",
+              "prompt": "Wie heißt der Stadtteil <b>Nr. 7</b>? ✍️",
+              "highlight": 7,
               "accept": [
                 "st. martin",
                 "st martin"
               ],
-              "prefix": "S"
+              "placeholder": "Stadtteil eintippen…",
+              "grp": "w1"
+            },
+            {
+              "type": "fillall",
+              "prompt": "Schreibe alle Stadtteile auf! ✍️",
+              "items": [
+                {
+                  "name": "Lind",
+                  "accept": [
+                    "lind"
+                  ],
+                  "prefix": "L"
+                },
+                {
+                  "name": "Seebach-Wasenboden",
+                  "accept": [
+                    "seebach-wasenboden",
+                    "seebach wasenboden"
+                  ],
+                  "prefix": "S"
+                },
+                {
+                  "name": "St. Agathen und Perau",
+                  "accept": [
+                    "st. agathen und perau",
+                    "st agathen und perau"
+                  ],
+                  "prefix": "S"
+                },
+                {
+                  "name": "Auen",
+                  "accept": [
+                    "auen"
+                  ],
+                  "prefix": "A"
+                },
+                {
+                  "name": "Warmbad-Judendorf",
+                  "accept": [
+                    "warmbad-judendorf",
+                    "warmbad judendorf"
+                  ],
+                  "prefix": "W"
+                },
+                {
+                  "name": "Völkendorf",
+                  "accept": [
+                    "völkendorf",
+                    "voelkendorf"
+                  ],
+                  "prefix": "V"
+                },
+                {
+                  "name": "St. Martin",
+                  "accept": [
+                    "st. martin",
+                    "st martin"
+                  ],
+                  "prefix": "S"
+                }
+              ]
             }
           ]
+        },
+        {
+          "id": "lind",
+          "n": 1,
+          "name": "Lind",
+          "icon": "🏙️",
+          "color": "#7ec8e3",
+          "sticker": {
+            "emoji": "🏟️",
+            "title": "Sport-Stadion Lind freigeschaltet!"
+          },
+          "questions": [
+            {
+              "type": "map",
+              "prompt": "Tippe auf <b>Lind</b> auf der Karte! 🗺️",
+              "target": 1,
+              "hint": "Lind liegt im Norden – nördlich vom Hauptbahnhof."
+            },
+            {
+              "type": "choice",
+              "prompt": "Wo liegt <b>Lind</b>? 🧭",
+              "options": [
+                "Nördlich des Hauptbahnhofs",
+                "Im Warmbad",
+                "Am Faaker See",
+                "Südlich der Drau"
+              ],
+              "answer": 0
+            },
+            {
+              "type": "type",
+              "prompt": "Schreibe den Namen von Stadtteil <b>Nr. 1</b>: ✍️",
+              "highlight": 1,
+              "accept": [
+                "lind"
+              ],
+              "placeholder": "Stadtteil eintippen…",
+              "hint": "4 Buchstaben, beginnt mit L."
+            },
+            {
+              "type": "choice",
+              "prompt": "Welches große Technologie-Unternehmen ist in Lind? 💻",
+              "options": [
+                "Lam Research",
+                "Infineon",
+                "Red Bull",
+                "Magna"
+              ],
+              "answer": 0
+            },
+            {
+              "type": "match",
+              "prompt": "Verbinde, was es in <b>Lind</b> gibt! 🔗",
+              "pairs": [
+                {
+                  "left": "🏟️",
+                  "right": "Sport-Stadion"
+                },
+                {
+                  "left": "🏫",
+                  "right": "HAK/HAS"
+                },
+                {
+                  "left": "💻",
+                  "right": "Lam Research"
+                },
+                {
+                  "left": "⚽",
+                  "right": "Ballspielhalle"
+                }
+              ]
+            },
+            {
+              "type": "collect",
+              "prompt": "In <b>Lind</b> gibt es noch mehr! Ergänze, was fehlt. 🏙️",
+              "given": [
+                {
+                  "symbol": "🏟️",
+                  "name": "Sport-Stadion"
+                },
+                {
+                  "symbol": "⚽",
+                  "name": "Ballspielhalle"
+                },
+                {
+                  "symbol": "💻",
+                  "name": "Lam Research"
+                },
+                {
+                  "symbol": "🏫",
+                  "name": "HAK/HAS"
+                }
+              ],
+              "blanks": [
+                {
+                  "symbol": "🎒",
+                  "name": "Volksschule",
+                  "accept": [
+                    "volksschule",
+                    "vs"
+                  ]
+                },
+                {
+                  "symbol": "🧸",
+                  "name": "Kindergarten",
+                  "accept": [
+                    "kindergarten",
+                    "kiga"
+                  ]
+                },
+                {
+                  "symbol": "🤸",
+                  "name": "Sport-MS",
+                  "accept": [
+                    "sport-ms",
+                    "sport ms",
+                    "sportms",
+                    "sport-mittelschule",
+                    "sport mittelschule",
+                    "sportmittelschule"
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "choice",
+              "prompt": "Wie <b>groß</b> ist Lind? 📏",
+              "options": [
+                "Einer der größeren Stadtteile",
+                "Der kleinste Stadtteil",
+                "Eine kleine Insel",
+                "Nur ein Park"
+              ],
+              "answer": 0
+            },
+            {
+              "type": "type",
+              "prompt": "Schreibe das Technologie-Unternehmen richtig: 💻",
+              "accept": [
+                "lam research"
+              ],
+              "placeholder": "Firmenname eintippen…",
+              "hint": "Zwei Wörter: „Lam …“ (engl. für Forschung)."
+            }
+          ]
+        },
+        {
+          "id": "seebach",
+          "n": 2,
+          "name": "Seebach-Wasenboden",
+          "icon": "🚉",
+          "color": "#cfcfcf",
+          "sticker": {
+            "emoji": "🚉",
+            "title": "Hauptbahnhof-Sticker freigeschaltet!"
+          },
+          "questions": [
+            {
+              "type": "map",
+              "prompt": "Tippe auf <b>Seebach-Wasenboden</b>! 🗺️",
+              "target": 2,
+              "hint": "Liegt nordöstlich der Innenstadt, gleich bei der Drau."
+            },
+            {
+              "type": "choice",
+              "prompt": "Welcher wichtige Bahnhof liegt hier? 🚉",
+              "options": [
+                "Hauptbahnhof",
+                "Westbahnhof",
+                "Seebahnhof",
+                "Faaker Bahnhof"
+              ],
+              "answer": 0
+            },
+            {
+              "type": "type",
+              "prompt": "Schreibe den Namen von Stadtteil <b>Nr. 2</b>: ✍️",
+              "highlight": 2,
+              "accept": [
+                "seebach-wasenboden",
+                "seebach wasenboden"
+              ],
+              "placeholder": "Stadtteil eintippen…",
+              "hint": "Doppelname mit Bindestrich: „Seebach-…“."
+            },
+            {
+              "type": "choice",
+              "prompt": "Welche Behörde ist in Seebach-Wasenboden? 👮",
+              "options": [
+                "Landespolizeidirektion",
+                "Rathaus",
+                "Bezirksgericht",
+                "Finanzamt"
+              ],
+              "answer": 0
+            },
+            {
+              "type": "match",
+              "prompt": "Verbinde, was es hier gibt! 🔗",
+              "pairs": [
+                {
+                  "left": "⚰️",
+                  "right": "Zentral-Friedhof"
+                },
+                {
+                  "left": "🛹",
+                  "right": "Skatepark"
+                },
+                {
+                  "left": "🚉",
+                  "right": "Hauptbahnhof"
+                },
+                {
+                  "left": "🪖",
+                  "right": "Rohrkaserne"
+                }
+              ]
+            },
+            {
+              "type": "collect",
+              "prompt": "In <b>Seebach-Wasenboden</b> gibt es noch mehr! Ergänze, was fehlt. 🚉",
+              "given": [
+                {
+                  "symbol": "🚉",
+                  "name": "Hauptbahnhof"
+                },
+                {
+                  "symbol": "🪖",
+                  "name": "Rohrkaserne"
+                },
+                {
+                  "symbol": "👮",
+                  "name": "Landespolizeidirektion"
+                },
+                {
+                  "symbol": "⚰️",
+                  "name": "Zentral-Friedhof"
+                },
+                {
+                  "symbol": "🛹",
+                  "name": "Skatepark"
+                }
+              ],
+              "blanks": [
+                {
+                  "symbol": "🧸",
+                  "name": "Kindergarten Tratten",
+                  "accept": [
+                    "kindergarten tratten",
+                    "kiga tratten",
+                    "kindergarten-tratten"
+                  ]
+                },
+                {
+                  "symbol": "🎒",
+                  "name": "Volksschule",
+                  "accept": [
+                    "volksschule",
+                    "vs"
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "cloze",
+              "prompt": "Ergänze die Lücken im Satz! 📝",
+              "segments": [
+                {
+                  "text": "In Seebach-Wasenboden gibt es ein großes "
+                },
+                {
+                  "blank": {
+                    "name": "Naherholungsgebiet",
+                    "accept": [
+                      "naherholungsgebiet",
+                      "naherholungs-gebiet"
+                    ],
+                    "placeholder": "…"
+                  }
+                },
+                {
+                  "text": ". Dort liegt der "
+                },
+                {
+                  "blank": {
+                    "name": "größte Spielplatz",
+                    "accept": [
+                      "größte spielplatz",
+                      "grösste spielplatz",
+                      "groesste spielplatz",
+                      "größten spielplatz",
+                      "größter spielplatz",
+                      "spielplatz"
+                    ],
+                    "placeholder": "…"
+                  }
+                },
+                {
+                  "text": " Villachs und ein "
+                },
+                {
+                  "blank": {
+                    "name": "Skatepark",
+                    "accept": [
+                      "skatepark",
+                      "skaterpark"
+                    ],
+                    "placeholder": "…"
+                  }
+                },
+                {
+                  "text": "."
+                }
+              ]
+            },
+            {
+              "type": "choice",
+              "prompt": "Wo liegt Seebach-Wasenboden? 🧭",
+              "options": [
+                "Nordöstlich der Innenstadt",
+                "Im Süden am Berg",
+                "Am Ossiacher See",
+                "Westlich vom Warmbad"
+              ],
+              "answer": 0
+            },
+            {
+              "type": "type",
+              "prompt": "Wie heißt der große Ort in Seebach mit den vielen Gräbern? ⚰️",
+              "accept": [
+                "zentral-friedhof",
+                "zentralfriedhof",
+                "zentral friedhof"
+              ],
+              "placeholder": "Antwort eintippen…",
+              "hint": "„Zentral-…“ – wo Villach seine Verstorbenen bestattet."
+            }
+          ]
+        },
+        {
+          "id": "stagathen",
+          "n": 3,
+          "name": "St. Agathen und Perau",
+          "icon": "🎬",
+          "questions": [
+            {
+              "type": "map",
+              "prompt": "Tippe auf <b>St. Agathen und Perau</b> auf der Karte! 🗺️",
+              "target": 3
+            },
+            {
+              "type": "choice",
+              "prompt": "Wo liegt <b>St. Agathen und Perau</b>? 🧭",
+              "options": [
+                "Östlich der Innenstadt",
+                "Im Süden am Berg",
+                "Am Faaker See",
+                "Westlich vom Warmbad"
+              ],
+              "answer": 0
+            },
+            {
+              "type": "type",
+              "prompt": "Wie heißt der Stadtteil <b>Nr. 3</b>? ✍️",
+              "highlight": 3,
+              "accept": [
+                "st. agathen und perau",
+                "st agathen und perau"
+              ],
+              "placeholder": "Stadtteil eintippen…"
+            },
+            {
+              "type": "choice",
+              "prompt": "Welches Kino wurde in <b>St. Agathen und Perau</b> neu gebaut? 🎬",
+              "options": [
+                "Cineplexx",
+                "Megaplex",
+                "Cinecity",
+                "UCI Kino"
+              ],
+              "answer": 0
+            },
+            {
+              "type": "choice",
+              "prompt": "Wie heißt das Einkaufszentrum in <b>St. Agathen und Perau</b>? 🛍️",
+              "options": [
+                "Neukauf",
+                "Atrio",
+                "City Park",
+                "Südpark"
+              ],
+              "answer": 0
+            },
+            {
+              "type": "match",
+              "prompt": "Verbinde, was es in <b>St. Agathen und Perau</b> gibt! 🔗",
+              "pairs": [
+                {
+                  "left": "🎬",
+                  "right": "Cineplexx"
+                },
+                {
+                  "left": "🎳",
+                  "right": "Bowling-Center"
+                },
+                {
+                  "left": "🛍️",
+                  "right": "Neukauf"
+                },
+                {
+                  "left": "🧸",
+                  "right": "2 Kindergärten"
+                }
+              ]
+            },
+            {
+              "type": "cloze",
+              "prompt": "Ergänze die Lücken im Satz! 📝",
+              "segments": [
+                {
+                  "text": "Die beiden Kindergärten heißen "
+                },
+                {
+                  "blank": {
+                    "name": "Purzelini",
+                    "accept": [
+                      "purzelini"
+                    ],
+                    "placeholder": "…"
+                  }
+                },
+                {
+                  "text": " und "
+                },
+                {
+                  "blank": {
+                    "name": "Perau",
+                    "accept": [
+                      "perau"
+                    ],
+                    "placeholder": "…"
+                  }
+                },
+                {
+                  "text": "."
+                }
+              ]
+            }
+          ],
+          "sticker": {
+            "emoji": "🎬",
+            "title": "Cineplexx-Kino freigeschaltet!"
+          }
+        },
+        {
+          "id": "auen",
+          "n": 4,
+          "name": "Auen",
+          "icon": "🏭",
+          "questions": [
+            {
+              "type": "map",
+              "prompt": "Tippe auf <b>Auen</b> auf der Karte! 🗺️",
+              "target": 4
+            },
+            {
+              "type": "choice",
+              "prompt": "Wo liegt <b>Auen</b>? 🧭",
+              "options": [
+                "Südöstlich der Innenstadt",
+                "Nördlich vom Bahnhof",
+                "Am Ossiacher See",
+                "Auf einem Berg"
+              ],
+              "answer": 0
+            },
+            {
+              "type": "type",
+              "prompt": "Wie heißt der Stadtteil <b>Nr. 4</b>? ✍️",
+              "highlight": 4,
+              "accept": [
+                "auen"
+              ],
+              "placeholder": "Stadtteil eintippen…"
+            },
+            {
+              "type": "choice",
+              "prompt": "Was ist das Besondere an <b>Auen</b>? 📏",
+              "options": [
+                "Es ist der zweitgrößte Stadtteil",
+                "Es ist der größte Stadtteil",
+                "Es ist der kleinste Stadtteil",
+                "Es ist eine Insel"
+              ],
+              "answer": 0
+            },
+            {
+              "type": "choice",
+              "prompt": "Welcher große Arbeitgeber ist in <b>Auen</b>? 🏭",
+              "options": [
+                "Infineon",
+                "Lam Research",
+                "Red Bull",
+                "Magna"
+              ],
+              "answer": 0
+            },
+            {
+              "type": "match",
+              "prompt": "Verbinde, was es in <b>Auen</b> gibt! 🔗",
+              "pairs": [
+                {
+                  "left": "🏭",
+                  "right": "Infineon"
+                },
+                {
+                  "left": "🛍️",
+                  "right": "Atrio"
+                },
+                {
+                  "left": "🚗",
+                  "right": "Autohäuser & Großhandel"
+                }
+              ]
+            },
+            {
+              "type": "collect",
+              "prompt": "In <b>Auen</b> gibt es noch mehr! Ergänze, was fehlt. 🏭",
+              "given": [
+                {
+                  "symbol": "🏭",
+                  "name": "Infineon"
+                },
+                {
+                  "symbol": "🛍️",
+                  "name": "Atrio"
+                },
+                {
+                  "symbol": "🚗",
+                  "name": "Autohäuser & Großhandel"
+                }
+              ],
+              "blanks": [
+                {
+                  "symbol": "🎒",
+                  "name": "Volksschule",
+                  "accept": [
+                    "volksschule",
+                    "vs"
+                  ]
+                },
+                {
+                  "symbol": "🏫",
+                  "name": "Mittelschule",
+                  "accept": [
+                    "mittelschule",
+                    "ms"
+                  ]
+                },
+                {
+                  "symbol": "🎓",
+                  "name": "HTL",
+                  "accept": [
+                    "htl"
+                  ]
+                }
+              ]
+            }
+          ],
+          "sticker": {
+            "emoji": "🏭",
+            "title": "Infineon-Sticker freigeschaltet!"
+          }
+        },
+        {
+          "id": "warmbad",
+          "n": 5,
+          "name": "Warmbad-Judendorf",
+          "icon": "♨️",
+          "questions": [
+            {
+              "type": "map",
+              "prompt": "Tippe auf <b>Warmbad-Judendorf</b> auf der Karte! 🗺️",
+              "target": 5
+            },
+            {
+              "type": "choice",
+              "prompt": "Wo liegt <b>Warmbad-Judendorf</b>? 🧭",
+              "options": [
+                "Südwestlich der Innenstadt",
+                "Nördlich vom Bahnhof",
+                "Mitten in der Altstadt",
+                "Am Faaker See"
+              ],
+              "answer": 0
+            },
+            {
+              "type": "type",
+              "prompt": "Wie heißt der Stadtteil <b>Nr. 5</b>? ✍️",
+              "highlight": 5,
+              "accept": [
+                "warmbad-judendorf",
+                "warmbad judendorf"
+              ],
+              "placeholder": "Stadtteil eintippen…"
+            },
+            {
+              "type": "choice",
+              "prompt": "Was für ein Viertel ist <b>Warmbad-Judendorf</b>? 🏛️",
+              "options": [
+                "Ein historisch interessantes Viertel",
+                "Ein Industriegebiet",
+                "Ein Bahnhofsviertel",
+                "Eine kleine Insel"
+              ],
+              "answer": 0
+            },
+            {
+              "type": "choice",
+              "prompt": "Welche große Therme gibt es in <b>Warmbad</b>? ♨️",
+              "options": [
+                "KärntenTherme",
+                "Therme Wien",
+                "AQUA DOME",
+                "Tauern Spa"
+              ],
+              "answer": 0
+            },
+            {
+              "type": "match",
+              "prompt": "Verbinde, was es in <b>Warmbad-Judendorf</b> gibt! 🔗",
+              "pairs": [
+                {
+                  "left": "♨️",
+                  "right": "KärntenTherme"
+                },
+                {
+                  "left": "💧",
+                  "right": "Maibachl"
+                },
+                {
+                  "left": "🌳",
+                  "right": "Napoleonwiese"
+                },
+                {
+                  "left": "🎾",
+                  "right": "Sportpark Tennis"
+                },
+                {
+                  "left": "🚸",
+                  "right": "ÖAMTC-Verkehrsgarten"
+                }
+              ]
+            },
+            {
+              "type": "collect",
+              "prompt": "In <b>Warmbad-Judendorf</b> gibt es noch mehr! Ergänze, was fehlt. ♨️",
+              "given": [
+                {
+                  "symbol": "♨️",
+                  "name": "KärntenTherme"
+                },
+                {
+                  "symbol": "💧",
+                  "name": "Maibachl"
+                },
+                {
+                  "symbol": "🌳",
+                  "name": "Napoleonwiese"
+                },
+                {
+                  "symbol": "🎾",
+                  "name": "Sportpark Tennis"
+                },
+                {
+                  "symbol": "🚸",
+                  "name": "ÖAMTC-Verkehrsgarten"
+                }
+              ],
+              "blanks": [
+                {
+                  "symbol": "🐴",
+                  "name": "Reitstall",
+                  "accept": [
+                    "reitstall"
+                  ]
+                },
+                {
+                  "symbol": "🏥",
+                  "name": "Privatklinik",
+                  "accept": [
+                    "privatklinik"
+                  ]
+                },
+                {
+                  "symbol": "🩺",
+                  "name": "Kurzentrum",
+                  "accept": [
+                    "kurzentrum",
+                    "kur-zentrum"
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "choice",
+              "prompt": "Für welche Branche gibt es in <b>Warmbad-Judendorf</b> besondere Schulen? 🏫",
+              "options": [
+                "Tourismus",
+                "Technik",
+                "Landwirtschaft",
+                "Kunst"
+              ],
+              "answer": 0
+            }
+          ],
+          "sticker": {
+            "emoji": "♨️",
+            "title": "KärntenTherme freigeschaltet!"
+          }
+        },
+        {
+          "id": "voelkendorf",
+          "n": 6,
+          "name": "Völkendorf",
+          "icon": "🏟️",
+          "questions": [
+            {
+              "type": "map",
+              "prompt": "Tippe auf <b>Völkendorf</b> auf der Karte! 🗺️",
+              "target": 6
+            },
+            {
+              "type": "choice",
+              "prompt": "Wo liegt <b>Völkendorf</b>? 🧭",
+              "options": [
+                "Westlich der Innenstadt",
+                "Östlich vom Bahnhof",
+                "Am Faaker See",
+                "Im Süden am Berg"
+              ],
+              "answer": 0
+            },
+            {
+              "type": "type",
+              "prompt": "Wie heißt der Stadtteil <b>Nr. 6</b>? ✍️",
+              "highlight": 6,
+              "accept": [
+                "völkendorf",
+                "voelkendorf"
+              ],
+              "placeholder": "Stadtteil eintippen…"
+            },
+            {
+              "type": "choice",
+              "prompt": "Welche große Halle gibt es in <b>Völkendorf</b>? 🏟️",
+              "options": [
+                "Villacher Stadthalle",
+                "Olympiahalle",
+                "Messehalle",
+                "Stadtsaal"
+              ],
+              "answer": 0
+            },
+            {
+              "type": "choice",
+              "prompt": "Was kann man in der Villacher Stadthalle erleben? 🏒",
+              "options": [
+                "Eishockey und Konzerte",
+                "Autorennen",
+                "Skispringen",
+                "Pferderennen"
+              ],
+              "answer": 0
+            },
+            {
+              "type": "match",
+              "prompt": "Verbinde, was es in <b>Völkendorf</b> gibt! 🔗",
+              "pairs": [
+                {
+                  "left": "🏟️",
+                  "right": "Villacher Stadthalle"
+                },
+                {
+                  "left": "💻",
+                  "right": "Mittelschule (Informatik)"
+                },
+                {
+                  "left": "🎓",
+                  "right": "Fachberufsschule"
+                },
+                {
+                  "left": "🚴",
+                  "right": "Wander- & Radwege"
+                }
+              ]
+            },
+            {
+              "type": "collect",
+              "prompt": "In <b>Völkendorf</b> gibt es noch mehr! Ergänze, was fehlt. 🏟️",
+              "given": [
+                {
+                  "symbol": "🏟️",
+                  "name": "Villacher Stadthalle"
+                },
+                {
+                  "symbol": "💻",
+                  "name": "Mittelschule (Informatik)"
+                },
+                {
+                  "symbol": "🎓",
+                  "name": "Fachberufsschule"
+                },
+                {
+                  "symbol": "🚴",
+                  "name": "Wander- & Radwege"
+                }
+              ],
+              "blanks": [
+                {
+                  "symbol": "🎒",
+                  "name": "Volksschule",
+                  "accept": [
+                    "volksschule",
+                    "vs"
+                  ]
+                },
+                {
+                  "symbol": "🧸",
+                  "name": "2 Kindergärten",
+                  "accept": [
+                    "2 kindergärten",
+                    "2 kindergaerten",
+                    "zwei kindergärten",
+                    "kindergärten",
+                    "kindergaerten",
+                    "2 kindergarten"
+                  ]
+                },
+                {
+                  "symbol": "🩺",
+                  "name": "viele Ärzte",
+                  "accept": [
+                    "viele ärzte",
+                    "ärzte",
+                    "aerzte",
+                    "viele aerzte"
+                  ]
+                }
+              ]
+            }
+          ],
+          "sticker": {
+            "emoji": "🏟️",
+            "title": "Villacher Stadthalle freigeschaltet!"
+          }
+        },
+        {
+          "id": "stmartin",
+          "n": 7,
+          "name": "St. Martin",
+          "icon": "⛪",
+          "questions": [
+            {
+              "type": "map",
+              "prompt": "Tippe auf <b>St. Martin</b> auf der Karte! 🗺️",
+              "target": 7
+            },
+            {
+              "type": "choice",
+              "prompt": "Wo liegt <b>St. Martin</b>? 🧭",
+              "options": [
+                "Nordwestlich der Innenstadt",
+                "Südlich der Drau",
+                "Am Ossiacher See",
+                "Mitten in der Altstadt"
+              ],
+              "answer": 0
+            },
+            {
+              "type": "type",
+              "prompt": "Wie heißt der Stadtteil <b>Nr. 7</b>? ✍️",
+              "highlight": 7,
+              "accept": [
+                "st. martin",
+                "st martin"
+              ],
+              "placeholder": "Stadtteil eintippen…"
+            },
+            {
+              "type": "choice",
+              "prompt": "Welche höhere Schule gibt es in <b>St. Martin</b>? 🎓",
+              "options": [
+                "Gymnasium St. Martin",
+                "HTL",
+                "Tourismusschule",
+                "Handelsakademie"
+              ],
+              "answer": 0
+            },
+            {
+              "type": "choice",
+              "prompt": "Welche besondere Sporthalle gibt es in <b>St. Martin</b>? 🤺",
+              "options": [
+                "Eine Fechthalle",
+                "Eine Boxhalle",
+                "Eine Kletterhalle",
+                "Eine Eishalle"
+              ],
+              "answer": 0
+            },
+            {
+              "type": "match",
+              "prompt": "Verbinde, was es in <b>St. Martin</b> gibt! 🔗",
+              "pairs": [
+                {
+                  "left": "🤺",
+                  "right": "Fechthalle"
+                },
+                {
+                  "left": "🤸",
+                  "right": "Motorikpark"
+                },
+                {
+                  "left": "🏃",
+                  "right": "Sportzentrum"
+                },
+                {
+                  "left": "🌳",
+                  "right": "Parks"
+                }
+              ]
+            },
+            {
+              "type": "collect",
+              "prompt": "In <b>St. Martin</b> gibt es noch mehr! Ergänze, was fehlt. ⛪",
+              "given": [
+                {
+                  "symbol": "🎓",
+                  "name": "Gymnasium St. Martin"
+                },
+                {
+                  "symbol": "🤺",
+                  "name": "Fechthalle"
+                },
+                {
+                  "symbol": "🤸",
+                  "name": "Motorikpark"
+                },
+                {
+                  "symbol": "🏃",
+                  "name": "Sportzentrum"
+                },
+                {
+                  "symbol": "🌳",
+                  "name": "Parks"
+                }
+              ],
+              "blanks": [
+                {
+                  "symbol": "🎒",
+                  "name": "Volksschule",
+                  "accept": [
+                    "volksschule",
+                    "vs"
+                  ]
+                },
+                {
+                  "symbol": "🧸",
+                  "name": "2 Kindergärten",
+                  "accept": [
+                    "2 kindergärten",
+                    "2 kindergaerten",
+                    "zwei kindergärten",
+                    "kindergärten",
+                    "kindergaerten",
+                    "2 kindergarten"
+                  ]
+                }
+              ]
+            }
+          ],
+          "sticker": {
+            "emoji": "🤺",
+            "title": "Fechthalle freigeschaltet!"
+          }
+        },
+        {
+          "id": "stadtteile-quiz",
+          "name": "Großes Quiz",
+          "icon": "🏆",
+          "quiz": true,
+          "quizCount": 12,
+          "sticker": {
+            "emoji": "🏆",
+            "title": "Quiz-Meister!"
+          }
         }
       ]
     },
     {
-      "id": "lind",
-      "n": 1,
-      "name": "Lind",
-      "icon": "🏙️",
-      "color": "#7ec8e3",
-      "sticker": {
-        "emoji": "🏟️",
-        "title": "Sport-Stadion Lind freigeschaltet!"
-      },
-      "questions": [
-        {
-          "type": "map",
-          "prompt": "Tippe auf <b>Lind</b> auf der Karte! 🗺️",
-          "target": 1,
-          "hint": "Lind liegt im Norden – nördlich vom Hauptbahnhof."
-        },
-        {
-          "type": "choice",
-          "prompt": "Wo liegt <b>Lind</b>? 🧭",
-          "options": [
-            "Nördlich des Hauptbahnhofs",
-            "Im Warmbad",
-            "Am Faaker See",
-            "Südlich der Drau"
-          ],
-          "answer": 0
-        },
-        {
-          "type": "type",
-          "prompt": "Schreibe den Namen von Stadtteil <b>Nr. 1</b>: ✍️",
-          "highlight": 1,
-          "accept": [
-            "lind"
-          ],
-          "placeholder": "Stadtteil eintippen…",
-          "hint": "4 Buchstaben, beginnt mit L."
-        },
-        {
-          "type": "choice",
-          "prompt": "Welches große Technologie-Unternehmen ist in Lind? 💻",
-          "options": [
-            "Lam Research",
-            "Infineon",
-            "Red Bull",
-            "Magna"
-          ],
-          "answer": 0
-        },
-        {
-          "type": "match",
-          "prompt": "Verbinde, was es in <b>Lind</b> gibt! 🔗",
-          "pairs": [
-            {
-              "left": "🏟️",
-              "right": "Sport-Stadion"
-            },
-            {
-              "left": "🏫",
-              "right": "HAK/HAS"
-            },
-            {
-              "left": "💻",
-              "right": "Lam Research"
-            },
-            {
-              "left": "⚽",
-              "right": "Ballspielhalle"
-            }
-          ]
-        },
-        {
-          "type": "collect",
-          "prompt": "In <b>Lind</b> gibt es noch mehr! Ergänze, was fehlt. 🏙️",
-          "given": [
-            {
-              "symbol": "🏟️",
-              "name": "Sport-Stadion"
-            },
-            {
-              "symbol": "⚽",
-              "name": "Ballspielhalle"
-            },
-            {
-              "symbol": "💻",
-              "name": "Lam Research"
-            },
-            {
-              "symbol": "🏫",
-              "name": "HAK/HAS"
-            }
-          ],
-          "blanks": [
-            {
-              "symbol": "🎒",
-              "name": "Volksschule",
-              "accept": [
-                "volksschule",
-                "vs"
-              ]
-            },
-            {
-              "symbol": "🧸",
-              "name": "Kindergarten",
-              "accept": [
-                "kindergarten",
-                "kiga"
-              ]
-            },
-            {
-              "symbol": "🤸",
-              "name": "Sport-MS",
-              "accept": [
-                "sport-ms",
-                "sport ms",
-                "sportms",
-                "sport-mittelschule",
-                "sport mittelschule",
-                "sportmittelschule"
-              ]
-            }
-          ]
-        },
-        {
-          "type": "choice",
-          "prompt": "Wie <b>groß</b> ist Lind? 📏",
-          "options": [
-            "Einer der größeren Stadtteile",
-            "Der kleinste Stadtteil",
-            "Eine kleine Insel",
-            "Nur ein Park"
-          ],
-          "answer": 0
-        },
-        {
-          "type": "type",
-          "prompt": "Schreibe das Technologie-Unternehmen richtig: 💻",
-          "accept": [
-            "lam research"
-          ],
-          "placeholder": "Firmenname eintippen…",
-          "hint": "Zwei Wörter: „Lam …“ (engl. für Forschung)."
-        }
-      ],
-      "requires": "uebersicht-schreiben",
-      "mask": true
+      "id": "vororte",
+      "name": "Vororte",
+      "icon": "🏡",
+      "iconBg": "var(--yellow)",
+      "subtitle": "Äußere Stadtteile",
+      "lessons": []
     },
     {
-      "id": "seebach",
-      "n": 2,
-      "name": "Seebach-Wasenboden",
-      "icon": "🚉",
-      "color": "#cfcfcf",
-      "sticker": {
-        "emoji": "🚉",
-        "title": "Hauptbahnhof-Sticker freigeschaltet!"
-      },
-      "questions": [
-        {
-          "type": "map",
-          "prompt": "Tippe auf <b>Seebach-Wasenboden</b>! 🗺️",
-          "target": 2,
-          "hint": "Liegt nordöstlich der Innenstadt, gleich bei der Drau."
-        },
-        {
-          "type": "choice",
-          "prompt": "Welcher wichtige Bahnhof liegt hier? 🚉",
-          "options": [
-            "Hauptbahnhof",
-            "Westbahnhof",
-            "Seebahnhof",
-            "Faaker Bahnhof"
-          ],
-          "answer": 0
-        },
-        {
-          "type": "type",
-          "prompt": "Schreibe den Namen von Stadtteil <b>Nr. 2</b>: ✍️",
-          "highlight": 2,
-          "accept": [
-            "seebach-wasenboden",
-            "seebach wasenboden"
-          ],
-          "placeholder": "Stadtteil eintippen…",
-          "hint": "Doppelname mit Bindestrich: „Seebach-…“."
-        },
-        {
-          "type": "choice",
-          "prompt": "Welche Behörde ist in Seebach-Wasenboden? 👮",
-          "options": [
-            "Landespolizeidirektion",
-            "Rathaus",
-            "Bezirksgericht",
-            "Finanzamt"
-          ],
-          "answer": 0
-        },
-        {
-          "type": "match",
-          "prompt": "Verbinde, was es hier gibt! 🔗",
-          "pairs": [
-            {
-              "left": "⚰️",
-              "right": "Zentral-Friedhof"
-            },
-            {
-              "left": "🛹",
-              "right": "Skatepark"
-            },
-            {
-              "left": "🚉",
-              "right": "Hauptbahnhof"
-            },
-            {
-              "left": "🪖",
-              "right": "Rohrkaserne"
-            }
-          ]
-        },
-        {
-          "type": "collect",
-          "prompt": "In <b>Seebach-Wasenboden</b> gibt es noch mehr! Ergänze, was fehlt. 🚉",
-          "given": [
-            {
-              "symbol": "🚉",
-              "name": "Hauptbahnhof"
-            },
-            {
-              "symbol": "🪖",
-              "name": "Rohrkaserne"
-            },
-            {
-              "symbol": "👮",
-              "name": "Landespolizeidirektion"
-            },
-            {
-              "symbol": "⚰️",
-              "name": "Zentral-Friedhof"
-            },
-            {
-              "symbol": "🛹",
-              "name": "Skatepark"
-            }
-          ],
-          "blanks": [
-            {
-              "symbol": "🧸",
-              "name": "Kindergarten Tratten",
-              "accept": [
-                "kindergarten tratten",
-                "kiga tratten",
-                "kindergarten-tratten"
-              ]
-            },
-            {
-              "symbol": "🎒",
-              "name": "Volksschule",
-              "accept": [
-                "volksschule",
-                "vs"
-              ]
-            }
-          ]
-        },
-        {
-          "type": "cloze",
-          "prompt": "Ergänze die Lücken im Satz! 📝",
-          "segments": [
-            {
-              "text": "In Seebach-Wasenboden gibt es ein großes "
-            },
-            {
-              "blank": {
-                "name": "Naherholungsgebiet",
-                "accept": [
-                  "naherholungsgebiet",
-                  "naherholungs-gebiet"
-                ],
-                "placeholder": "…"
-              }
-            },
-            {
-              "text": ". Dort liegt der "
-            },
-            {
-              "blank": {
-                "name": "größte Spielplatz",
-                "accept": [
-                  "größte spielplatz",
-                  "grösste spielplatz",
-                  "groesste spielplatz",
-                  "größten spielplatz",
-                  "größter spielplatz",
-                  "spielplatz"
-                ],
-                "placeholder": "…"
-              }
-            },
-            {
-              "text": " Villachs und ein "
-            },
-            {
-              "blank": {
-                "name": "Skatepark",
-                "accept": [
-                  "skatepark",
-                  "skaterpark"
-                ],
-                "placeholder": "…"
-              }
-            },
-            {
-              "text": "."
-            }
-          ]
-        },
-        {
-          "type": "choice",
-          "prompt": "Wo liegt Seebach-Wasenboden? 🧭",
-          "options": [
-            "Nordöstlich der Innenstadt",
-            "Im Süden am Berg",
-            "Am Ossiacher See",
-            "Westlich vom Warmbad"
-          ],
-          "answer": 0
-        },
-        {
-          "type": "type",
-          "prompt": "Wie heißt der große Ort in Seebach mit den vielen Gräbern? ⚰️",
-          "accept": [
-            "zentral-friedhof",
-            "zentralfriedhof",
-            "zentral friedhof"
-          ],
-          "placeholder": "Antwort eintippen…",
-          "hint": "„Zentral-…“ – wo Villach seine Verstorbenen bestattet."
-        }
-      ],
-      "requires": "uebersicht-schreiben",
-      "mask": true
-    },
-    {
-      "id": "stagathen",
-      "n": 3,
-      "name": "St. Agathen und Perau",
-      "icon": "🎬",
-      "questions": [
-        {
-          "type": "map",
-          "prompt": "Tippe auf <b>St. Agathen und Perau</b> auf der Karte! 🗺️",
-          "target": 3
-        },
-        {
-          "type": "choice",
-          "prompt": "Wo liegt <b>St. Agathen und Perau</b>? 🧭",
-          "options": [
-            "Östlich der Innenstadt",
-            "Im Süden am Berg",
-            "Am Faaker See",
-            "Westlich vom Warmbad"
-          ],
-          "answer": 0
-        },
-        {
-          "type": "type",
-          "prompt": "Wie heißt der Stadtteil <b>Nr. 3</b>? ✍️",
-          "highlight": 3,
-          "accept": [
-            "st. agathen und perau",
-            "st agathen und perau"
-          ],
-          "placeholder": "Stadtteil eintippen…"
-        },
-        {
-          "type": "choice",
-          "prompt": "Welches Kino wurde in <b>St. Agathen und Perau</b> neu gebaut? 🎬",
-          "options": [
-            "Cineplexx",
-            "Megaplex",
-            "Cinecity",
-            "UCI Kino"
-          ],
-          "answer": 0
-        },
-        {
-          "type": "choice",
-          "prompt": "Wie heißt das Einkaufszentrum in <b>St. Agathen und Perau</b>? 🛍️",
-          "options": [
-            "Neukauf",
-            "Atrio",
-            "City Park",
-            "Südpark"
-          ],
-          "answer": 0
-        },
-        {
-          "type": "match",
-          "prompt": "Verbinde, was es in <b>St. Agathen und Perau</b> gibt! 🔗",
-          "pairs": [
-            {
-              "left": "🎬",
-              "right": "Cineplexx"
-            },
-            {
-              "left": "🎳",
-              "right": "Bowling-Center"
-            },
-            {
-              "left": "🛍️",
-              "right": "Neukauf"
-            },
-            {
-              "left": "🧸",
-              "right": "2 Kindergärten"
-            }
-          ]
-        },
-        {
-          "type": "cloze",
-          "prompt": "Ergänze die Lücken im Satz! 📝",
-          "segments": [
-            {
-              "text": "Die beiden Kindergärten heißen "
-            },
-            {
-              "blank": {
-                "name": "Purzelini",
-                "accept": [
-                  "purzelini"
-                ],
-                "placeholder": "…"
-              }
-            },
-            {
-              "text": " und "
-            },
-            {
-              "blank": {
-                "name": "Perau",
-                "accept": [
-                  "perau"
-                ],
-                "placeholder": "…"
-              }
-            },
-            {
-              "text": "."
-            }
-          ]
-        }
-      ],
-      "requires": "uebersicht-schreiben",
-      "mask": true,
-      "sticker": {
-        "emoji": "🎬",
-        "title": "Cineplexx-Kino freigeschaltet!"
-      }
-    },
-    {
-      "id": "auen",
-      "n": 4,
-      "name": "Auen",
-      "icon": "🏭",
-      "questions": [
-        {
-          "type": "map",
-          "prompt": "Tippe auf <b>Auen</b> auf der Karte! 🗺️",
-          "target": 4
-        },
-        {
-          "type": "choice",
-          "prompt": "Wo liegt <b>Auen</b>? 🧭",
-          "options": [
-            "Südöstlich der Innenstadt",
-            "Nördlich vom Bahnhof",
-            "Am Ossiacher See",
-            "Auf einem Berg"
-          ],
-          "answer": 0
-        },
-        {
-          "type": "type",
-          "prompt": "Wie heißt der Stadtteil <b>Nr. 4</b>? ✍️",
-          "highlight": 4,
-          "accept": [
-            "auen"
-          ],
-          "placeholder": "Stadtteil eintippen…"
-        },
-        {
-          "type": "choice",
-          "prompt": "Was ist das Besondere an <b>Auen</b>? 📏",
-          "options": [
-            "Es ist der zweitgrößte Stadtteil",
-            "Es ist der größte Stadtteil",
-            "Es ist der kleinste Stadtteil",
-            "Es ist eine Insel"
-          ],
-          "answer": 0
-        },
-        {
-          "type": "choice",
-          "prompt": "Welcher große Arbeitgeber ist in <b>Auen</b>? 🏭",
-          "options": [
-            "Infineon",
-            "Lam Research",
-            "Red Bull",
-            "Magna"
-          ],
-          "answer": 0
-        },
-        {
-          "type": "match",
-          "prompt": "Verbinde, was es in <b>Auen</b> gibt! 🔗",
-          "pairs": [
-            {
-              "left": "🏭",
-              "right": "Infineon"
-            },
-            {
-              "left": "🛍️",
-              "right": "Atrio"
-            },
-            {
-              "left": "🚗",
-              "right": "Autohäuser & Großhandel"
-            }
-          ]
-        },
-        {
-          "type": "collect",
-          "prompt": "In <b>Auen</b> gibt es noch mehr! Ergänze, was fehlt. 🏭",
-          "given": [
-            {
-              "symbol": "🏭",
-              "name": "Infineon"
-            },
-            {
-              "symbol": "🛍️",
-              "name": "Atrio"
-            },
-            {
-              "symbol": "🚗",
-              "name": "Autohäuser & Großhandel"
-            }
-          ],
-          "blanks": [
-            {
-              "symbol": "🎒",
-              "name": "Volksschule",
-              "accept": [
-                "volksschule",
-                "vs"
-              ]
-            },
-            {
-              "symbol": "🏫",
-              "name": "Mittelschule",
-              "accept": [
-                "mittelschule",
-                "ms"
-              ]
-            },
-            {
-              "symbol": "🎓",
-              "name": "HTL",
-              "accept": [
-                "htl"
-              ]
-            }
-          ]
-        }
-      ],
-      "requires": "uebersicht-schreiben",
-      "mask": true,
-      "sticker": {
-        "emoji": "🏭",
-        "title": "Infineon-Sticker freigeschaltet!"
-      }
-    },
-    {
-      "id": "warmbad",
-      "n": 5,
-      "name": "Warmbad-Judendorf",
-      "icon": "♨️",
-      "questions": [
-        {
-          "type": "map",
-          "prompt": "Tippe auf <b>Warmbad-Judendorf</b> auf der Karte! 🗺️",
-          "target": 5
-        },
-        {
-          "type": "choice",
-          "prompt": "Wo liegt <b>Warmbad-Judendorf</b>? 🧭",
-          "options": [
-            "Südwestlich der Innenstadt",
-            "Nördlich vom Bahnhof",
-            "Mitten in der Altstadt",
-            "Am Faaker See"
-          ],
-          "answer": 0
-        },
-        {
-          "type": "type",
-          "prompt": "Wie heißt der Stadtteil <b>Nr. 5</b>? ✍️",
-          "highlight": 5,
-          "accept": [
-            "warmbad-judendorf",
-            "warmbad judendorf"
-          ],
-          "placeholder": "Stadtteil eintippen…"
-        },
-        {
-          "type": "choice",
-          "prompt": "Was für ein Viertel ist <b>Warmbad-Judendorf</b>? 🏛️",
-          "options": [
-            "Ein historisch interessantes Viertel",
-            "Ein Industriegebiet",
-            "Ein Bahnhofsviertel",
-            "Eine kleine Insel"
-          ],
-          "answer": 0
-        },
-        {
-          "type": "choice",
-          "prompt": "Welche große Therme gibt es in <b>Warmbad</b>? ♨️",
-          "options": [
-            "KärntenTherme",
-            "Therme Wien",
-            "AQUA DOME",
-            "Tauern Spa"
-          ],
-          "answer": 0
-        },
-        {
-          "type": "match",
-          "prompt": "Verbinde, was es in <b>Warmbad-Judendorf</b> gibt! 🔗",
-          "pairs": [
-            {
-              "left": "♨️",
-              "right": "KärntenTherme"
-            },
-            {
-              "left": "💧",
-              "right": "Maibachl"
-            },
-            {
-              "left": "🌳",
-              "right": "Napoleonwiese"
-            },
-            {
-              "left": "🎾",
-              "right": "Sportpark Tennis"
-            },
-            {
-              "left": "🚸",
-              "right": "ÖAMTC-Verkehrsgarten"
-            }
-          ]
-        },
-        {
-          "type": "collect",
-          "prompt": "In <b>Warmbad-Judendorf</b> gibt es noch mehr! Ergänze, was fehlt. ♨️",
-          "given": [
-            {
-              "symbol": "♨️",
-              "name": "KärntenTherme"
-            },
-            {
-              "symbol": "💧",
-              "name": "Maibachl"
-            },
-            {
-              "symbol": "🌳",
-              "name": "Napoleonwiese"
-            },
-            {
-              "symbol": "🎾",
-              "name": "Sportpark Tennis"
-            },
-            {
-              "symbol": "🚸",
-              "name": "ÖAMTC-Verkehrsgarten"
-            }
-          ],
-          "blanks": [
-            {
-              "symbol": "🐴",
-              "name": "Reitstall",
-              "accept": [
-                "reitstall"
-              ]
-            },
-            {
-              "symbol": "🏥",
-              "name": "Privatklinik",
-              "accept": [
-                "privatklinik"
-              ]
-            },
-            {
-              "symbol": "🩺",
-              "name": "Kurzentrum",
-              "accept": [
-                "kurzentrum",
-                "kur-zentrum"
-              ]
-            }
-          ]
-        },
-        {
-          "type": "choice",
-          "prompt": "Für welche Branche gibt es in <b>Warmbad-Judendorf</b> besondere Schulen? 🏫",
-          "options": [
-            "Tourismus",
-            "Technik",
-            "Landwirtschaft",
-            "Kunst"
-          ],
-          "answer": 0
-        }
-      ],
-      "requires": "uebersicht-schreiben",
-      "mask": true,
-      "sticker": {
-        "emoji": "♨️",
-        "title": "KärntenTherme freigeschaltet!"
-      }
-    },
-    {
-      "id": "voelkendorf",
-      "n": 6,
-      "name": "Völkendorf",
-      "icon": "🏟️",
-      "questions": [
-        {
-          "type": "map",
-          "prompt": "Tippe auf <b>Völkendorf</b> auf der Karte! 🗺️",
-          "target": 6
-        },
-        {
-          "type": "choice",
-          "prompt": "Wo liegt <b>Völkendorf</b>? 🧭",
-          "options": [
-            "Westlich der Innenstadt",
-            "Östlich vom Bahnhof",
-            "Am Faaker See",
-            "Im Süden am Berg"
-          ],
-          "answer": 0
-        },
-        {
-          "type": "type",
-          "prompt": "Wie heißt der Stadtteil <b>Nr. 6</b>? ✍️",
-          "highlight": 6,
-          "accept": [
-            "völkendorf",
-            "voelkendorf"
-          ],
-          "placeholder": "Stadtteil eintippen…"
-        },
-        {
-          "type": "choice",
-          "prompt": "Welche große Halle gibt es in <b>Völkendorf</b>? 🏟️",
-          "options": [
-            "Villacher Stadthalle",
-            "Olympiahalle",
-            "Messehalle",
-            "Stadtsaal"
-          ],
-          "answer": 0
-        },
-        {
-          "type": "choice",
-          "prompt": "Was kann man in der Villacher Stadthalle erleben? 🏒",
-          "options": [
-            "Eishockey und Konzerte",
-            "Autorennen",
-            "Skispringen",
-            "Pferderennen"
-          ],
-          "answer": 0
-        },
-        {
-          "type": "match",
-          "prompt": "Verbinde, was es in <b>Völkendorf</b> gibt! 🔗",
-          "pairs": [
-            {
-              "left": "🏟️",
-              "right": "Villacher Stadthalle"
-            },
-            {
-              "left": "💻",
-              "right": "Mittelschule (Informatik)"
-            },
-            {
-              "left": "🎓",
-              "right": "Fachberufsschule"
-            },
-            {
-              "left": "🚴",
-              "right": "Wander- & Radwege"
-            }
-          ]
-        },
-        {
-          "type": "collect",
-          "prompt": "In <b>Völkendorf</b> gibt es noch mehr! Ergänze, was fehlt. 🏟️",
-          "given": [
-            {
-              "symbol": "🏟️",
-              "name": "Villacher Stadthalle"
-            },
-            {
-              "symbol": "💻",
-              "name": "Mittelschule (Informatik)"
-            },
-            {
-              "symbol": "🎓",
-              "name": "Fachberufsschule"
-            },
-            {
-              "symbol": "🚴",
-              "name": "Wander- & Radwege"
-            }
-          ],
-          "blanks": [
-            {
-              "symbol": "🎒",
-              "name": "Volksschule",
-              "accept": [
-                "volksschule",
-                "vs"
-              ]
-            },
-            {
-              "symbol": "🧸",
-              "name": "2 Kindergärten",
-              "accept": [
-                "2 kindergärten",
-                "2 kindergaerten",
-                "zwei kindergärten",
-                "kindergärten",
-                "kindergaerten",
-                "2 kindergarten"
-              ]
-            },
-            {
-              "symbol": "🩺",
-              "name": "viele Ärzte",
-              "accept": [
-                "viele ärzte",
-                "ärzte",
-                "aerzte",
-                "viele aerzte"
-              ]
-            }
-          ]
-        }
-      ],
-      "requires": "uebersicht-schreiben",
-      "mask": true,
-      "sticker": {
-        "emoji": "🏟️",
-        "title": "Villacher Stadthalle freigeschaltet!"
-      }
-    },
-    {
-      "id": "stmartin",
-      "n": 7,
-      "name": "St. Martin",
-      "icon": "⛪",
-      "questions": [
-        {
-          "type": "map",
-          "prompt": "Tippe auf <b>St. Martin</b> auf der Karte! 🗺️",
-          "target": 7
-        },
-        {
-          "type": "choice",
-          "prompt": "Wo liegt <b>St. Martin</b>? 🧭",
-          "options": [
-            "Nordwestlich der Innenstadt",
-            "Südlich der Drau",
-            "Am Ossiacher See",
-            "Mitten in der Altstadt"
-          ],
-          "answer": 0
-        },
-        {
-          "type": "type",
-          "prompt": "Wie heißt der Stadtteil <b>Nr. 7</b>? ✍️",
-          "highlight": 7,
-          "accept": [
-            "st. martin",
-            "st martin"
-          ],
-          "placeholder": "Stadtteil eintippen…"
-        },
-        {
-          "type": "choice",
-          "prompt": "Welche höhere Schule gibt es in <b>St. Martin</b>? 🎓",
-          "options": [
-            "Gymnasium St. Martin",
-            "HTL",
-            "Tourismusschule",
-            "Handelsakademie"
-          ],
-          "answer": 0
-        },
-        {
-          "type": "choice",
-          "prompt": "Welche besondere Sporthalle gibt es in <b>St. Martin</b>? 🤺",
-          "options": [
-            "Eine Fechthalle",
-            "Eine Boxhalle",
-            "Eine Kletterhalle",
-            "Eine Eishalle"
-          ],
-          "answer": 0
-        },
-        {
-          "type": "match",
-          "prompt": "Verbinde, was es in <b>St. Martin</b> gibt! 🔗",
-          "pairs": [
-            {
-              "left": "🤺",
-              "right": "Fechthalle"
-            },
-            {
-              "left": "🤸",
-              "right": "Motorikpark"
-            },
-            {
-              "left": "🏃",
-              "right": "Sportzentrum"
-            },
-            {
-              "left": "🌳",
-              "right": "Parks"
-            }
-          ]
-        },
-        {
-          "type": "collect",
-          "prompt": "In <b>St. Martin</b> gibt es noch mehr! Ergänze, was fehlt. ⛪",
-          "given": [
-            {
-              "symbol": "🎓",
-              "name": "Gymnasium St. Martin"
-            },
-            {
-              "symbol": "🤺",
-              "name": "Fechthalle"
-            },
-            {
-              "symbol": "🤸",
-              "name": "Motorikpark"
-            },
-            {
-              "symbol": "🏃",
-              "name": "Sportzentrum"
-            },
-            {
-              "symbol": "🌳",
-              "name": "Parks"
-            }
-          ],
-          "blanks": [
-            {
-              "symbol": "🎒",
-              "name": "Volksschule",
-              "accept": [
-                "volksschule",
-                "vs"
-              ]
-            },
-            {
-              "symbol": "🧸",
-              "name": "2 Kindergärten",
-              "accept": [
-                "2 kindergärten",
-                "2 kindergaerten",
-                "zwei kindergärten",
-                "kindergärten",
-                "kindergaerten",
-                "2 kindergarten"
-              ]
-            }
-          ]
-        }
-      ],
-      "requires": "uebersicht-schreiben",
-      "mask": true,
-      "sticker": {
-        "emoji": "🤺",
-        "title": "Fechthalle freigeschaltet!"
-      }
+      "id": "hauptplatz",
+      "name": "Hauptplatz",
+      "icon": "⛲",
+      "iconBg": "var(--indigo-soft)",
+      "subtitle": "Innenstadt & Hauptplatz",
+      "lessons": []
     }
   ]
 }
