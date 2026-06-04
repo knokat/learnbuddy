@@ -337,6 +337,7 @@ const collectQuiz = (section, pool, seen) => {
     if(l.quiz || l.mega) return;
     (l.questions||[]).forEach(q=>{
       if(!QUIZ_TYPES.has(q.type)) return;
+      if(q.noquiz) return;   // bewusst aus dem Quiz ausgenommen (z. B. lange Fließtext-Lückentexte)
       const key = q.type + "|" + norm(q.prompt||"");
       if(seen.has(key)) return;
       seen.add(key);
