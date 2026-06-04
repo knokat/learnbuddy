@@ -184,6 +184,17 @@ input,textarea{font-family:var(--font-body);}
 .q-photo.missing{border:2px dashed var(--magenta);box-shadow:none;}
 .q-photo.missing img{display:none;}
 .q-photo.missing::after{content:"📷 Bild fehlt – Datei in projects/ hochladen";display:block;padding:20px;text-align:center;color:var(--magenta);font-family:var(--font-head);font-weight:600;}
+.q-topic{display:inline-block;align-self:flex-start;background:var(--yellow-soft);color:var(--indigo-d);font-family:var(--font-head);font-weight:600;font-size:15px;padding:6px 14px;border-radius:999px;margin:0 0 14px;border:2px solid var(--yellow);}
+.tf{display:flex;flex-direction:column;gap:14px;margin-top:6px;}
+.tf-btn{display:flex;align-items:center;gap:14px;background:#fff;border:2.5px solid var(--indigo-soft);border-radius:20px;padding:20px 22px;font-family:var(--font-head);font-weight:600;font-size:23px;color:var(--ink);box-shadow:0 4px 0 var(--indigo-soft);text-align:left;width:100%;cursor:pointer;transition:transform .08s;}
+.tf-btn:active{transform:translateY(2px);}
+.tf-ic{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:50%;font-size:20px;color:#fff;flex:none;}
+.tf-true .tf-ic{background:var(--green);}
+.tf-false .tf-ic{background:var(--magenta);}
+.tf-btn.sel{border-color:var(--teal);background:var(--teal-soft);box-shadow:0 4px 0 #b8e6e6;}
+.tf-btn.good{border-color:var(--green);background:var(--green-soft);box-shadow:0 4px 0 #c4e89a;}
+.tf-btn.bad{border-color:var(--red);background:var(--red-soft);box-shadow:0 4px 0 #f6c0d2;}
+.tf-btn.dim{opacity:.5;}
 
 .q-sub{font-family:var(--font-head);font-weight:500;font-size:18px;color:var(--muted);margin:-8px 0 18px;}
 .q-sub b{color:var(--ink);}
@@ -320,7 +331,7 @@ const playDing = () => {
   }catch(e){}
 };
 // Quiz-Aufbau: zufällige Mischung; jede Frage trägt ihren Karten-Kontext (_map/_districts) mit.
-const QUIZ_TYPES = new Set(["map","choice","type","match","cloze"]);
+const QUIZ_TYPES = new Set(["map","choice","type","match","cloze","truefalse"]);
 const collectQuiz = (section, pool, seen) => {
   (section.lessons||[]).forEach(l=>{
     if(l.quiz || l.mega) return;
@@ -329,7 +340,7 @@ const collectQuiz = (section, pool, seen) => {
       const key = q.type + "|" + norm(q.prompt||"");
       if(seen.has(key)) return;
       seen.add(key);
-      pool.push({ ...q, _map: section.map, _districts: section.districts });
+      pool.push({ ...q, _map: section.map, _districts: section.districts, _topic: l.name, _section: section.name });
     });
   });
 };
@@ -414,6 +425,31 @@ function ChoiceQ({ q, state, setAnswer }){
           return (
             <button key={i} className={cls} onClick={()=> answering && setAnswer(i)}>
               <span className="k">{KEYS[i]}</span>{opt}
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+/* ===================== Fragetyp: truefalse (Richtig/Falsch) ===================== */
+function TrueFalseQ({ q, state, setAnswer }){
+  const answering = state.phase==="answering";
+  const wrong = state.phase==="wrong";
+  const opts = [{v:true, label:"Richtig", ic:"✓", cl:"tf-true"}, {v:false, label:"Falsch", ic:"✗", cl:"tf-false"}];
+  return (
+    <div className="q-area">
+      <div className="q-prompt" dangerouslySetInnerHTML={{__html:q.prompt}} />
+      <div className="tf">
+        {opts.map((o,i)=>{
+          let cls="tf-btn "+o.cl;
+          if(answering){ if(state.answer===o.v) cls+=" sel"; }
+          else if(wrong){ if(state.answer===o.v) cls+=" bad"; }
+          else { if(o.v===q.answer) cls+=" good"; else if(state.answer===o.v) cls+=" bad"; else cls+=" dim"; }
+          return (
+            <button key={i} className={cls} onClick={()=> answering && setAnswer(o.v)}>
+              <span className="tf-ic">{o.ic}</span>{o.label}
             </button>
           );
         })}
@@ -654,6 +690,7 @@ function Exercise({ project, unit, lesson, onExit, onDone }){
     let ok=false;
     if(q.type==="map")    ok = st.answer===q.target;
     if(q.type==="choice") ok = st.answer===q.answer;
+    if(q.type==="truefalse") ok = st.answer===q.answer;
     if(q.type==="type")   ok = q.accept.some(a=> norm(a)===norm(st.answer||""));
     return { ok, results:null };
   }
@@ -665,7 +702,8 @@ function Exercise({ project, unit, lesson, onExit, onDone }){
       setSt(s=>({...s, phase:"correct", correct:true, results}));
     } else {
       if(!st.lostHeart) setHearts(h=>Math.max(0,h-1));
-      setSt(s=>({...s, phase:"wrong", correct:false, results, lostHeart:true}));
+      const goReveal = (q.type==="truefalse");   // Wahr/Falsch: direkt die Richtigstellung zeigen (kein "Nochmal")
+      setSt(s=>({...s, phase: goReveal?"revealed":"wrong", correct:false, results, lostHeart:true}));
     }
   }
   function retry(){
@@ -708,6 +746,7 @@ function Exercise({ project, unit, lesson, onExit, onDone }){
           <div className="ex-bar"><i style={{width:progress+"%"}}></i></div>
           <span className="hearts">{"❤️".repeat(hearts)}{"🤍".repeat(3-hearts)}</span>
         </div>
+        {q._topic && <div className="q-topic">📍 {lesson && lesson.mega && q._section ? q._section+" · "+q._topic : q._topic}</div>}
         {q.type==="map"    && <MapQ map={q._map || (unit&&unit.map)} districts={q._districts || (unit&&unit.districts)} q={q} state={st} setAnswer={setAnswer} />}
         {q.type==="choice" && <ChoiceQ q={q} state={st} setAnswer={setAnswer} />}
         {q.type==="type"   && <TypeQ map={q._map || (unit&&unit.map)} districts={q._districts || (unit&&unit.districts)} q={q} state={st} setAnswer={setAnswer} />}
@@ -715,6 +754,7 @@ function Exercise({ project, unit, lesson, onExit, onDone }){
         {q.type==="collect" && <CollectQ q={q} state={st} setAnswer={setAnswer} />}
         {q.type==="fillall" && <FillAllQ q={q} state={st} setAnswer={setAnswer} />}
         {q.type==="cloze"  && <ClozeQ q={q} state={st} setAnswer={setAnswer} />}
+        {q.type==="truefalse" && <TrueFalseQ q={q} state={st} setAnswer={setAnswer} />}
 
         {q.type!=="match" && st.phase==="answering" && (
           <div className="foot">
@@ -742,7 +782,7 @@ function Exercise({ project, unit, lesson, onExit, onDone }){
               <span className="ic">🦊</span>
               <div className="tx">
                 <b>{pick(["Bravo!","Stark! 💪","Perfekt! 🎉","Genau richtig!","Top gemacht!"])}</b>
-                <span>Richtig!</span>
+                <span dangerouslySetInnerHTML={{__html: q.explain || "Richtig!"}} />
               </div>
             </div>
             <button className="btn btn-green" onClick={next}>Weiter</button>
@@ -753,8 +793,8 @@ function Exercise({ project, unit, lesson, onExit, onDone }){
             <div className="fb">
               <span className="ic">📘</span>
               <div className="tx">
-                <b>Das ist die Lösung</b>
-                <span>Schau sie dir an – beim nächsten Mal klappt's!</span>
+                <b>{q.explain ? "Merk dir:" : "Das ist die Lösung"}</b>
+                <span dangerouslySetInnerHTML={{__html: q.explain || "Schau sie dir an – beim nächsten Mal klappt's!"}} />
               </div>
             </div>
             <button className="btn btn-primary" onClick={next}>Weiter</button>
