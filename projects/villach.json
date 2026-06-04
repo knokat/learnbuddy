@@ -2409,6 +2409,264 @@
           ]
         },
         {
+          "id": "hauptplatz-lueckentext",
+          "name": "Lückentext: Hauptplatz",
+          "icon": "📜",
+          "sticker": {
+            "emoji": "📜",
+            "title": "Lückentext-Profi"
+          },
+          "questions": [
+            {
+              "type": "cloze",
+              "prompt": "Ergänze den Lückentext! 📜",
+              "noquiz": true,
+              "segments": [
+                {
+                  "text": "Der Hauptplatz entstand schon vor über 800 Jahren. Schon damals war er ein "
+                },
+                {
+                  "blank": {
+                    "name": "Marktplatz",
+                    "accept": [
+                      "marktplatz"
+                    ],
+                    "placeholder": "M …"
+                  }
+                },
+                {
+                  "text": ", wo Menschen einkaufen und handeln konnten. Mehrmals pro Woche gab es "
+                },
+                {
+                  "blank": {
+                    "name": "Wochenmärkte",
+                    "accept": [
+                      "wochenmärkte",
+                      "wochenmaerkte"
+                    ],
+                    "placeholder": "W …"
+                  }
+                },
+                {
+                  "text": ". Seit "
+                },
+                {
+                  "blank": {
+                    "name": "1988",
+                    "accept": [
+                      "1988"
+                    ],
+                    "placeholder": "…"
+                  }
+                },
+                {
+                  "text": " ist der Hauptplatz eine "
+                },
+                {
+                  "blank": {
+                    "name": "Fußgängerzone",
+                    "accept": [
+                      "fußgängerzone",
+                      "fussgängerzone",
+                      "fußgaengerzone",
+                      "fussgaengerzone"
+                    ],
+                    "placeholder": "F …"
+                  }
+                },
+                {
+                  "text": " – das heißt: keine "
+                },
+                {
+                  "blank": {
+                    "name": "Autos",
+                    "accept": [
+                      "autos",
+                      "auto"
+                    ],
+                    "placeholder": "…"
+                  }
+                },
+                {
+                  "text": " mehr, nur Menschen und Fahrräder. Der Hauptplatz ist der "
+                },
+                {
+                  "blank": {
+                    "name": "Mittelpunkt",
+                    "accept": [
+                      "mittelpunkt"
+                    ],
+                    "placeholder": "M …"
+                  }
+                },
+                {
+                  "text": " der Stadt."
+                }
+              ]
+            },
+            {
+              "type": "cloze",
+              "prompt": "Ergänze den Lückentext! 📜",
+              "noquiz": true,
+              "segments": [
+                {
+                  "text": "In den engen Gassen lebten und arbeiteten früher die "
+                },
+                {
+                  "blank": {
+                    "name": "Handwerker",
+                    "accept": [
+                      "handwerker"
+                    ],
+                    "placeholder": "H …"
+                  }
+                },
+                {
+                  "text": " zusammen. Über manchen Gassen spannen sich "
+                },
+                {
+                  "blank": {
+                    "name": "Schwibbögen",
+                    "accept": [
+                      "schwibbögen",
+                      "schwibboegen",
+                      "schwibbogen"
+                    ],
+                    "placeholder": "S …"
+                  }
+                },
+                {
+                  "text": ", die die Häuser bei einem "
+                },
+                {
+                  "blank": {
+                    "name": "Erdbeben",
+                    "accept": [
+                      "erdbeben"
+                    ],
+                    "placeholder": "…"
+                  }
+                },
+                {
+                  "text": " abstützen. In der Mitte des Platzes steht die "
+                },
+                {
+                  "blank": {
+                    "name": "Dreifaltigkeitssäule",
+                    "accept": [
+                      "dreifaltigkeitssäule",
+                      "dreifaltigkeitssaeule",
+                      "dreifaltigkeitssaule"
+                    ],
+                    "placeholder": "D …"
+                  }
+                },
+                {
+                  "text": ". Sie wurde 1739 gebaut, als Villach von schlimmen "
+                },
+                {
+                  "blank": {
+                    "name": "Seuchen",
+                    "accept": [
+                      "seuchen",
+                      "seuche"
+                    ],
+                    "placeholder": "…"
+                  }
+                },
+                {
+                  "text": " geplagt war."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "hauptplatz-lueckentext-mauer",
+          "name": "Lückentext: Stadtmauer",
+          "icon": "🏰",
+          "sticker": {
+            "emoji": "🏰",
+            "title": "Mauer-Meister"
+          },
+          "questions": [
+            {
+              "type": "cloze",
+              "prompt": "Ergänze den Lückentext! 🏰",
+              "noquiz": true,
+              "segments": [
+                {
+                  "text": "Um die Stadt vor Überfällen zu schützen, baute man eine "
+                },
+                {
+                  "blank": {
+                    "name": "Ringmauer",
+                    "accept": [
+                      "ringmauer"
+                    ],
+                    "placeholder": "R …"
+                  }
+                },
+                {
+                  "text": ". Sie hatte einen Wehrgang mit "
+                },
+                {
+                  "blank": {
+                    "name": "14",
+                    "accept": [
+                      "14",
+                      "vierzehn"
+                    ],
+                    "placeholder": "…"
+                  }
+                },
+                {
+                  "text": " Rundtürmen. Außen lag ein "
+                },
+                {
+                  "blank": {
+                    "name": "Wassergraben",
+                    "accept": [
+                      "wassergraben"
+                    ],
+                    "placeholder": "W …"
+                  }
+                },
+                {
+                  "text": ", der aber nicht mit Wasser gefüllt war. Die Mauer hatte "
+                },
+                {
+                  "blank": {
+                    "name": "4",
+                    "accept": [
+                      "4",
+                      "vier"
+                    ],
+                    "placeholder": "…"
+                  }
+                },
+                {
+                  "text": " Tore, die in der Nacht fest "
+                },
+                {
+                  "blank": {
+                    "name": "verschlossen",
+                    "accept": [
+                      "verschlossen",
+                      "zugesperrt",
+                      "abgesperrt"
+                    ],
+                    "placeholder": "v …"
+                  }
+                },
+                {
+                  "text": " wurden."
+                }
+              ]
+            }
+          ]
+        },
+        {
           "id": "hauptplatz-bilder",
           "name": "Was ist das?",
           "icon": "📷",
