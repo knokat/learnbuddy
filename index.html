@@ -312,6 +312,21 @@ const shuffleOptions = (q) => {
   const order = shuffle(q.options.map((_,i)=>i));
   return { ...q, options: order.map(i=>q.options[i]), answer: order.indexOf(q.answer) };
 };
+// 3b: "Was fehlt" abwechslungsreich — aus einem Pool je Durchgang zufaellig Luecken waehlen.
+// pool: [{symbol,name,accept?,blankable?}]. blankable:false => immer "schon da" (z. B. schwer tippbare Namen).
+const prepCollect = (q) => {
+  if(q.type!=="collect" || !Array.isArray(q.pool)) return q;
+  const pool = q.pool;
+  const blankable = pool.filter(it=>it.blankable!==false);
+  const k = Math.max(1, Math.min(q.blankCount||2, blankable.length));
+  const chosen = new Set(shuffle(blankable.slice()).slice(0,k).map(it=>it.name));
+  const given=[], blanks=[];
+  pool.forEach(it=>{
+    if(chosen.has(it.name)) blanks.push({symbol:it.symbol, name:it.name, accept: it.accept || [norm(it.name)]});
+    else given.push({symbol:it.symbol, name:it.name});
+  });
+  return {...q, given, blanks};
+};
 // Kurzer, fröhlicher Ton bei richtiger Antwort (Web Audio, ohne Datei).
 let _audioCtx = null;
 const playDing = () => {
@@ -648,7 +663,7 @@ function Exercise({ project, unit, lesson, onExit, onDone }){
     lesson.mega ? buildMegaQuiz(project, lesson.quizCount||15)
     : lesson.quiz ? buildSectionQuiz(unit, lesson.quizCount||12)
     : orderQuestions(lesson.questions)
-  ).map(shuffleOptions));
+  ).map(shuffleOptions).map(prepCollect));
   const initAnswer = (qq) => {
     if(!qq) return null;
     if(qq.type==="type" && qq.prefix) return qq.prefix;
