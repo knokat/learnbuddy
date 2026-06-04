@@ -1245,6 +1245,65 @@
           }
         },
         {
+          "id": "stadtteile-wf",
+          "name": "Richtig oder Falsch?",
+          "icon": "⚖️",
+          "sticker": {
+            "emoji": "🦊",
+            "title": "Wahrheits-Fuchs"
+          },
+          "questions": [
+            {
+              "type": "truefalse",
+              "prompt": "In Lind gibt es das Technologie-Unternehmen <b>Lam Research</b>.",
+              "answer": true,
+              "explain": "Richtig! Lam Research ist in Lind."
+            },
+            {
+              "type": "truefalse",
+              "prompt": "<b>Infineon</b> ist im Stadtteil Lind.",
+              "answer": false,
+              "explain": "Falsch! Infineon ist in <b>Auen</b>."
+            },
+            {
+              "type": "truefalse",
+              "prompt": "Das Einkaufszentrum <b>Atrio</b> ist in Auen.",
+              "answer": true,
+              "explain": "Richtig! Das Atrio ist in Auen."
+            },
+            {
+              "type": "truefalse",
+              "prompt": "Die <b>KärntenTherme</b> ist in Warmbad-Judendorf.",
+              "answer": true,
+              "explain": "Richtig! Die KärntenTherme ist in Warmbad."
+            },
+            {
+              "type": "truefalse",
+              "prompt": "Die <b>Villacher Stadthalle</b> steht in St. Martin.",
+              "answer": false,
+              "explain": "Falsch! Die Villacher Stadthalle steht in <b>Völkendorf</b>."
+            },
+            {
+              "type": "truefalse",
+              "prompt": "Das <b>Cineplexx</b>-Kino wurde in St. Agathen und Perau gebaut.",
+              "answer": true,
+              "explain": "Richtig! Das Cineplexx ist in St. Agathen und Perau."
+            },
+            {
+              "type": "truefalse",
+              "prompt": "<b>Auen</b> ist der größte Stadtteil von Villach.",
+              "answer": false,
+              "explain": "Falsch! Auen ist der <b>zweitgrößte</b> Stadtteil."
+            },
+            {
+              "type": "truefalse",
+              "prompt": "Das <b>Gymnasium St. Martin</b> steht im Stadtteil Lind.",
+              "answer": false,
+              "explain": "Falsch! Das Gymnasium St. Martin steht in <b>St. Martin</b>."
+            }
+          ]
+        },
+        {
           "id": "stadtteile-quiz",
           "name": "Großes Quiz",
           "icon": "🏆",
@@ -1656,6 +1715,65 @@
                   "right": "Drobollach und Egg"
                 }
               ]
+            }
+          ]
+        },
+        {
+          "id": "vororte-wf",
+          "name": "Richtig oder Falsch?",
+          "icon": "⚖️",
+          "sticker": {
+            "emoji": "🕵️",
+            "title": "Fakten-Spürnase"
+          },
+          "questions": [
+            {
+              "type": "truefalse",
+              "prompt": "<b>Landskron</b> ist der größte und bevölkerungsreichste Vorort.",
+              "answer": true,
+              "explain": "Richtig! Landskron ist der größte und bevölkerungsreichste Vorort."
+            },
+            {
+              "type": "truefalse",
+              "prompt": "Den <b>Silbersee</b> gibt es in St. Ulrich.",
+              "answer": true,
+              "explain": "Richtig! Der Silbersee liegt in St. Ulrich."
+            },
+            {
+              "type": "truefalse",
+              "prompt": "Die <b>Fachhochschule</b> und der Technologiepark sind in Maria Gail.",
+              "answer": false,
+              "explain": "Falsch! Die Fachhochschule ist in <b>St. Magdalen</b>."
+            },
+            {
+              "type": "truefalse",
+              "prompt": "Der <b>Affenberg</b> ist in Landskron.",
+              "answer": true,
+              "explain": "Richtig! Der Affenberg ist in Landskron."
+            },
+            {
+              "type": "truefalse",
+              "prompt": "<b>Fellach</b> liegt im Osten von Villach.",
+              "answer": false,
+              "explain": "Falsch! Fellach liegt im <b>Westen</b>."
+            },
+            {
+              "type": "truefalse",
+              "prompt": "Die <b>Pfarr- und Wallfahrtskirche</b> steht in Maria Gail.",
+              "answer": true,
+              "explain": "Richtig! Die Wallfahrtskirche ist in Maria Gail."
+            },
+            {
+              "type": "truefalse",
+              "prompt": "Den <b>Hochseilgarten</b> am Tabor gibt es in Federaun.",
+              "answer": false,
+              "explain": "Falsch! Der Hochseilgarten ist in <b>Drobollach und Egg</b>."
+            },
+            {
+              "type": "truefalse",
+              "prompt": "Der <b>Römerweg</b> führt durch St. Ulrich.",
+              "answer": false,
+              "explain": "Falsch! Der Römerweg führt durch <b>Federaun</b>."
             }
           ]
         },
@@ -2333,6 +2451,65 @@
               ],
               "answer": 0,
               "grp": "bild"
+            }
+          ]
+        },
+        {
+          "id": "hauptplatz-wf",
+          "name": "Richtig oder Falsch?",
+          "icon": "⚖️",
+          "sticker": {
+            "emoji": "⚖️",
+            "title": "Wahr-oder-Falsch-Profi"
+          },
+          "questions": [
+            {
+              "type": "truefalse",
+              "prompt": "Der <b>Hauptplatz</b> ist über 800 Jahre alt.",
+              "answer": true,
+              "explain": "Richtig! Der Hauptplatz ist über 800 Jahre alt."
+            },
+            {
+              "type": "truefalse",
+              "prompt": "Am Hauptplatz dürfen heute <b>Autos</b> fahren.",
+              "answer": false,
+              "explain": "Falsch! Seit 1988 ist der Hauptplatz eine <b>Fußgängerzone</b> – ohne Autos."
+            },
+            {
+              "type": "truefalse",
+              "prompt": "Der <b>Stadtpfarrturm</b> ist der höchste Kirchturm in ganz Kärnten.",
+              "answer": true,
+              "explain": "Richtig! Mit 94 m ist er der höchste Kirchturm Kärntens."
+            },
+            {
+              "type": "truefalse",
+              "prompt": "Der Stadtpfarrturm hat <b>239 Treppenstufen</b>.",
+              "answer": true,
+              "explain": "Richtig! Es sind 239 Treppenstufen."
+            },
+            {
+              "type": "truefalse",
+              "prompt": "Die <b>Dreifaltigkeitssäule</b> wurde wegen eines Erdbebens gebaut.",
+              "answer": false,
+              "explain": "Falsch! Sie wurde wegen schrecklicher <b>Seuchen</b> gebaut."
+            },
+            {
+              "type": "truefalse",
+              "prompt": "Der <b>Wassergraben</b> rund um die alte Stadtmauer war mit Wasser gefüllt.",
+              "answer": false,
+              "explain": "Falsch! Der Wassergraben war <b>nicht</b> mit Wasser gefüllt."
+            },
+            {
+              "type": "truefalse",
+              "prompt": "Die <b>Schwibbögen</b> über den engen Gassen stützen die Häuser bei einem Erdbeben.",
+              "answer": true,
+              "explain": "Richtig! Die Schwibbögen stützen die Häuser bei Erdbeben."
+            },
+            {
+              "type": "truefalse",
+              "prompt": "Die alte Ringmauer hatte <b>6 Tore</b>.",
+              "answer": false,
+              "explain": "Falsch! Die Ringmauer hatte <b>4 Tore</b>."
             }
           ]
         },
