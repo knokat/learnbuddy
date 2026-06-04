@@ -283,15 +283,41 @@ const KID = "Leander";
 const KEYS = "ABCD";
 const shuffle = (a) => { const x=[...a]; for(let i=x.length-1;i>0;i--){const j=(Math.random()*(i+1))|0;[x[i],x[j]]=[x[j],x[i]];} return x; };
 // mischt Fragen innerhalb zusammenhängender Gruppen mit gleichem grp; Reihenfolge der Gruppen bleibt
+// Mischt die Fragen einer Lektion. "collect"/"fillall" bleiben an ihrer Stelle (sie brauchen die
+// vorher vorgekommenen Einträge); alle übrigen Fragen werden in ihrem Abschnitt zufällig gemischt.
 const orderQuestions = (qs) => {
-  const out=[]; let i=0;
-  while(i<qs.length){
-    const g=qs[i].grp;
-    if(g==null){ out.push(qs[i]); i++; continue; }
-    let j=i; while(j<qs.length && qs[j].grp===g) j++;
-    out.push(...shuffle(qs.slice(i,j))); i=j;
-  }
+  const list = qs||[]; const out=[]; let seg=[];
+  const flush=()=>{ shuffle(seg).forEach(q=>out.push(q)); seg=[]; };
+  list.forEach(q=>{
+    if(q.type==="collect" || q.type==="fillall"){ flush(); out.push(q); }
+    else seg.push(q);
+  });
+  flush();
   return out;
+};
+// Mischt bei Multiple-Choice die Antwort-Optionen (richtige Antwort nicht immer oben).
+const shuffleOptions = (q) => {
+  if(q.type!=="choice" || !Array.isArray(q.options)) return q;
+  const order = shuffle(q.options.map((_,i)=>i));
+  return { ...q, options: order.map(i=>q.options[i]), answer: order.indexOf(q.answer) };
+};
+// Kurzer, fröhlicher Ton bei richtiger Antwort (Web Audio, ohne Datei).
+let _audioCtx = null;
+const playDing = () => {
+  try{
+    _audioCtx = _audioCtx || new (window.AudioContext||window.webkitAudioContext)();
+    const ac = _audioCtx; if(ac.state==="suspended") ac.resume();
+    const now = ac.currentTime;
+    [523.25, 659.25, 783.99].forEach((f,i)=>{        // C5–E5–G5
+      const o=ac.createOscillator(), g=ac.createGain();
+      o.type="triangle"; o.frequency.value=f;
+      const t=now+i*0.085;
+      g.gain.setValueAtTime(0.0001,t);
+      g.gain.exponentialRampToValueAtTime(0.22, t+0.02);
+      g.gain.exponentialRampToValueAtTime(0.0001, t+0.38);
+      o.connect(g).connect(ac.destination); o.start(t); o.stop(t+0.4);
+    });
+  }catch(e){}
 };
 // Quiz-Aufbau: zufällige Mischung; jede Frage trägt ihren Karten-Kontext (_map/_districts) mit.
 const QUIZ_TYPES = new Set(["map","choice","type","match","cloze"]);
@@ -581,10 +607,11 @@ function ClozeQ({ q, state, setAnswer }){
 
 /* ===================== Übung ===================== */
 function Exercise({ project, unit, lesson, onExit, onDone }){
-  const [qs] = useState(()=>
+  const [qs] = useState(()=> (
     lesson.mega ? buildMegaQuiz(project, lesson.quizCount||15)
     : lesson.quiz ? buildSectionQuiz(unit, lesson.quizCount||12)
-    : orderQuestions(lesson.questions));
+    : orderQuestions(lesson.questions)
+  ).map(shuffleOptions));
   const initAnswer = (qq) => {
     if(!qq) return null;
     if(qq.type==="type" && qq.prefix) return qq.prefix;
@@ -633,6 +660,7 @@ function Exercise({ project, unit, lesson, onExit, onDone }){
   function check(){
     const { ok, results } = evaluate();
     if(ok){
+      playDing();
       setCorrectCount(c=>c+1);
       setSt(s=>({...s, phase:"correct", correct:true, results}));
     } else {
@@ -740,7 +768,7 @@ function Exercise({ project, unit, lesson, onExit, onDone }){
 /* ===================== Belohnung ===================== */
 function Reward({ lesson, xp, correct, total, onContinue }){
   const cols=["#24B1B1","#FDEB9E","#C13383","#4B5694","#3fbfbf","#58a700"];
-  const bits = useMemo(()=> Array.from({length:34},()=>({
+  const bits = useMemo(()=> Array.from({length:50},()=>({
     l:Math.random()*100, c:cols[(Math.random()*cols.length)|0],
     d:(Math.random()*2.4).toFixed(2), du:(2.4+Math.random()*1.8).toFixed(2)
   })),[]);
