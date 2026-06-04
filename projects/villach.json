@@ -332,28 +332,11 @@
             {
               "type": "collect",
               "prompt": "In <b>Lind</b> gibt es noch mehr! Ergänze, was fehlt. 🏙️",
-              "given": [
-                {
-                  "symbol": "🏟️",
-                  "name": "Sport-Stadion"
-                },
-                {
-                  "symbol": "⚽",
-                  "name": "Ballspielhalle"
-                },
-                {
-                  "symbol": "🔬",
-                  "name": "Lam Research"
-                },
-                {
-                  "symbol": "📊",
-                  "name": "HAK/HAS"
-                }
-              ],
-              "blanks": [
+              "pool": [
                 {
                   "symbol": "🏫",
                   "name": "Volksschule",
+                  "blankable": true,
                   "accept": [
                     "volksschule",
                     "vs"
@@ -362,6 +345,7 @@
                 {
                   "symbol": "🧸",
                   "name": "Kindergarten",
+                  "blankable": true,
                   "accept": [
                     "kindergarten",
                     "kiga"
@@ -370,6 +354,7 @@
                 {
                   "symbol": "🤸",
                   "name": "Sport-MS",
+                  "blankable": true,
                   "accept": [
                     "sport-ms",
                     "sport ms",
@@ -378,8 +363,39 @@
                     "sport mittelschule",
                     "sportmittelschule"
                   ]
+                },
+                {
+                  "symbol": "🏟️",
+                  "name": "Sport-Stadion",
+                  "blankable": true,
+                  "accept": [
+                    "sport-stadion",
+                    "sport stadion",
+                    "sportstadion",
+                    "sport-stadion villach",
+                    "sport stadion villach"
+                  ]
+                },
+                {
+                  "symbol": "⚽",
+                  "name": "Ballspielhalle",
+                  "blankable": true,
+                  "accept": [
+                    "ballspielhalle"
+                  ]
+                },
+                {
+                  "symbol": "🔬",
+                  "name": "Lam Research",
+                  "blankable": false
+                },
+                {
+                  "symbol": "📊",
+                  "name": "HAK/HAS",
+                  "blankable": false
                 }
-              ]
+              ],
+              "blankCount": 3
             },
             {
               "type": "choice",
@@ -478,32 +494,20 @@
             {
               "type": "collect",
               "prompt": "In <b>Seebach-Wasenboden</b> gibt es noch mehr! Ergänze, was fehlt. 🚉",
-              "given": [
+              "pool": [
                 {
-                  "symbol": "🚉",
-                  "name": "Hauptbahnhof"
+                  "symbol": "🏫",
+                  "name": "Volksschule",
+                  "blankable": true,
+                  "accept": [
+                    "volksschule",
+                    "vs"
+                  ]
                 },
-                {
-                  "symbol": "🪖",
-                  "name": "Rohrkaserne"
-                },
-                {
-                  "symbol": "👮",
-                  "name": "Landespolizeidirektion"
-                },
-                {
-                  "symbol": "⚰️",
-                  "name": "Zentral-Friedhof"
-                },
-                {
-                  "symbol": "🛹",
-                  "name": "Skatepark"
-                }
-              ],
-              "blanks": [
                 {
                   "symbol": "🧸",
                   "name": "Kindergarten Tratten",
+                  "blankable": true,
                   "accept": [
                     "kindergarten tratten",
                     "kiga tratten",
@@ -511,14 +515,46 @@
                   ]
                 },
                 {
-                  "symbol": "🏫",
-                  "name": "Volksschule",
+                  "symbol": "🚉",
+                  "name": "Hauptbahnhof",
+                  "blankable": true,
                   "accept": [
-                    "volksschule",
-                    "vs"
+                    "hauptbahnhof"
                   ]
+                },
+                {
+                  "symbol": "🪖",
+                  "name": "Rohrkaserne",
+                  "blankable": true,
+                  "accept": [
+                    "rohrkaserne"
+                  ]
+                },
+                {
+                  "symbol": "⚰️",
+                  "name": "Zentral-Friedhof",
+                  "blankable": true,
+                  "accept": [
+                    "zentral-friedhof",
+                    "zentralfriedhof",
+                    "zentral friedhof"
+                  ]
+                },
+                {
+                  "symbol": "🛹",
+                  "name": "Skatepark",
+                  "blankable": true,
+                  "accept": [
+                    "skatepark"
+                  ]
+                },
+                {
+                  "symbol": "👮",
+                  "name": "Landespolizeidirektion",
+                  "blankable": false
                 }
-              ]
+              ],
+              "blankCount": 3
             },
             {
               "type": "cloze",
@@ -785,24 +821,11 @@
             {
               "type": "collect",
               "prompt": "In <b>Auen</b> gibt es noch mehr! Ergänze, was fehlt. 🏭",
-              "given": [
-                {
-                  "symbol": "🏭",
-                  "name": "Infineon"
-                },
-                {
-                  "symbol": "🛍️",
-                  "name": "Atrio"
-                },
-                {
-                  "symbol": "🚗",
-                  "name": "Autohäuser & Großhandel"
-                }
-              ],
-              "blanks": [
+              "pool": [
                 {
                   "symbol": "🏫",
                   "name": "Volksschule",
+                  "blankable": true,
                   "accept": [
                     "volksschule",
                     "vs"
@@ -811,6 +834,7 @@
                 {
                   "symbol": "📚",
                   "name": "Mittelschule",
+                  "blankable": true,
                   "accept": [
                     "mittelschule",
                     "ms"
@@ -819,11 +843,31 @@
                 {
                   "symbol": "⚙️",
                   "name": "HTL",
+                  "blankable": true,
                   "accept": [
                     "htl"
                   ]
+                },
+                {
+                  "symbol": "🛍️",
+                  "name": "Atrio",
+                  "blankable": true,
+                  "accept": [
+                    "atrio"
+                  ]
+                },
+                {
+                  "symbol": "🏭",
+                  "name": "Infineon",
+                  "blankable": false
+                },
+                {
+                  "symbol": "🚗",
+                  "name": "Autohäuser & Großhandel",
+                  "blankable": false
                 }
-              ]
+              ],
+              "blankCount": 3
             }
           ],
           "sticker": {
@@ -914,32 +958,20 @@
             {
               "type": "collect",
               "prompt": "In <b>Warmbad-Judendorf</b> gibt es noch mehr! Ergänze, was fehlt. ♨️",
-              "given": [
+              "pool": [
                 {
-                  "symbol": "♨️",
-                  "name": "KärntenTherme"
+                  "symbol": "🧖",
+                  "name": "Kurzentrum",
+                  "blankable": true,
+                  "accept": [
+                    "kurzentrum",
+                    "kur-zentrum"
+                  ]
                 },
-                {
-                  "symbol": "💧",
-                  "name": "Maibachl"
-                },
-                {
-                  "symbol": "🌼",
-                  "name": "Napoleonwiese"
-                },
-                {
-                  "symbol": "🎾",
-                  "name": "Sportpark Tennis"
-                },
-                {
-                  "symbol": "🚸",
-                  "name": "ÖAMTC-Verkehrsgarten"
-                }
-              ],
-              "blanks": [
                 {
                   "symbol": "🐴",
                   "name": "Reitstall",
+                  "blankable": true,
                   "accept": [
                     "reitstall"
                   ]
@@ -947,19 +979,46 @@
                 {
                   "symbol": "🏥",
                   "name": "Privatklinik",
+                  "blankable": true,
                   "accept": [
                     "privatklinik"
                   ]
                 },
                 {
-                  "symbol": "🧖",
-                  "name": "Kurzentrum",
+                  "symbol": "💧",
+                  "name": "Maibachl",
+                  "blankable": true,
                   "accept": [
-                    "kurzentrum",
-                    "kur-zentrum"
+                    "maibachl"
                   ]
+                },
+                {
+                  "symbol": "🌼",
+                  "name": "Napoleonwiese",
+                  "blankable": true,
+                  "accept": [
+                    "napoleonwiese",
+                    "napoleon-wiese",
+                    "napoleon wiese"
+                  ]
+                },
+                {
+                  "symbol": "♨️",
+                  "name": "KärntenTherme",
+                  "blankable": false
+                },
+                {
+                  "symbol": "🎾",
+                  "name": "Sportpark Tennis",
+                  "blankable": false
+                },
+                {
+                  "symbol": "🚸",
+                  "name": "ÖAMTC-Verkehrsgarten",
+                  "blankable": false
                 }
-              ]
+              ],
+              "blankCount": 3
             },
             {
               "type": "choice",
@@ -1057,28 +1116,11 @@
             {
               "type": "collect",
               "prompt": "In <b>Völkendorf</b> gibt es noch mehr! Ergänze, was fehlt. 🏟️",
-              "given": [
-                {
-                  "symbol": "🏒",
-                  "name": "Villacher Stadthalle"
-                },
-                {
-                  "symbol": "💻",
-                  "name": "Mittelschule (Informatik)"
-                },
-                {
-                  "symbol": "🔨",
-                  "name": "Fachberufsschule"
-                },
-                {
-                  "symbol": "🚴",
-                  "name": "Wander- & Radwege"
-                }
-              ],
-              "blanks": [
+              "pool": [
                 {
                   "symbol": "🏫",
                   "name": "Volksschule",
+                  "blankable": true,
                   "accept": [
                     "volksschule",
                     "vs"
@@ -1087,6 +1129,7 @@
                 {
                   "symbol": "🧸",
                   "name": "2 Kindergärten",
+                  "blankable": true,
                   "accept": [
                     "2 kindergärten",
                     "2 kindergaerten",
@@ -1099,14 +1142,40 @@
                 {
                   "symbol": "🩺",
                   "name": "viele Ärzte",
+                  "blankable": true,
                   "accept": [
                     "viele ärzte",
                     "ärzte",
                     "aerzte",
                     "viele aerzte"
                   ]
+                },
+                {
+                  "symbol": "🔨",
+                  "name": "Fachberufsschule",
+                  "blankable": true,
+                  "accept": [
+                    "fachberufsschule",
+                    "fachberufschule"
+                  ]
+                },
+                {
+                  "symbol": "🏒",
+                  "name": "Villacher Stadthalle",
+                  "blankable": false
+                },
+                {
+                  "symbol": "💻",
+                  "name": "Mittelschule (Informatik)",
+                  "blankable": false
+                },
+                {
+                  "symbol": "🚴",
+                  "name": "Wander- & Radwege",
+                  "blankable": false
                 }
-              ]
+              ],
+              "blankCount": 3
             }
           ],
           "sticker": {
@@ -1193,32 +1262,11 @@
             {
               "type": "collect",
               "prompt": "In <b>St. Martin</b> gibt es noch mehr! Ergänze, was fehlt. ⛪",
-              "given": [
-                {
-                  "symbol": "🏛️",
-                  "name": "Gymnasium St. Martin"
-                },
-                {
-                  "symbol": "🤺",
-                  "name": "Fechthalle"
-                },
-                {
-                  "symbol": "🏋️",
-                  "name": "Motorikpark"
-                },
-                {
-                  "symbol": "🏃",
-                  "name": "Sportzentrum"
-                },
-                {
-                  "symbol": "🌳",
-                  "name": "Parks"
-                }
-              ],
-              "blanks": [
+              "pool": [
                 {
                   "symbol": "🏫",
                   "name": "Volksschule",
+                  "blankable": true,
                   "accept": [
                     "volksschule",
                     "vs"
@@ -1227,6 +1275,7 @@
                 {
                   "symbol": "🧸",
                   "name": "2 Kindergärten",
+                  "blankable": true,
                   "accept": [
                     "2 kindergärten",
                     "2 kindergaerten",
@@ -1235,8 +1284,47 @@
                     "kindergaerten",
                     "2 kindergarten"
                   ]
+                },
+                {
+                  "symbol": "🤺",
+                  "name": "Fechthalle",
+                  "blankable": true,
+                  "accept": [
+                    "fechthalle"
+                  ]
+                },
+                {
+                  "symbol": "🏋️",
+                  "name": "Motorikpark",
+                  "blankable": true,
+                  "accept": [
+                    "motorikpark"
+                  ]
+                },
+                {
+                  "symbol": "🏃",
+                  "name": "Sportzentrum",
+                  "blankable": true,
+                  "accept": [
+                    "sportzentrum"
+                  ]
+                },
+                {
+                  "symbol": "🌳",
+                  "name": "Parks",
+                  "blankable": true,
+                  "accept": [
+                    "parks",
+                    "park"
+                  ]
+                },
+                {
+                  "symbol": "🏛️",
+                  "name": "Gymnasium St. Martin",
+                  "blankable": false
                 }
-              ]
+              ],
+              "blankCount": 3
             }
           ],
           "sticker": {
