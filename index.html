@@ -260,13 +260,41 @@ input,textarea{font-family:var(--font-body);}
 .reward .score{margin-top:10px;font-family:var(--font-head);font-weight:600;font-size:20px;color:var(--teal-d);}
 .reward .xpbig{margin-top:24px;background:var(--yellow);color:#7a5b00;font-family:var(--font-head);font-weight:700;font-size:28px;padding:12px 32px;border-radius:40px;box-shadow:0 6px 0 var(--yellow-d);}
 /* Level-Anzeige */
-.levelbar{margin:6px 26px 4px;background:#fff;border:var(--card-bd);box-shadow:var(--card-sh);border-radius:18px;padding:12px 16px;}
+.levelbar{display:flex;align-items:center;gap:14px;margin:6px 26px 4px;background:#fff;border:var(--card-bd);box-shadow:var(--card-sh);border-radius:18px;padding:12px 16px;}
+.levelbar.tappable{cursor:pointer;-webkit-tap-highlight-color:transparent;transition:transform .1s;}
+.levelbar.tappable:active{transform:translateY(2px);}
+.lb-fig{width:60px;height:60px;flex:none;object-fit:contain;filter:drop-shadow(0 2px 3px rgba(0,0,0,.12));}
+.lb-main{flex:1;min-width:0;}
+.lb-more{margin-left:auto;font-family:var(--font-head);font-weight:700;font-size:13px;color:var(--teal-d);white-space:nowrap;}
 .lb-top{display:flex;align-items:center;gap:10px;}
 .lb-badge{font-family:var(--font-head);font-weight:700;font-size:15px;color:#fff;background:var(--indigo);padding:3px 12px;border-radius:999px;}
 .lb-title{font-family:var(--font-head);font-weight:700;color:var(--indigo);font-size:18px;}
 .lb-track{margin:9px 0 6px;height:14px;border-radius:10px;background:var(--indigo-soft);overflow:hidden;}
 .lb-track i{display:block;height:100%;border-radius:10px;background:linear-gradient(90deg,var(--yellow),var(--yellow-d));transition:width .5s;}
 .lb-foot{font-size:13px;color:var(--muted);font-weight:700;}
+
+/* Lernpfad-Ansicht */
+.lp-intro{padding:6px 26px 10px;color:var(--ink);font-weight:700;font-size:16px;line-height:1.45;}
+.lp{flex:1;overflow-y:auto;padding:6px 26px 18px;display:flex;flex-direction:column;gap:10px;position:relative;}
+.lp-node{display:flex;align-items:center;gap:16px;width:78%;}
+.lp-node.right{align-self:flex-end;flex-direction:row-reverse;text-align:right;}
+.lp-node.left{align-self:flex-start;}
+.lp-fig-wrap{position:relative;flex:none;width:78px;height:78px;border-radius:50%;display:grid;place-items:center;background:var(--teal-soft);box-shadow:0 4px 0 rgba(36,177,177,.16);}
+.lp-fig{width:70px;height:70px;object-fit:contain;}
+.lp-node.future .lp-fig-wrap{background:var(--indigo-soft);box-shadow:0 4px 0 #d7dbed;}
+.lp-node.future .lp-fig{filter:grayscale(.85) opacity(.55);}
+.lp-node.here .lp-fig-wrap{width:92px;height:92px;background:var(--yellow-soft);box-shadow:0 0 0 4px var(--yellow-d),0 6px 0 rgba(246,214,97,.45);}
+.lp-node.here .lp-fig{width:84px;height:84px;}
+.lp-check{position:absolute;bottom:-2px;right:-2px;width:26px;height:26px;border-radius:50%;background:var(--green);color:#fff;font-weight:900;font-size:15px;display:grid;place-items:center;border:2px solid #fff;}
+.lp-lock{position:absolute;bottom:-2px;right:-2px;font-size:20px;filter:drop-shadow(0 1px 1px rgba(0,0,0,.2));}
+.lp-info{min-width:0;}
+.lp-lvl{font-family:var(--font-head);font-weight:700;font-size:13px;color:var(--muted);}
+.lp-name{font-family:var(--font-head);font-weight:700;font-size:20px;color:var(--indigo);line-height:1.1;}
+.lp-node.future .lp-name{color:var(--muted);}
+.lp-xp{font-weight:800;font-size:14px;color:var(--teal-d);margin-top:2px;}
+.lp-node.future .lp-xp{color:var(--muted);}
+.lp-node.here .lp-name{color:var(--magenta);}
+.lp-node.here .lp-xp{color:var(--magenta);}
 .reward-level{width:100%;max-width:360px;margin-top:18px;}
 .reward-level .levelbar{margin:0;}
 .levelup{margin-top:18px;background:var(--green-soft);border:2px solid var(--green);color:var(--green-d);font-family:var(--font-head);font-weight:700;font-size:20px;padding:12px 22px;border-radius:18px;display:flex;flex-direction:column;align-items:center;gap:2px;}
@@ -924,7 +952,7 @@ function Path({ unit, doneSet, scores, xp, streak, onStart, onBack }){
           <button className="back" onClick={onBack} aria-label="Zurück">←</button>
           <div className="ttl"><b>{unit.icon} {unit.name}</b><span>{unit.subtitle||""}</span></div>
           <div className="spacer"></div>
-          <div className="chips"><span className="chip flame">🔥 {streak}</span><span className="chip xp">⭐ {xp}</span></div>
+          <div className="chips"><span className="chip flame">🔥 {streak}</span><span className="chip xp">{xp} XP</span></div>
         </div>
         <div className="vili">
           <div className="face">🦊</div>
@@ -979,7 +1007,7 @@ function SectionSelect({ project, progress, xp, streak, onOpenSection, onMega, o
           <button className="back" onClick={onBack} aria-label="Zurück">←</button>
           <div className="ttl"><b>{project.icon} {project.name}</b><span>{project.subtitle||""}</span></div>
           <div className="spacer"></div>
-          <div className="chips"><span className="chip flame">🔥 {streak}</span><span className="chip xp">⭐ {xp}</span></div>
+          <div className="chips"><span className="chip flame">🔥 {streak}</span><span className="chip xp">{xp} XP</span></div>
         </div>
         <div className="vili">
           <div className="face">🦊</div>
@@ -1025,18 +1053,73 @@ function SectionSelect({ project, progress, xp, streak, onOpenSection, onMega, o
 }
 
 /* ===================== Startbildschirm ===================== */
-function LevelBar({ xp }){
+function levelFig(level){ return "levels/level"+Math.min(Math.max(level,1),9)+".png"; }
+
+function LevelBar({ xp, onOpen }){
   const f = foxLevel(xp);
+  const clickable = typeof onOpen==="function";
   return (
-    <div className="levelbar">
-      <div className="lb-top"><span className="lb-badge">🦊 Level {f.level}</span><b className="lb-title">{f.title}</b></div>
-      <div className="lb-track"><i style={{width:f.pct+"%"}}></i></div>
-      <div className="lb-foot">noch <b>{f.toNext} XP</b> bis Level {f.level+1}</div>
+    <div className={"levelbar"+(clickable?" tappable":"")}
+         onClick={onOpen}
+         role={clickable?"button":undefined} tabIndex={clickable?0:undefined}
+         onKeyDown={clickable?(e=>{ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); onOpen(); } }):undefined}>
+      <img className="lb-fig" src={levelFig(f.level)} alt={f.title} />
+      <div className="lb-main">
+        <div className="lb-top">
+          <span className="lb-badge">🦊 Level {f.level}</span>
+          <b className="lb-title">{f.title}</b>
+          {clickable && <span className="lb-more">Weg ansehen ›</span>}
+        </div>
+        <div className="lb-track"><i style={{width:f.pct+"%"}}></i></div>
+        <div className="lb-foot">noch <b>{f.toNext} XP</b> bis Level {f.level+1}</div>
+      </div>
     </div>
   );
 }
 
-function Home({ tiles, progress, xp, streak, onOpen, onNew, onBackup }){
+/* Lernpfad-Ansicht: alle 9 Fuchs-Level als Weg (geschafft → aktuell → kommt noch) */
+function LevelPath({ xp, onBack }){
+  const f = foxLevel(xp);
+  const cur = Math.min(f.level, 9);
+  const levels = FOX_TITLES.map((title,i)=>({ level:i+1, title, need:lvlThreshold(i+1) }));
+  const hereRef = useRef(null);
+  useEffect(()=>{ if(hereRef.current) hereRef.current.scrollIntoView({block:"center"}); }, []);
+  return (
+    <div className="screen"><div className="body">
+      <div className="appbar pad-top titled">
+        <button className="iconbtn" onClick={onBack}>←</button>
+        <div className="title">Dein Fuchs-Weg</div>
+      </div>
+      <div className="lp-intro">Du bist <b>Level {f.level} – {f.title}</b>. {f.level<9
+        ? <>Noch <b>{f.toNext} XP</b> bis Level {f.level+1}. 🦊</>
+        : <>Du hast den höchsten Rang erreicht! 👑</>}</div>
+      <div className="lp">
+        {levels.slice().reverse().map((L)=>{
+          const done = L.level < cur;
+          const here = L.level === cur;
+          const cls = here ? "here" : (done ? "done" : "future");
+          return (
+            <div key={L.level} ref={here?hereRef:undefined} className={"lp-node "+cls+(L.level%2? " left":" right")}>
+              <div className="lp-fig-wrap">
+                <img className="lp-fig" src={levelFig(L.level)} alt={L.title} />
+                {done && <span className="lp-check">✓</span>}
+                {!done && !here && <span className="lp-lock">🔒</span>}
+              </div>
+              <div className="lp-info">
+                <div className="lp-lvl">Level {L.level}</div>
+                <div className="lp-name">{L.title}</div>
+                <div className="lp-xp">{here ? "Du bist hier ⭐" : (done ? "Geschafft" : "ab "+L.need+" XP")}</div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+      <div className="reward-cta"><button className="btn btn-primary" onClick={onBack}>Weiter üben</button></div>
+    </div></div>
+  );
+}
+
+function Home({ tiles, progress, xp, streak, onOpen, onNew, onBackup, onOpenLevels }){
   return (
     <div className="screen">
       <div className="body">
@@ -1045,10 +1128,10 @@ function Home({ tiles, progress, xp, streak, onOpen, onNew, onBackup }){
           <div className="spacer"></div>
           <div className="chips">
             <span className="chip flame">🔥 {streak}</span>
-            <span className="chip xp">⭐ {xp}</span>
+            <span className="chip xp">{xp} XP</span>
           </div>
         </div>
-        <LevelBar xp={xp} />
+        <LevelBar xp={xp} onOpen={onOpenLevels} />
         <div className="vili">
           <div className="face">🦊</div>
           <div className="bubble">Bereit zum Üben? <b>Such dir ein Projekt aus!</b></div>
@@ -1356,9 +1439,10 @@ function App(){
   if(scene.name==="home"){
     if(!manifest) return <Loading text="Lade deine Projekte…" />;
     return <Home tiles={tiles} progress={progress} xp={xp} streak={streak}
-                 onOpen={openTile} onNew={()=>setScene({name:"new"})} onBackup={()=>setScene({name:"backup"})} />;
+                 onOpen={openTile} onNew={()=>setScene({name:"new"})} onBackup={()=>setScene({name:"backup"})} onOpenLevels={()=>setScene({name:"levels"})} />;
   }
   if(scene.name==="backup") return <BackupPanel onClose={()=>setScene({name:"home"})} />;
+  if(scene.name==="levels") return <LevelPath xp={xp} onBack={()=>setScene({name:"home"})} />;
   if(scene.name==="loading") return <Loading text="Vili holt die Übungen…" />;
   if(scene.name==="loaderr")
     return <Fatal msg="Dieses Thema konnte nicht geladen werden."
