@@ -259,6 +259,30 @@ input,textarea{font-family:var(--font-body);}
 .reward .sub{color:var(--muted);font-weight:800;font-size:20px;margin-top:6px;}
 .reward .score{margin-top:10px;font-family:var(--font-head);font-weight:600;font-size:20px;color:var(--teal-d);}
 .reward .xpbig{margin-top:24px;background:var(--yellow);color:#7a5b00;font-family:var(--font-head);font-weight:700;font-size:28px;padding:12px 32px;border-radius:40px;box-shadow:0 6px 0 var(--yellow-d);}
+/* Level-Anzeige */
+.levelbar{margin:6px 26px 4px;background:#fff;border:var(--card-bd);box-shadow:var(--card-sh);border-radius:18px;padding:12px 16px;}
+.lb-top{display:flex;align-items:center;gap:10px;}
+.lb-badge{font-family:var(--font-head);font-weight:700;font-size:15px;color:#fff;background:var(--indigo);padding:3px 12px;border-radius:999px;}
+.lb-title{font-family:var(--font-head);font-weight:700;color:var(--indigo);font-size:18px;}
+.lb-track{margin:9px 0 6px;height:14px;border-radius:10px;background:var(--indigo-soft);overflow:hidden;}
+.lb-track i{display:block;height:100%;border-radius:10px;background:linear-gradient(90deg,var(--yellow),var(--yellow-d));transition:width .5s;}
+.lb-foot{font-size:13px;color:var(--muted);font-weight:700;}
+.reward-level{width:100%;max-width:360px;margin-top:18px;}
+.reward-level .levelbar{margin:0;}
+.levelup{margin-top:18px;background:var(--green-soft);border:2px solid var(--green);color:var(--green-d);font-family:var(--font-head);font-weight:700;font-size:20px;padding:12px 22px;border-radius:18px;display:flex;flex-direction:column;align-items:center;gap:2px;}
+.levelup span{font-size:16px;color:var(--indigo);}
+/* Buttons / Backup */
+.btn-soft{background:#fff;color:var(--indigo);border:var(--card-bd);box-shadow:var(--card-sh);width:100%;margin-top:12px;}
+.btn-soft:active{transform:translateY(2px);}
+.iconbtn{flex:none;width:44px;height:44px;border-radius:14px;border:var(--card-bd);background:#fff;box-shadow:var(--card-sh);font-size:22px;color:var(--indigo);cursor:pointer;}
+.bk{padding:8px 26px 30px;display:flex;flex-direction:column;gap:16px;}
+.bk-card{background:#fff;border:var(--card-bd);box-shadow:var(--card-sh);border-radius:20px;padding:18px 18px 20px;}
+.bk-card h3{font-family:var(--font-head);font-weight:700;color:var(--indigo);font-size:21px;margin:0 0 6px;}
+.bk-card p{color:var(--muted);font-weight:600;font-size:15px;margin:0 0 12px;line-height:1.4;}
+.bk-area{width:100%;min-height:96px;border:2px solid var(--indigo-soft);border-radius:14px;padding:10px 12px;font-family:monospace;font-size:13px;color:var(--ink);resize:vertical;margin-bottom:12px;box-sizing:border-box;}
+.bk-row{display:flex;gap:12px;}
+.bk-row .btn{margin-top:0;}
+.bk-msg{background:var(--yellow-soft);border:2px solid var(--yellow);color:#7a5b00;font-family:var(--font-head);font-weight:700;border-radius:14px;padding:12px 16px;text-align:center;}
 .sticker{margin-top:22px;background:#fff;border:var(--card-bd);box-shadow:var(--card-sh);border-radius:22px;padding:18px 24px;display:flex;align-items:center;gap:16px;}
 .sticker .se{font-size:52px;}
 .sticker .st b{font-family:var(--font-head);font-weight:600;font-size:19px;color:var(--ink);display:block;}
@@ -373,6 +397,32 @@ const norm = (s) => (s||"").toLowerCase().trim().replace(/\s+/g,' ').replace(/[.
 const pick = (a) => a[(Math.random()*a.length)|0];
 function load(k, def){ try{ const v=localStorage.getItem(k); return v===null?def:JSON.parse(v);}catch(e){return def;} }
 function save(k, v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
+
+// ===== XP-Level mit Fuchs-Titeln =====
+const FOX_TITLES = ["Fuchs-Frischling","Fuchs-Schüler","Fuchs-Lehrling","Fuchs-Kenner","Fuchs-Meister","Fuchs-Profi","Fuchs-Champion","Fuchs-Großmeister","Fuchs-Legende"];
+const lvlThreshold = (L) => 50*L*(L-1);                 // XP nötig, um Level L zu erreichen (100 mehr pro Stufe)
+const foxLevel = (xp) => {
+  xp = Math.max(0, xp|0);
+  let L=1; while(lvlThreshold(L+1) <= xp) L++;
+  const base=lvlThreshold(L), next=lvlThreshold(L+1);
+  return { level:L, title:FOX_TITLES[Math.min(L-1, FOX_TITLES.length-1)],
+           base, next, into:xp-base, span:next-base, toNext:next-xp,
+           pct: Math.max(4, Math.round((xp-base)/(next-base)*100)) };
+};
+
+// ===== Fortschritt sichern / wiederherstellen =====
+const PROGRESS_KEYS = ["lernfuchs_done","lernfuchs_scores","lernfuchs_xp","lernfuchs_streak","lernfuchs_userprojects"];
+function buildBackup(){
+  const data={};
+  PROGRESS_KEYS.forEach(k=>{ const v=localStorage.getItem(k); if(v!==null) data[k]=v; });
+  return JSON.stringify({ app:"lernfuchs", version:1, date:new Date().toISOString(), data }, null, 2);
+}
+function applyBackup(text){
+  const obj = JSON.parse(text);
+  if(!obj || obj.app!=="lernfuchs" || !obj.data) throw new Error("Das ist keine gültige Lernfuchs-Sicherung.");
+  Object.entries(obj.data).forEach(([k,v])=>{ if(PROGRESS_KEYS.includes(k) && typeof v==="string") localStorage.setItem(k, v); });
+  return true;
+}
 const playableCount = (p) => (p.lessons||[]).filter(l=>!l.locked && (l.questions||[]).length>0).length;
 
 function validateProject(obj){
@@ -822,7 +872,7 @@ function Exercise({ project, unit, lesson, onExit, onDone }){
 }
 
 /* ===================== Belohnung ===================== */
-function Reward({ lesson, xp, correct, total, onContinue }){
+function Reward({ lesson, xp, correct, total, levelUp, totalXp, onContinue }){
   const cols=["#24B1B1","#FDEB9E","#C13383","#4B5694","#3fbfbf","#58a700"];
   const bits = useMemo(()=> Array.from({length:50},()=>({
     l:Math.random()*100, c:cols[(Math.random()*cols.length)|0],
@@ -842,6 +892,12 @@ function Reward({ lesson, xp, correct, total, onContinue }){
             <div className="score">🎯 {correct} von {total} Aufgaben richtig</div>
           )}
           <div className="xpbig">+{xp} XP ⭐</div>
+          {levelUp && (
+            <div className="levelup">🎉 Level {levelUp.level} erreicht!<span>{levelUp.title}</span></div>
+          )}
+          {typeof totalXp==="number" && totalXp>0 && (
+            <div className="reward-level"><LevelBar xp={totalXp} /></div>
+          )}
           {lesson.sticker && (
             <div className="sticker">
               <div className="se">{lesson.sticker.emoji}</div>
@@ -969,7 +1025,18 @@ function SectionSelect({ project, progress, xp, streak, onOpenSection, onMega, o
 }
 
 /* ===================== Startbildschirm ===================== */
-function Home({ tiles, progress, xp, streak, onOpen, onNew }){
+function LevelBar({ xp }){
+  const f = foxLevel(xp);
+  return (
+    <div className="levelbar">
+      <div className="lb-top"><span className="lb-badge">🦊 Level {f.level}</span><b className="lb-title">{f.title}</b></div>
+      <div className="lb-track"><i style={{width:f.pct+"%"}}></i></div>
+      <div className="lb-foot">noch <b>{f.toNext} XP</b> bis Level {f.level+1}</div>
+    </div>
+  );
+}
+
+function Home({ tiles, progress, xp, streak, onOpen, onNew, onBackup }){
   return (
     <div className="screen">
       <div className="body">
@@ -981,6 +1048,7 @@ function Home({ tiles, progress, xp, streak, onOpen, onNew }){
             <span className="chip xp">⭐ {xp}</span>
           </div>
         </div>
+        <LevelBar xp={xp} />
         <div className="vili">
           <div className="face">🦊</div>
           <div className="bubble">Bereit zum Üben? <b>Such dir ein Projekt aus!</b></div>
@@ -1009,6 +1077,7 @@ function Home({ tiles, progress, xp, streak, onOpen, onNew }){
             </div>}
         <div className="cta-wrap">
           <button className="btn btn-primary" onClick={onNew}>＋ Neues Projekt anlegen</button>
+          <button className="btn btn-soft" onClick={onBackup}>💾 Fortschritt sichern</button>
         </div>
       </div>
     </div>
@@ -1127,6 +1196,67 @@ function Fatal({ msg, onRetry }){
   );
 }
 
+/* ===================== Fortschritt sichern / wiederherstellen ===================== */
+function BackupPanel({ onClose }){
+  const [code] = useState(()=> buildBackup());
+  const [paste, setPaste] = useState("");
+  const [msg, setMsg] = useState(null);
+  const fileRef = useRef(null);
+
+  function download(){
+    try{
+      const blob = new Blob([code], {type:"application/json"});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href=url; a.download="lernfuchs-fortschritt-"+new Date().toISOString().slice(0,10)+".json";
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(()=>URL.revokeObjectURL(url), 1500);
+      setMsg("Datei wird gespeichert. ✅");
+    }catch(e){ setMsg("⚠️ Speichern hat nicht geklappt – nutze den Code zum Kopieren."); }
+  }
+  function copy(){
+    try{ navigator.clipboard.writeText(code).then(()=>setMsg("Code kopiert! ✅"), ()=>setMsg("Bitte den Text antippen und kopieren.")); }
+    catch(e){ setMsg("Bitte den Text antippen und kopieren."); }
+  }
+  function restore(text){
+    try{ applyBackup(text); setMsg("Wiederhergestellt! App wird neu geladen…"); setTimeout(()=>location.reload(), 900); }
+    catch(e){ setMsg("⚠️ "+e.message); }
+  }
+  function onFile(e){
+    const f=e.target.files && e.target.files[0]; if(!f) return;
+    const r=new FileReader(); r.onload=()=> restore(String(r.result)); r.readAsText(f);
+  }
+
+  return (
+    <div className="screen"><div className="body">
+      <div className="appbar pad-top titled">
+        <button className="iconbtn" onClick={onClose}>←</button>
+        <div className="title">Fortschritt sichern</div>
+      </div>
+      <div className="bk">
+        <div className="bk-card">
+          <h3>💾 Sichern</h3>
+          <p>Lade {KID}s Fortschritt als Datei herunter <b>oder</b> kopiere den Sicherungs-Code. Damit kannst du ihn jederzeit wiederherstellen – auch nach einem Update oder auf einem anderen Gerät.</p>
+          <textarea className="bk-area" readOnly value={code} onFocus={e=>e.target.select()} />
+          <div className="bk-row">
+            <button className="btn btn-green" onClick={download}>Als Datei laden</button>
+            <button className="btn btn-soft" onClick={copy}>Code kopieren</button>
+          </div>
+        </div>
+        <div className="bk-card">
+          <h3>♻️ Wiederherstellen</h3>
+          <p>Wähle eine Sicherungs-Datei oder füge einen Code ein. <b>Achtung:</b> der aktuelle Fortschritt wird dabei überschrieben.</p>
+          <input ref={fileRef} type="file" accept=".json,application/json,text/plain" style={{display:"none"}} onChange={onFile} />
+          <button className="btn btn-soft" onClick={()=> fileRef.current && fileRef.current.click()}>Sicherungs-Datei wählen…</button>
+          <textarea className="bk-area" placeholder="…oder Sicherungs-Code hier einfügen" value={paste} onChange={e=>setPaste(e.target.value)} />
+          <button className="btn btn-primary" disabled={!paste.trim()} onClick={()=> restore(paste)}>Wiederherstellen</button>
+        </div>
+        {msg && <div className="bk-msg">{msg}</div>}
+      </div>
+    </div></div>
+  );
+}
+
 /* ===================== App (lädt Manifest + Themen bei Bedarf) ===================== */
 function App(){
   const [manifest, setManifest] = useState(null);     // [{id,name,icon,iconBg,subtitle,file,lessonCount}]
@@ -1198,7 +1328,10 @@ function App(){
                                                       : { name:"path", projectId:s.projectId, sectionId:s.sectionId };
   function exitEx(){ setScene(s=> backFromEx(s)); }
   function finishEx(res){
-    setLastRes({ xp:res.xp, correct:res.correct, total:res.total }); setXp(x=>x+res.xp);
+    const after = xp + res.xp;
+    const lu = foxLevel(after).level > foxLevel(xp).level ? foxLevel(after) : null;
+    setLastRes({ xp:res.xp, correct:res.correct, total:res.total, levelUp: lu, totalXp: after });
+    setXp(x=>x+res.xp);
     const pid = scene.projectId, lid = scene.lesson.id;
     if(!scene.lesson.quiz && !scene.lesson.mega){
       setProgress(pr=>{ const cur=pr[pid]||[]; return cur.includes(lid) ? pr : {...pr,[pid]:[...cur,lid]}; });
@@ -1223,8 +1356,9 @@ function App(){
   if(scene.name==="home"){
     if(!manifest) return <Loading text="Lade deine Projekte…" />;
     return <Home tiles={tiles} progress={progress} xp={xp} streak={streak}
-                 onOpen={openTile} onNew={()=>setScene({name:"new"})} />;
+                 onOpen={openTile} onNew={()=>setScene({name:"new"})} onBackup={()=>setScene({name:"backup"})} />;
   }
+  if(scene.name==="backup") return <BackupPanel onClose={()=>setScene({name:"home"})} />;
   if(scene.name==="loading") return <Loading text="Vili holt die Übungen…" />;
   if(scene.name==="loaderr")
     return <Fatal msg="Dieses Thema konnte nicht geladen werden."
@@ -1242,6 +1376,7 @@ function App(){
     return <Exercise project={activeProject} unit={activeUnit} lesson={scene.lesson} onExit={exitEx} onDone={finishEx} />;
   if(scene.name==="reward" && activeProject)
     return <Reward lesson={scene.lesson} xp={lastRes.xp} correct={lastRes.correct} total={lastRes.total}
+                   levelUp={lastRes.levelUp} totalXp={lastRes.totalXp}
                    onContinue={()=> setScene(backFromEx(scene))} />;
 
   // Fallback (z. B. Reload mitten in einer Übung -> Cache leer)
