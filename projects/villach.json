@@ -2005,6 +2005,133 @@
       "subtitle": "Innenstadt & Hauptplatz",
       "lessons": [
         {
+          "id": "hauptplatz-finden",
+          "name": "Gassen & Plätze finden",
+          "icon": "🗺️",
+          "questions": [
+            {
+              "type": "map",
+              "grp": "find",
+              "prompt": "Tippe auf <b>Hauptplatz</b> auf der Karte! 🗺️",
+              "target": 1
+            },
+            {
+              "type": "map",
+              "grp": "find",
+              "prompt": "Tippe auf <b>Stadtbrücke</b> auf der Karte! 🗺️",
+              "target": 2
+            },
+            {
+              "type": "map",
+              "grp": "find",
+              "prompt": "Tippe auf <b>Bahnhofsstraße</b> auf der Karte! 🗺️",
+              "target": 3
+            },
+            {
+              "type": "map",
+              "grp": "find",
+              "prompt": "Tippe auf <b>Draulände</b> auf der Karte! 🗺️",
+              "target": 4
+            },
+            {
+              "type": "map",
+              "grp": "find",
+              "prompt": "Tippe auf <b>Drau</b> auf der Karte! 🗺️",
+              "target": 5
+            },
+            {
+              "type": "map",
+              "grp": "find",
+              "prompt": "Tippe auf <b>Lederergasse</b> auf der Karte! 🗺️",
+              "target": 6
+            },
+            {
+              "type": "map",
+              "grp": "find",
+              "prompt": "Tippe auf <b>Karlgasse</b> auf der Karte! 🗺️",
+              "target": 7
+            },
+            {
+              "type": "map",
+              "grp": "find",
+              "prompt": "Tippe auf <b>Rathausgasse</b> auf der Karte! 🗺️",
+              "target": 8
+            },
+            {
+              "type": "map",
+              "grp": "find",
+              "prompt": "Tippe auf <b>Seilergasse</b> auf der Karte! 🗺️",
+              "target": 9
+            },
+            {
+              "type": "map",
+              "grp": "find",
+              "prompt": "Tippe auf <b>Gerbergasse</b> auf der Karte! 🗺️",
+              "target": 10
+            },
+            {
+              "type": "map",
+              "grp": "find",
+              "prompt": "Tippe auf <b>Ankershofengasse</b> auf der Karte! 🗺️",
+              "target": 11
+            },
+            {
+              "type": "map",
+              "grp": "find",
+              "prompt": "Tippe auf <b>Nikolaigasse</b> auf der Karte! 🗺️",
+              "target": 12
+            },
+            {
+              "type": "map",
+              "grp": "find",
+              "prompt": "Tippe auf <b>Khevenhüllergasse</b> auf der Karte! 🗺️",
+              "target": 13
+            },
+            {
+              "type": "map",
+              "grp": "find",
+              "prompt": "Tippe auf <b>Unterer Kirchplatz</b> auf der Karte! 🗺️",
+              "target": 14
+            },
+            {
+              "type": "map",
+              "grp": "find",
+              "prompt": "Tippe auf <b>Oberer Kirchplatz</b> auf der Karte! 🗺️",
+              "target": 15
+            },
+            {
+              "type": "map",
+              "grp": "find",
+              "prompt": "Tippe auf <b>Stadtpfarrkirche</b> auf der Karte! 🗺️",
+              "target": 16
+            },
+            {
+              "type": "map",
+              "grp": "find",
+              "prompt": "Tippe auf <b>Dreifaltigkeitssäule</b> auf der Karte! 🗺️",
+              "target": 17
+            },
+            {
+              "type": "map",
+              "grp": "find",
+              "prompt": "Tippe auf <b>Rathausplatz</b> auf der Karte! 🗺️",
+              "target": 18
+            },
+            {
+              "type": "map",
+              "grp": "find",
+              "prompt": "Tippe auf <b>Rathaus</b> auf der Karte! 🗺️",
+              "target": 19
+            },
+            {
+              "type": "map",
+              "grp": "find",
+              "prompt": "Tippe auf <b>Leiningengasse</b> auf der Karte! 🗺️",
+              "target": 20
+            }
+          ]
+        },
+        {
           "id": "hauptplatz-gassen",
           "name": "Gassen & Straßen",
           "icon": "🛣️",
