@@ -1651,66 +1651,19 @@
           "questions": [
             {
               "type": "choice",
-              "prompt": "In welcher Himmelsrichtung liegt <b>Fellach</b>?",
+              "grp": "info",
+              "prompt": "In welche zwei Teile ist <b>Fellach</b> geteilt?",
               "options": [
-                "Norden",
-                "Osten",
-                "Süden",
-                "Westen"
+                "Obere Fellach und Untere Fellach",
+                "Groß-Fellach und Klein-Fellach",
+                "Alt-Fellach und Neu-Fellach",
+                "Ober-Vassach und Unter-Vassach"
               ],
-              "answer": 3,
-              "grp": "info"
+              "answer": 0
             },
             {
               "type": "choice",
-              "prompt": "In welcher Himmelsrichtung liegt <b>St. Ulrich</b>?",
-              "options": [
-                "Norden",
-                "Osten",
-                "Süden",
-                "Westen"
-              ],
-              "answer": 1,
-              "grp": "info"
-            },
-            {
-              "type": "choice",
-              "prompt": "In welcher Himmelsrichtung liegt <b>Federaun</b>?",
-              "options": [
-                "Norden",
-                "Osten",
-                "Süden",
-                "Westen"
-              ],
-              "answer": 2,
-              "grp": "info"
-            },
-            {
-              "type": "choice",
-              "prompt": "In welcher Himmelsrichtung liegt <b>Landskron</b>?",
-              "options": [
-                "Nordosten",
-                "Nordwesten",
-                "Südosten",
-                "Südwesten"
-              ],
-              "answer": 0,
-              "grp": "info"
-            },
-            {
-              "type": "choice",
-              "prompt": "In welchem Vorort gibt es den <b>Silbersee</b>?",
-              "options": [
-                "St. Ulrich",
-                "Vassach",
-                "Federaun",
-                "Maria Gail"
-              ],
-              "answer": 0,
-              "grp": "info"
-            },
-            {
-              "type": "choice",
+              "grp": "info",
               "prompt": "An welchem Vorort liegt der <b>Vassacher See</b>?",
               "options": [
                 "Vassach",
@@ -1718,11 +1671,47 @@
                 "Fellach",
                 "St. Ulrich"
               ],
-              "answer": 0,
-              "grp": "info"
+              "answer": 0
             },
             {
               "type": "choice",
+              "grp": "info",
+              "prompt": "In welchem Vorort liegt der <b>Oswaldiberg</b>?",
+              "options": [
+                "Vassach",
+                "Fellach",
+                "St. Leonhard",
+                "Federaun"
+              ],
+              "answer": 0
+            },
+            {
+              "type": "choice",
+              "grp": "info",
+              "prompt": "In welchem Vorort gibt es den <b>St. Leonharder See</b>?",
+              "options": [
+                "St. Leonhard",
+                "Vassach",
+                "St. Ulrich",
+                "Maria Gail"
+              ],
+              "answer": 0
+            },
+            {
+              "type": "choice",
+              "grp": "info",
+              "prompt": "In welchem Vorort gibt es den <b>Silbersee</b>?",
+              "options": [
+                "St. Ulrich",
+                "Vassach",
+                "Federaun",
+                "Maria Gail"
+              ],
+              "answer": 0
+            },
+            {
+              "type": "choice",
+              "grp": "info",
               "prompt": "Welcher Vorort ist der <b>größte und bevölkerungsreichste</b>?",
               "options": [
                 "Landskron",
@@ -1730,23 +1719,35 @@
                 "Maria Gail",
                 "St. Magdalen"
               ],
-              "answer": 0,
-              "grp": "info"
+              "answer": 0
             },
             {
               "type": "choice",
-              "prompt": "Wo gibt es die <b>Fachhochschule</b> und den <b>Technologiepark</b>?",
+              "grp": "info",
+              "prompt": "Welche zwei Tierparks gibt es in <b>Landskron</b>?",
               "options": [
-                "St. Magdalen",
-                "St. Leonhard",
-                "Drobollach und Egg",
-                "Federaun"
+                "Affenberg und Adlerarena",
+                "Affenberg und Reptilienzoo",
+                "Adlerarena und Aquarium",
+                "Tierpark und Streichelzoo"
               ],
-              "answer": 0,
-              "grp": "info"
+              "answer": 0
             },
             {
               "type": "choice",
+              "grp": "info",
+              "prompt": "In <b>St. Magdalen</b> gibt es gleich drei wichtige Einrichtungen. Welche?",
+              "options": [
+                "Fachhochschule, Technologiepark und WIFI",
+                "Fachhochschule, Bahnhof und Schwimmbad",
+                "Technologiepark, Kino und Museum",
+                "WIFI, Flughafen und Hafen"
+              ],
+              "answer": 0
+            },
+            {
+              "type": "choice",
+              "grp": "info",
               "prompt": "In welchem Vorort ist die <b>Pfarr- und Wallfahrtskirche</b>?",
               "options": [
                 "Maria Gail",
@@ -1754,11 +1755,23 @@
                 "Vassach",
                 "Landskron"
               ],
-              "answer": 0,
-              "grp": "info"
+              "answer": 0
             },
             {
               "type": "choice",
+              "grp": "info",
+              "prompt": "In welchem Vorort gibt es einen <b>Sportplatz</b>?",
+              "options": [
+                "Maria Gail",
+                "Federaun",
+                "St. Ulrich",
+                "Fellach"
+              ],
+              "answer": 0
+            },
+            {
+              "type": "choice",
+              "grp": "info",
               "prompt": "Wo gibt es den <b>Tabor mit Hochseilgarten</b> und den <b>Panorama Beach</b>?",
               "options": [
                 "Drobollach und Egg",
@@ -1766,11 +1779,23 @@
                 "Federaun",
                 "St. Magdalen"
               ],
-              "answer": 0,
-              "grp": "info"
+              "answer": 0
             },
             {
               "type": "choice",
+              "grp": "info",
+              "prompt": "In welchem Vorort kann man <b>Soccer-Golf</b> spielen?",
+              "options": [
+                "Drobollach und Egg",
+                "Maria Gail",
+                "Vassach",
+                "Landskron"
+              ],
+              "answer": 0
+            },
+            {
+              "type": "choice",
+              "grp": "info",
               "prompt": "Durch welchen Vorort führt der <b>Römerweg</b>?",
               "options": [
                 "Federaun",
@@ -1778,29 +1803,36 @@
                 "Vassach",
                 "St. Leonhard"
               ],
-              "answer": 0,
-              "grp": "info"
+              "answer": 0
             },
             {
               "type": "match",
-              "prompt": "Verbinde das Wahrzeichen mit dem richtigen Vorort! 🔗",
               "grp": "info",
+              "prompt": "Verbinde, was es gibt, mit dem richtigen Vorort! 🔗",
               "pairs": [
                 {
-                  "left": "Affenberg",
+                  "left": "Oswaldiberg",
+                  "right": "Vassach"
+                },
+                {
+                  "left": "St. Leonharder See",
+                  "right": "St. Leonhard"
+                },
+                {
+                  "left": "Adlerarena",
                   "right": "Landskron"
                 },
                 {
-                  "left": "Fachhochschule",
+                  "left": "Technologiepark",
                   "right": "St. Magdalen"
                 },
                 {
-                  "left": "Wallfahrtskirche",
-                  "right": "Maria Gail"
+                  "left": "Soccer-Golf",
+                  "right": "Drobollach und Egg"
                 },
                 {
-                  "left": "Hochseilgarten",
-                  "right": "Drobollach und Egg"
+                  "left": "Sportplatz",
+                  "right": "Maria Gail"
                 }
               ]
             }
@@ -1831,7 +1863,7 @@
               "type": "truefalse",
               "prompt": "Die <b>Fachhochschule</b> und der Technologiepark sind in Maria Gail.",
               "answer": false,
-              "explain": "Falsch! Die Fachhochschule ist in <b>St. Magdalen</b>."
+              "explain": "Falsch! Fachhochschule, Technologiepark und WIFI sind in <b>St. Magdalen</b>."
             },
             {
               "type": "truefalse",
@@ -1841,9 +1873,9 @@
             },
             {
               "type": "truefalse",
-              "prompt": "<b>Fellach</b> liegt im Osten von Villach.",
-              "answer": false,
-              "explain": "Falsch! Fellach liegt im <b>Westen</b>."
+              "prompt": "<b>Fellach</b> ist in Obere Fellach und Untere Fellach geteilt.",
+              "answer": true,
+              "explain": "Richtig! Fellach besteht aus Obere Fellach und Untere Fellach."
             },
             {
               "type": "truefalse",
@@ -1862,6 +1894,36 @@
               "prompt": "Der <b>Römerweg</b> führt durch St. Ulrich.",
               "answer": false,
               "explain": "Falsch! Der Römerweg führt durch <b>Federaun</b>."
+            },
+            {
+              "type": "truefalse",
+              "prompt": "Der <b>Oswaldiberg</b> liegt in Vassach.",
+              "answer": true,
+              "explain": "Richtig! Der Oswaldiberg ist in Vassach."
+            },
+            {
+              "type": "truefalse",
+              "prompt": "Der <b>St. Leonharder See</b> liegt in St. Magdalen.",
+              "answer": false,
+              "explain": "Falsch! Der St. Leonharder See ist in <b>St. Leonhard</b>."
+            },
+            {
+              "type": "truefalse",
+              "prompt": "In St. Magdalen gibt es auch das <b>WIFI</b>.",
+              "answer": true,
+              "explain": "Richtig! In St. Magdalen gibt es Fachhochschule, Technologiepark und WIFI."
+            },
+            {
+              "type": "truefalse",
+              "prompt": "<b>Soccer-Golf</b> kann man in Maria Gail spielen.",
+              "answer": false,
+              "explain": "Falsch! Soccer-Golf gibt es in <b>Drobollach und Egg</b>."
+            },
+            {
+              "type": "truefalse",
+              "prompt": "Die <b>Adlerarena</b> ist in Landskron.",
+              "answer": true,
+              "explain": "Richtig! Affenberg und Adlerarena sind in Landskron."
             }
           ]
         },
