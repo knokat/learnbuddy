@@ -432,7 +432,7 @@ function save(k, v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){
 // Geteilte Instanz mit dem Nutrition-Tracker. Der anon-Key darf öffentlich sein – der
 // Zugriff ist per Row-Level-Security auf die Tabelle "lernfuchs_progress" beschränkt.
 const SUPA_URL = "https://qxbnjemssqjczexevnff.supabase.co";
-const SUPA_KEY = "HIER_ANON_KEY_EINSETZEN";   // Supabase → Project Settings → API → anon public
+const SUPA_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF4Ym5qZW1zc3FqY3pleGV2bmZmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU4MjUyMDYsImV4cCI6MjA5MTQwMTIwNn0.dZLv-Cgar7FaSSbyZBFcWq1JGQrp-v8UQ-CNjN3Fm2Y";   // Supabase → Project Settings → API → anon public
 const PROFILE  = "leander";                    // ein fester Spieler = Leanders iPad, kein Login nötig
 const SB = (window.supabase && SUPA_KEY && SUPA_KEY.indexOf("HIER_")!==0)
   ? window.supabase.createClient(SUPA_URL, SUPA_KEY)
