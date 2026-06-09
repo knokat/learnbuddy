@@ -337,6 +337,8 @@ input,textarea{font-family:var(--font-body);}
 <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
 <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<!-- Supabase: Fortschritt in der Cloud (überlebt Tab-Schließen, privaten Modus & die 7-Tage-Regel) -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script type="text/babel" data-presets="react">
 const { useState, useEffect, useMemo, useRef } = React;
@@ -425,6 +427,35 @@ const norm = (s) => (s||"").toLowerCase().trim().replace(/\s+/g,' ').replace(/[.
 const pick = (a) => a[(Math.random()*a.length)|0];
 function load(k, def){ try{ const v=localStorage.getItem(k); return v===null?def:JSON.parse(v);}catch(e){return def;} }
 function save(k, v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
+
+/* ===================== Supabase: Fortschritt in der Cloud ===================== */
+// Geteilte Instanz mit dem Nutrition-Tracker. Der anon-Key darf öffentlich sein – der
+// Zugriff ist per Row-Level-Security auf die Tabelle "lernfuchs_progress" beschränkt.
+const SUPA_URL = "https://qxbnjemssqjczexevnff.supabase.co";
+const SUPA_KEY = "HIER_ANON_KEY_EINSETZEN";   // Supabase → Project Settings → API → anon public
+const PROFILE  = "leander";                    // ein fester Spieler = Leanders iPad, kein Login nötig
+const SB = (window.supabase && SUPA_KEY && SUPA_KEY.indexOf("HIER_")!==0)
+  ? window.supabase.createClient(SUPA_URL, SUPA_KEY)
+  : null;                                       // ohne Key: App läuft wie bisher rein lokal
+
+async function cloudLoad(){
+  if(!SB) return null;
+  try{
+    const { data, error } = await SB.from("lernfuchs_progress")
+      .select("done,scores,xp,streak,userprojects").eq("profile", PROFILE).maybeSingle();
+    if(error) return null;
+    return data;   // null = noch keine Zeile vorhanden
+  }catch(e){ return null; }
+}
+async function cloudSave(p){
+  if(!SB) return;
+  try{
+    await SB.from("lernfuchs_progress").upsert({
+      profile: PROFILE, done:p.done, scores:p.scores, xp:p.xp, streak:p.streak,
+      userprojects:p.userprojects, updated_at:new Date().toISOString()
+    }, { onConflict:"profile" });
+  }catch(e){}
+}
 
 // ===== XP-Level mit Fuchs-Titeln =====
 const FOX_TITLES = ["Fuchs-Frischling","Fuchs-Schüler","Fuchs-Lehrling","Fuchs-Kenner","Fuchs-Meister","Fuchs-Profi","Fuchs-Champion","Fuchs-Großmeister","Fuchs-Legende"];
@@ -1348,15 +1379,46 @@ function App(){
   const [progress, setProgress] = useState(()=> load("lernfuchs_done", {}));
   const [scoreboard, setScoreboard] = useState(()=> load("lernfuchs_scores", {}));
   const [xp, setXp]   = useState(()=> load("lernfuchs_xp", 240));
-  const [streak]      = useState(()=> load("lernfuchs_streak", 5));
+  const [streak, setStreak] = useState(()=> load("lernfuchs_streak", 5));
   const [scene, setScene] = useState({ name:"home" });
   const [lastRes, setLastRes] = useState({ xp:0, correct:0, total:0 });
+  const [cloudReady, setCloudReady] = useState(false);   // true, sobald einmal aus der Cloud geladen (auch bei Fehler/offline)
+  const hydrated = useRef(false);                          // verhindert Speichern, bevor die Cloud geladen ist
   const cache = useRef({});   // id -> volle Projektdaten (im Speicher, nur einmal laden)
 
   useEffect(()=> save("lernfuchs_userprojects", userProjects), [userProjects]);
   useEffect(()=> save("lernfuchs_done", progress), [progress]);
   useEffect(()=> save("lernfuchs_scores", scoreboard), [scoreboard]);
   useEffect(()=> save("lernfuchs_xp", xp), [xp]);
+  useEffect(()=> save("lernfuchs_streak", streak), [streak]);
+
+  // Cloud beim Start einmal laden – die Cloud gewinnt (lokaler Speicher ist nur schneller Fallback/Offline-Puffer)
+  useEffect(()=>{
+    let alive=true;
+    (async ()=>{
+      const row = await cloudLoad();
+      if(alive && row){
+        if(row.done && typeof row.done==="object") setProgress(row.done);
+        if(row.scores && typeof row.scores==="object") setScoreboard(row.scores);
+        if(typeof row.xp==="number") setXp(row.xp);
+        if(typeof row.streak==="number") setStreak(row.streak);
+        if(Array.isArray(row.userprojects)) setUserProjects(row.userprojects);
+      }
+      hydrated.current = true;
+      if(alive) setCloudReady(true);
+    })();
+    return ()=>{ alive=false; };
+  }, []);
+
+  // Bei jeder Änderung in die Cloud sichern (kurz gebündelt). Erst nach dem ersten Laden,
+  // damit Startwerte die Cloud nicht überschreiben.
+  useEffect(()=>{
+    if(!hydrated.current) return;
+    const t = setTimeout(()=> cloudSave({
+      done:progress, scores:scoreboard, xp, streak, userprojects:userProjects
+    }), 600);
+    return ()=> clearTimeout(t);
+  }, [progress, scoreboard, xp, streak, userProjects]);
 
   // Manifest einmalig laden (winzig)
   useEffect(()=>{
@@ -1437,7 +1499,7 @@ function App(){
         .catch(()=>setManifestErr(manifestErr)); }} />;
 
   if(scene.name==="home"){
-    if(!manifest) return <Loading text="Lade deine Projekte…" />;
+    if(!manifest || !cloudReady) return <Loading text="Lade deine Projekte…" />;
     return <Home tiles={tiles} progress={progress} xp={xp} streak={streak}
                  onOpen={openTile} onNew={()=>setScene({name:"new"})} onBackup={()=>setScene({name:"backup"})} onOpenLevels={()=>setScene({name:"levels"})} />;
   }
